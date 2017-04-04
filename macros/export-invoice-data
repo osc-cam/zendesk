@@ -4,6 +4,7 @@
 \newcommand{\invref}{ {{ticket.external_id}} }
 \newcommand{\invrefzd}{ ZD-{{ticket.id}} }
 
+%%%%TYPE OF INVOICE
 {% if ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0' %}
 %%THIS IS AN APC INVOICE
 \newcommand{\transaction}{\OA}
@@ -19,20 +20,24 @@
 \newcommand{\transaction}{}
 {% endif %}
 
+%%%%FUND SPLIT
 {% if ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24117196 == '1' %}\newcommand{\RCUKratio}{(50\%)} \newcommand{\COAFratio}{(50\%)}
 {% else %}\newcommand{\RCUKratio}{} \newcommand{\COAFratio}{}
 {% endif %}
 
+%%%%RCUK COST CENTRE AND SOURCE OF FUNDS
 \newcommand{\invfundcode}{% if ticket.ticket_field_24117246 == '1' and ticket.ticket_field_46241307 == blank %}{\ERROR{RCUK payment ticked but no cost centre selected}}
 {% elsif ticket.ticket_field_24117246 == '0' and ticket.ticket_field_46241307 != blank %}{\ERROR{RCUK cost centre selected but no RCUK payment ticked}}
 {% elsif ticket.ticket_field_24117246 == '1' and ticket.ticket_field_46241307 != blank %}{
 	{% if ticket.ticket_field_46241307 == 'rcuk_cost_centre_veje_judb' %}{\VEJEJUDB\transaction}
 	{% elsif ticket.ticket_field_46241307 == 'rcuk_cost_centre_veji_judb' %}{\VEJIJUDB\transaction}
 	{% elsif ticket.ticket_field_46241307 == 'vejf_judb_iop_fund' %}{\VEJFJUDB\transaction}
+	{% elsif ticket.ticket_field_46241307 == 'rcuk_cost_centre_vejj_judb' %}{\VEJJJUDB\transaction}
 	{% else%}{\ERROR{RCUK cost centre not recognized}}{% endif %}
 }{% else %}{}
 {% endif %}
 
+%%%%COAF COST CENTRE AND SOURCE OF FUNDS
 \newcommand{\invfundcodeadditional}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_46241967 == blank %}{\ERROR{COAF payment ticked but no cost centre selected}}
 {% elsif ticket.ticket_field_24117196 == '0' and ticket.ticket_field_46241967 != blank %}{\ERROR{COAF cost centre selected but no COAF payment ticked}}
 {% elsif ticket.ticket_field_24117196 == '1' and ticket.ticket_field_46241967 != blank %}{
@@ -42,5 +47,7 @@
 	{% else%}{\ERROR{COAF cost centre not recognized}}{% endif %}
 }{% else %}{}
 {% endif %}
+
+%%%%COMMANDS TO EXECUTE INVOICE PROCESSING SCRIPTS
 %C:\Python-2.7\python.exe H:\finance\emailed_invoices\move-invoice.py
 %C:\Python-2.7\python.exe H:\finance\emailed_invoices\OAfinance-intern.py
