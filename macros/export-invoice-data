@@ -1,0 +1,46 @@
+%%%%INVOICE VARIABLES FOR {{ ticket.ticket_field_24071953 }}%%%%
+\newcommand{\xshift}{-7.5} %in cm; moves the invoice stamp horizontally by given amount
+\newcommand{\yshift}{-4} %in cm; moves the invoice stamp vertically by given amount
+\newcommand{\invref}{ {{ticket.external_id}} }
+\newcommand{\invrefzd}{ ZD-{{ticket.id}} }
+
+{% if ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0' %}
+%%THIS IS AN APC INVOICE
+\newcommand{\transaction}{\OA}
+{% elsif ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '1' and ticket.ticket_field_48023887 == '0' %}
+%%THIS IS A MEMBERSHIP INVOICE
+\newcommand{\transaction}{\membership}
+{% elsif ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '1' %}
+%%THIS IS A AN INVOICE FOR PAGE OF COLOUR CHARGES
+\newcommand{\transaction}{\pagecolour}
+{% else %}
+%%TYPE OF INVOICE (APC / MEMBERSHIP / PAGE & COLOUR) COULD NOT BE DETERMINED; 
+%%PLEASE MAP THE COMMAND BELOW TO \OA, \membership OR \pagecolour
+\newcommand{\transaction}{}
+{% endif %}
+
+{% if ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24117196 == '1' %}\newcommand{\RCUKratio}{(50\%)} \newcommand{\COAFratio}{(50\%)}
+{% else %}\newcommand{\RCUKratio}{} \newcommand{\COAFratio}{}
+{% endif %}
+
+\newcommand{\invfundcode}{% if ticket.ticket_field_24117246 == '1' and ticket.ticket_field_46241307 == blank %}{\ERROR{RCUK payment ticked but no cost centre selected}}
+{% elsif ticket.ticket_field_24117246 == '0' and ticket.ticket_field_46241307 != blank %}{\ERROR{RCUK cost centre selected but no RCUK payment ticked}}
+{% elsif ticket.ticket_field_24117246 == '1' and ticket.ticket_field_46241307 != blank %}{
+	{% if ticket.ticket_field_46241307 == 'rcuk_cost_centre_veje_judb' %}{\VEJEJUDB\transaction}
+	{% elsif ticket.ticket_field_46241307 == 'rcuk_cost_centre_veji_judb' %}{\VEJIJUDB\transaction}
+	{% elsif ticket.ticket_field_46241307 == 'vejf_judb_iop_fund' %}{\VEJFJUDB\transaction}
+	{% else%}{\ERROR{RCUK cost centre not recognized}}{% endif %}
+}{% else %}{}
+{% endif %}
+
+\newcommand{\invfundcodeadditional}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_46241967 == blank %}{\ERROR{COAF payment ticked but no cost centre selected}}
+{% elsif ticket.ticket_field_24117196 == '0' and ticket.ticket_field_46241967 != blank %}{\ERROR{COAF cost centre selected but no COAF payment ticked}}
+{% elsif ticket.ticket_field_24117196 == '1' and ticket.ticket_field_46241967 != blank %}{
+	{% if ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_045_rg82831' %}{\COAFfifteen\transaction}
+	{% elsif ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_045_rg82831_wellcome_supplement' %}{\COAFfifteensup\transaction}
+	{% elsif ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_050_rg88122' %}{\COAFsixteen\transaction}
+	{% else%}{\ERROR{COAF cost centre not recognized}}{% endif %}
+}{% else %}{}
+{% endif %}
+%C:\Python-2.7\python.exe H:\finance\emailed_invoices\move-invoice.py
+%C:\Python-2.7\python.exe H:\finance\emailed_invoices\OAfinance-intern.py
