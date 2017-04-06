@@ -3,6 +3,7 @@
 \newcommand{\yshift}{-4} %in cm; moves the invoice stamp vertically by given amount
 \newcommand{\invref}{ {{ticket.external_id}} }
 \newcommand{\invrefzd}{ ZD-{{ticket.id}} }
+\newcommand{\currentagent}{ {{current_user.name}} }
 
 %%%%TYPE OF INVOICE
 {% if ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0' %}
