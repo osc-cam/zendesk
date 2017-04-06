@@ -1,0 +1,10 @@
+####THIS FILE IS A COLLECTION OF STRINGS (BITS OF TEXT) THAT MAY
+####BE INCORPORATED INTO MACROS IN THE NEAR FUTURE
+
+
+##WHAT RCUK AND COAF CONSISTS OF
+As this is a completely Open Access journal, the publisher will probably charge an Open Access fee for this paper. I'm afraid that we won't be able to pay it if so, as we only receive grants to pay for research funded by RCUK or COAF.
+
+RCUK comprises: AHRC, BBSRC, EPSRC, ESRC, NERC, MRC, STFC
+COAF comprises: Arthritis UK, Bloodwise, British Heart Foundation, Cancer Research UK, Parkinson’s UK, Wellcome Trust.
+##
