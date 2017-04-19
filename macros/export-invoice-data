@@ -1,4 +1,4 @@
-%%%%INVOICE VARIABLES FOR {{ ticket.ticket_field_24071953 }}%%%%
+%%%%INVOICE VARIABLES FOR {{ticket.ticket_field_24071953}} {{ticket.ticket_field_48023907}} {{ticket.ticket_field_48024167}}%%%%
 \newcommand{\xshift}{-7.5} %in cm; moves the invoice stamp horizontally by given amount
 \newcommand{\yshift}{-4} %in cm; moves the invoice stamp vertically by given amount
 \newcommand{\invref}{ {{ticket.external_id}} }
