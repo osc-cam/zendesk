@@ -1,0 +1,1 @@
+H:\Zendesk\curl.exe https://camacuk.zendesk.com/api/v2/ticket_fields.json -v -u {email_address}:{password} > data.json

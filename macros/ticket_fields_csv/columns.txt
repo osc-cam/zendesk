@@ -1,0 +1,1 @@
+'raw_title', 'created_at', 'description', 'title', 'url', 'visible_in_portal', 'raw_description', 'required', 'updated_at', 'required_in_portal', 'collapsed_for_agents', 'regexp_for_validation', 'tag', 'raw_title_in_portal', 'title_in_portal', 'active', 'position', 'removable', 'type', 'id', 'editable_in_portal', 
