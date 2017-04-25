@@ -1,6 +1,8 @@
 Dear {{ticket.requester.name}},
 
-Thank you for uploading your paper. To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) we have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository, with {% if ticket.ticket_field_24072173 == blank or ticket.ticket_field_24072173 == '0_months' %}an embargo until publication.{% else%}a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo.{% endif %} Your manuscript can be found in Apollo at the following link:
+Thank you for uploading your paper. {% if ticket.ticket_field_24117286 == '1' %}Because it was accepted by the journal more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the acceptance date. {% if ticket.ticket_field_77355348 == '1' %}During the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication, so this article will still be eligible for the REF, but this flexibility will be subject to a review in autumn 2017.{% endif %} 
+
+W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% endif %}e have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == blank %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% endif %}. Your manuscript can be found in Apollo at the following link:
 
 {{ticket.ticket_field_24114846}}
 {% if ticket.ticket_field_24071633 == 'springer_compact' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '1' %}

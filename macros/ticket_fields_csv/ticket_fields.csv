@@ -140,6 +140,7 @@ Page/colour invoice processed,48023887,True,https://camacuk.zendesk.com/api/v2/t
 EPSRC Data Requirement,24536658,True,https://camacuk.zendesk.com/api/v2/ticket_fields/24536658.json
 Membership invoice processed,48024147,True,https://camacuk.zendesk.com/api/v2/ticket_fields/48024147.json
 DSpace done - needs email,24522837,True,https://camacuk.zendesk.com/api/v2/ticket_fields/24522837.json
+AR published,77352028,True,https://camacuk.zendesk.com/api/v2/ticket_fields/77352028.json
 Promote on Twitter?,40547167,True,https://camacuk.zendesk.com/api/v2/ticket_fields/40547167.json
 External email address,46901347,True,https://camacuk.zendesk.com/api/v2/ticket_fields/46901347.json
 Page/colour invoice number,48023907,True,https://camacuk.zendesk.com/api/v2/ticket_fields/48023907.json
@@ -188,6 +189,7 @@ Membership fees - COAF (EBDV),29275058,True,https://camacuk.zendesk.com/api/v2/t
 BBSRC,28673718,True,https://camacuk.zendesk.com/api/v2/ticket_fields/28673718.json
 Accessible to peer-reviewers?,40426168,True,https://camacuk.zendesk.com/api/v2/ticket_fields/40426168.json
 Date deposit completed,29275578,False,https://camacuk.zendesk.com/api/v2/ticket_fields/29275578.json
+Auto-reply options,77351868,True,https://camacuk.zendesk.com/api/v2/ticket_fields/77351868.json
 COAF Grant Numbers,29867967,True,https://camacuk.zendesk.com/api/v2/ticket_fields/29867967.json
 EPSRC,28673728,True,https://camacuk.zendesk.com/api/v2/ticket_fields/28673728.json
 Request a copy link,33085888,True,https://camacuk.zendesk.com/api/v2/ticket_fields/33085888.json
