@@ -2,9 +2,7 @@ Dear {{ticket.requester.name}},
 
 Thank you for uploading your paper. {% if ticket.ticket_field_24117286 == '1' %}Because it was accepted by the journal more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the acceptance date. {% if ticket.ticket_field_77355348 == '1' %}During the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication, so this article will still be eligible for the REF, but this flexibility will be subject to a review in autumn 2017.{% endif %} 
 
-W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% endif %}e have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == blank %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% endif %}. Your manuscript can be found in Apollo at the following link:
-
-{{ticket.ticket_field_24114846}}
+W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% endif %}e can add your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == blank %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% endif %}. We'll let you know when we've done this.
 {% if ticket.ticket_field_24071633 == 'springer_compact' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '1' %}
 The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) and [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policies. To comply with these you'll need to select the journal's option for immediate Open Access.
 
@@ -82,7 +80,7 @@ The article processing charge for articles published in this journal is XXXX + V
 {% elsif ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24071843 == '1' %}
 The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) and [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policies. To comply with these you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK and COAF block grants to pay for this.
 
-The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
+The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
 
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK and COAF.**
 
@@ -108,7 +106,7 @@ Once the final version has been published with a CC BY licence, we'll also be ab
 {% elsif ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24071843 == '0' %}
 The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK block grant to pay for this.
 
-The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' }}{{ticket.id}}** on the invoice so we can connect it to your article.
+The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it to your article.
 
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK.**
 
@@ -134,7 +132,7 @@ Once the final version has been published with a CC BY licence, we'll also be ab
 {% elsif ticket.ticket_field_24117246 == '0' and ticket.ticket_field_24071843 == '1' %}
 The paper is also covered by the [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's COAF block grant to pay for this.
 
-The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' }}{{ticket.id}}** on the invoice so we can connect it to your article.
+The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it to your article.
 
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by COAF.**
 
@@ -193,8 +191,5 @@ The Wellcome Trust requires research data generated as a result of Wellcome Trus
 #### Cancer Research UK research data
 We {% if ticket.ticket_field_26329848 == '1' or ticket.ticket_field_24071783 == '1'%}also {% endif %}note that this work is CRUK funded. CRUK requires research data generated as a result of CRUK support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [CRUK website](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines) or you can e-mail info@data.cam.ac.uk.
 {% endif %}
-
-We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
-
 Best wishes,
 {{ticket.assignee.first_name}}
