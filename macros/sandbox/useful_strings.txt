@@ -1,19 +1,24 @@
-####THIS FILE IS A COLLECTION OF STRINGS (BITS OF TEXT) THAT MAY
-####BE INCORPORATED INTO MACROS IN THE NEAR FUTURE
+%%%%THIS FILE IS A COLLECTION OF STRINGS (BITS OF TEXT) THAT MAY
+%%%%BE INCORPORATED INTO MACROS IN THE NEAR FUTURE
 
 
-##WHAT RCUK AND COAF CONSISTS OF
+%%WHAT RCUK AND COAF CONSISTS OF
 As this is a completely Open Access journal, the publisher will probably charge an Open Access fee for this paper. I'm afraid that we won't be able to pay it if so, as we only receive grants to pay for research funded by RCUK or COAF.
 
 RCUK comprises: AHRC, BBSRC, EPSRC, ESRC, NERC, MRC, STFC
 COAF comprises: Arthritis UK, Bloodwise, British Heart Foundation, Cancer Research UK, Parkinson’s UK, Wellcome Trust.
-##
+%%
 
 
-##RETROSPECTIVE OA NEEDED (WELLCOME TRUST)
+%%RETROSPECTIVE OA NEEDED (WELLCOME TRUST)
 The paper is also covered by the RCUK and COAF Open Access policies. To comply with these you should have selected the journal's paid-for option for immediate Open Access. **We advise you to contact the publisher as soon as possible requesting retrospective open access for this paper, as this is a requirement by the Wellcome Trust**. The corresponding author should be eligible for funds from his/her institution's RCUK and COAF block grants to pay for this.
-##
+%%
 
-##ACS MEMBERSHIP AS PART OF A SINGLE REPLY
-The article processing charge for articles published in this journal is $2000 + VAT. Please ask the publishers to include our reference number **#** on the invoice so we can connect it to your article. This takes into account an **institutional discount** and an **ACS member's discount**. Please apply these discounts when filling in the open access billing information. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
-##
+%%ACS MEMBERSHIP AS PART OF A SINGLE REPLY
+The article processing charge for articles published in this journal is $2000 + VAT. Please ask the publishers to include our reference number **%** on the invoice so we can connect it to your article. This takes into account an **institutional discount** and an **ACS member's discount**. Please apply these discounts when filling in the open access billing information. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
+%%
+
+%%DRAFT FOR PAPERS FUNDED BY EU FP7
+#### EU FP7 Open Access policy
+We note that this work is funded by FP7. Please review the information on [this page](http://osc.cam.ac.uk/open-access/open-access-policies/european-open-access-policies%EU FP7) regarding FP7's Open Access pilot programme and how to apply for payment of the article processing charges.
+%%
