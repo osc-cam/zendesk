@@ -8,11 +8,12 @@ W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk
 {% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}
 The paper is also covered by the following open access policy/policies:
 
-{% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/){% endif %}
-{% if ticket.ticket_field_24117196 == '1' %}* [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund){% endif %}
-{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy){% endif %}
-{% if ticket.ticket_field_24071633 != blank or ticket.ticket_field_24071633 != 'No' or ticket.ticket_field_24071633 == 'springer_compact' %}
-{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}You would be eligible for funds to pay for the cost of publishing in this fully open access journal.{% else %}To comply with this/these you'll need to select the journal's option for immediate Open Access.{% endif %}{% else %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **there is no need to select a paid-for Open Access option from the publisher in this case.**{% endif %}{% endif %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}
+{% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
+{% endif %}{% if ticket.ticket_field_24117196 == '1' %}* [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
+{% endif %}{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy)
+{% endif %}{% endif %}{% if ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' %}
+{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}You would be eligible for funds to pay for the cost of publishing in this fully open access journal.{% else %}To comply with this/these you'll need to select the journal's option for immediate Open Access.{% endif %}
+{% if ticket.ticket_field_24071633 == 'springer_compact' %}
 **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.
 {% else %} The article processing charge for articles published in this journal is XXXX + VAT. {% if ticket.ticket_field_61116627 == '1' and ticket.ticket_field_24117256 == '1' %}We have contacted the Bill & Melinda Gates Foundation to confirm that they would pay this fee to effect publication on the terms of their open access policy. We will let you know when they reply. {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% else %} Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% endif %}
 {% if ticket.ticket_field_24071633 != blank or ticket.ticket_field_24071633 != 'No' %}
@@ -34,9 +35,9 @@ and our email address info@openaccess.cam.ac.uk
 
 Our VAT no., should it be required, is GB 823 8476 09.
 
-*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*{% endif %}
+*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
 
-Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% endif %}
+Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% endif %}{% endif %}{% else %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **there is no need to select a paid-for Open Access option from the publisher in this case.**{% endif %}
 {% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
 **Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
 {% endif %}{% if ticket.ticket_field_26329848 == '1' %}
