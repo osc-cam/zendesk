@@ -1,4 +1,9 @@
-%%%%INVOICE VARIABLES FOR {{ticket.ticket_field_24071953}} {{ticket.ticket_field_48023907}} {{ticket.ticket_field_48024167}}%%%%
+%%%%INVOICE VARIABLES FOR {% if ticket.ticket_field_77143828 == 'oasis_apc' or (ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0') %}{{ticket.ticket_field_24071953}}{% elsif ticket.ticket_field_77143828 == 'oasis_page' or (ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '1') %}{{ticket.ticket_field_48023907}}{% elsif ticket.ticket_field_77143828 == 'oasis_membership' or (ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '1' and ticket.ticket_field_48023887 == '0') %}{{ticket.ticket_field_48024167}}{% endif %}%%%%
+\newcommand{\invoiceno}{ {% if ticket.ticket_field_77143828 == 'oasis_apc' or (ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0') %}{{ticket.ticket_field_24071953}}{% elsif ticket.ticket_field_77143828 == 'oasis_page' or (ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '1') %}{{ticket.ticket_field_48023907}}{% elsif ticket.ticket_field_77143828 == 'oasis_membership' or (ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '1' and ticket.ticket_field_48023887 == '0') %}{{ticket.ticket_field_48024167}}{% endif %} }
+%%APC INVOICE DATE: {{ticket.ticket_field_29295508}}
+%%PAGE/COLOUR INVOICE DATE: {{ticket.ticket_field_48023927}}
+%%MEMBERSHIP INVOICE DATE: {{ticket.ticket_field_48024187}}
+
 \newcommand{\xshift}{-7.5} %in cm; moves the invoice stamp horizontally by given amount
 \newcommand{\yshift}{-4} %in cm; moves the invoice stamp vertically by given amount
 \newcommand{\invref}{ {{ticket.external_id}} }
@@ -6,23 +11,22 @@
 \newcommand{\currentagent}{ {{current_user.name}} }
 
 %%%%TYPE OF INVOICE
-{% if ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0' %}
+{% if ticket.ticket_field_77143828 == 'oasis_apc' or (ticket.ticket_field_29294538 == '1' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '0') %}
 %%THIS IS AN APC INVOICE
 \newcommand{\transaction}{\OA}
-{% elsif ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '1' and ticket.ticket_field_48023887 == '0' %}
+{% elsif ticket.ticket_field_77143828 == 'oasis_membership' or (ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '1' and ticket.ticket_field_48023887 == '0') %}
 %%THIS IS A MEMBERSHIP INVOICE
 \newcommand{\transaction}{\membership}
-{% elsif ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '1' %}
+{% elsif ticket.ticket_field_77143828 == 'oasis_page' or (ticket.ticket_field_29294538 == '0' and ticket.ticket_field_48024147 == '0' and ticket.ticket_field_48023887 == '1') %}
 %%THIS IS A AN INVOICE FOR PAGE OF COLOUR CHARGES
 \newcommand{\transaction}{\pagecolour}
 {% else %}
-%%TYPE OF INVOICE (APC / MEMBERSHIP / PAGE & COLOUR) COULD NOT BE DETERMINED; 
-%%PLEASE MAP THE COMMAND BELOW TO \OA, \membership OR \pagecolour AND DELETE ONE OR MORE INVOICE NUMBERS ON THE FIRST LINE
-\newcommand{\transaction}{}
+%%ERROR: TYPE OF INVOICE COULD NOT BE DETECTED
+\newcommand{\transaction}{\ERROR{Type of invoice could not be detected}}
 {% endif %}
 
 %%%%FUND SPLIT
-{% if ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24117196 == '1' %}\newcommand{\RCUKratio}{(50\%)} \newcommand{\COAFratio}{(50\%)}
+{% if ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24071843 == '1' and ticket.ticket_field_77143828 != 'oasis_page' %}\newcommand{\RCUKratio}{(50\%)} \newcommand{\COAFratio}{(50\%)}
 {% else %}\newcommand{\RCUKratio}{} \newcommand{\COAFratio}{}
 {% endif %}
 
@@ -39,16 +43,21 @@
 {% endif %}
 
 %%%%COAF COST CENTRE AND SOURCE OF FUNDS
-\newcommand{\invfundcodeadditional}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_46241967 == blank %}{\ERROR{COAF payment ticked but no cost centre selected}}
-{% elsif ticket.ticket_field_24117196 == '0' and ticket.ticket_field_46241967 != blank %}{\ERROR{COAF cost centre selected but no COAF payment ticked}}
-{% elsif ticket.ticket_field_24117196 == '1' and ticket.ticket_field_46241967 != blank %}{
-	{% if ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_045_rg82831' %}{\COAFfifteen\transaction}
-	{% elsif ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_045_rg82831_wellcome_supplement' %}{\COAFfifteensup\transaction}
-	{% elsif ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_050_rg88122' %}{\COAFsixteen\transaction}
-	{% else%}{\ERROR{COAF cost centre not recognized}}{% endif %}
-}{% else %}{}
+\newcommand{\invfundcodeadditional}%
+{% if ticket.ticket_field_77143828 != 'oasis_page' %}%
+    {% if ticket.ticket_field_24071843 == '1' and ticket.ticket_field_46241967 == blank %}{\ERROR{COAF payment ticked but no cost centre selected}}%
+    {% elsif ticket.ticket_field_24071843 == '0' and ticket.ticket_field_46241967 != blank %}{\ERROR{COAF cost centre selected but no COAF payment ticked}}%
+    {% elsif ticket.ticket_field_24071843 == '1' and ticket.ticket_field_46241967 != blank %}{
+        {% if ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_045_rg82831' %}{\COAFfifteen\transaction}%
+        {% elsif ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_045_rg82831_wellcome_supplement' %}{\COAFfifteensup\transaction}%
+        {% elsif ticket.ticket_field_46241967 == 'coaf_cost_centre_veag_050_rg88122' %}{\COAFsixteen\transaction}%
+        {% else%}{\ERROR{COAF cost centre not recognized}}{% endif %}%
+    }{% else %}{}%
+    {% endif %}%
+{% else %}{}%
 {% endif %}
 
 %%%%COMMANDS TO EXECUTE INVOICE PROCESSING SCRIPTS
+%USERPROFILE%\AppData\Local\Programs\Python\Python36-32\python.exe %USERPROFILE%\OATS\OASIS\OASIS.py
 %C:\Python-2.7\python.exe H:\finance\emailed_invoices\move-invoice.py
 %C:\Python-2.7\python.exe H:\finance\emailed_invoices\OAfinance-intern.py

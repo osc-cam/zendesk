@@ -3,89 +3,21 @@ Dear {{ticket.requester.name}},
 Thank you for uploading your paper. {% if ticket.ticket_field_24117286 == '1' %}Because it was accepted by the journal more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the acceptance date. {% if ticket.ticket_field_77355348 == '1' %}During the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication, so this article will still be eligible for the REF, but this flexibility will be subject to a review in autumn 2017.{% endif %} 
 
 W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% endif %}e can add your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == blank %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% endif %}. We'll let you know when we've done this.
-{% if ticket.ticket_field_24071633 == 'springer_compact' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '1' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) and [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policies. To comply with these you'll need to select the journal's option for immediate Open Access.
+{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}
+The paper is also covered by the following open access policy/policies:
 
+{% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/){% endif %}
+{% if ticket.ticket_field_24117196 == '1' %}* [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund){% endif %}
+{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy){% endif %}
+{% if ticket.ticket_field_24071633 != blank or ticket.ticket_field_24071633 != 'No' or ticket.ticket_field_24071633 == 'springer_compact' %}
+{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}You would be eligible for funds to pay for the cost of publishing in this fully open access journal.{% else %}To comply with this/these you'll need to select the journal's option for immediate Open Access.{% endif %}{% else %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **there is no need to select a paid-for Open Access option from the publisher in this case.**{% endif %}{% endif %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}
 **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.
+{% else %} The article processing charge for articles published in this journal is XXXX + VAT. {% if ticket.ticket_field_61116627 == '1' and ticket.ticket_field_24117256 == '1' %}We have contacted the Bill & Melinda Gates Foundation to confirm that they would pay this fee to effect publication on the terms of their open access policy. We will let you know when they reply. {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% else %} Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% endif %}
+{% if ticket.ticket_field_24071633 != blank or ticket.ticket_field_24071633 != 'No' %}
+**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders.**
 
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK and COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK and COAF requirements.)
-{% elsif ticket.ticket_field_24071633 == 'springer_compact' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '0' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) Open Access policy. To comply with this you'll need to select the journal's option for immediate Open Access.
-
-**The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK requirements.)
-{% elsif ticket.ticket_field_24071633 == 'springer_compact' and ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '1' %}
-The paper is also covered by the [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policy. To comply with this you'll need to select the journal's option for immediate Open Access.
-
-**The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with COAF requirements.)
-{% elsif ticket.ticket_field_24071633 == 'springer_compact' and ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' %}
-**The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You will need to select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**. Your paper should be published with a CC BY licence. Once it has been published Open Access we will be able to replace the accepted version with the final version in Apollo and remove the embargo.
-{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '1' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) and [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policies. To comply with these you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK and COAF block grants to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK and COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK and COAF requirements.)
-{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '0' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK block grant to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK requirements.)
-{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' and ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '1' %}
-The paper is also covered by the [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's COAF block grant to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with COAF requirements.)
-{% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '1' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) and [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policies. To comply with these you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK and COAF block grants to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK and COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK and COAF requirements.)
-{% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' and ticket.ticket_field_24071783 == '1' and ticket.ticket_field_24117196 == '0' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK block grant to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK requirements.)
-{% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' and ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '1' %}
-The paper is also covered by the [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's COAF block grant to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with COAF requirements.)
-{% elsif ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24071843 == '1' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) and [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policies. To comply with these you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK and COAF block grants to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK and COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK and COAF requirements.)
-
+(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements.)
+{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}
 When filling in our invoicing details you should give the billing address as:
 
 University of Cambridge
@@ -100,64 +32,10 @@ and our email address info@openaccess.cam.ac.uk
 
 Our VAT no., should it be required, is GB 823 8476 09.
 
-*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
+*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*{% endif %}
 
-Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
-{% elsif ticket.ticket_field_24117246 == '1' and ticket.ticket_field_24071843 == '0' %}
-The paper is also covered by the [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's RCUK block grant to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it to your article.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by RCUK.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with RCUK requirements.)
-
-When filling in our invoicing details you should give the billing address as:
-
-University of Cambridge
-Open Access
-Cambridge University Library
-West Road
-Cambridge
-CB3 9DR
-UK
-
-and our email address info@openaccess.cam.ac.uk
-
-Our VAT no., should it be required, is GB 823 8476 09.
-
-*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
-
-Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
-{% elsif ticket.ticket_field_24117246 == '0' and ticket.ticket_field_24071843 == '1' %}
-The paper is also covered by the [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund) Open Access policy. To comply with this you'll need to select the journal's paid-for option for immediate Open Access. You would be eligible for funds from the University's COAF block grant to pay for this.
-
-The article processing charge for articles published in this journal is XXXX + VAT. Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it to your article.
-
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by COAF.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with COAF requirements.)
-
-When filling in our invoicing details you should give the billing address as:
-
-University of Cambridge
-Open Access
-Cambridge University Library
-West Road
-Cambridge
-CB3 9DR
-UK
-
-and our email address info@openaccess.cam.ac.uk
-
-Our VAT no., should it be required, is GB 823 8476 09.
-
-*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
-
-Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
-{% elsif ticket.ticket_field_24071633 == 'payment_no' %}
-**There is no need to select a paid-for Open Access option from the publisher in this case.**
-{% endif %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
+Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% endif %}
+{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
 **Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
 {% endif %}{% if ticket.ticket_field_26329848 == '1' %}
 #### Wellcome Trust Open Access sanctions for non-compliance
@@ -191,5 +69,6 @@ The Wellcome Trust requires research data generated as a result of Wellcome Trus
 #### Cancer Research UK research data
 We {% if ticket.ticket_field_26329848 == '1' or ticket.ticket_field_24071783 == '1'%}also {% endif %}note that this work is CRUK funded. CRUK requires research data generated as a result of CRUK support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [CRUK website](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines) or you can e-mail info@data.cam.ac.uk.
 {% endif %}
+
 Best wishes,
 {{ticket.assignee.first_name}}
