@@ -57,9 +57,10 @@ BEGIN: IF MARKED AS APC PAYMENT OR PREPAYMENT DEAL
     END: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' and ticket.ticket_field_24117256 == '1' %}{% comment %}
     BEGIN: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSE INVOICE
-    {% endcomment %}We have contacted the Bill & Melinda Gates Foundation to confirm that they would pay this fee to effect publication on the terms of their open access policy. We will let you know when they reply. {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% else %} Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% comment %}
+    {% endcomment %}The Bill & Melinda Gates Foundation should pay this fee to effect publication on the terms of their open access policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% else %} Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% comment %}
     END: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSE INVOICE
     {% endcomment %}
+
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders.**
 
 (Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements.)
@@ -84,7 +85,6 @@ Our VAT no., should it be required, is GB 823 8476 09.
 *If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*{% endif %}{% comment %}
     END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
     {% endcomment %}
-
 Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}{% comment %}
     
     BEGIN: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
@@ -95,6 +95,7 @@ Once the final version has been published with a CC BY licence, we'll also be ab
 END: IF MARKED AS APC PAYMENT OR PREPAYMENT DEAL
 
 {% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
+
 **Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
 {% endif %}{% if ticket.ticket_field_26329848 == '1' %}
 #### Wellcome Trust Open Access sanctions for non-compliance
