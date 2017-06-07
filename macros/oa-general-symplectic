@@ -69,10 +69,12 @@ According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/fu
 
 (Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements.)
 
-{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% comment %}
+{% if ticket.ticket_field_24071633 == 'payment_yes' %}{% comment %}
+    BEGIN: IF MARKED AS APC PAYMENT
+    {% endcomment %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% comment %}
     
-    BEGIN: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
-    {% endcomment %}When filling in our invoicing details you should give the billing address as:
+        BEGIN: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
+        {% endcomment %}When filling in our invoicing details you should give the billing address as:
 
 University of Cambridge
 Open Access
@@ -87,9 +89,10 @@ and our email address info@openaccess.cam.ac.uk
 Our VAT no., should it be required, is GB 823 8476 09.
 
 *If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*{% endif %}{% comment %}
-    END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
-    {% endcomment %}
-Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}{% comment %}
+        END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
+    {% endcomment %}{% endif %}{% comment %}
+    END: IF MARKED AS APC PAYMENT
+    {% endcomment %}Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}{% comment %}
 
     BEGIN: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
     {% endcomment %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
