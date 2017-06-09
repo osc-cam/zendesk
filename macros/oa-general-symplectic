@@ -30,14 +30,14 @@ END: IF NOT MARKED AS PUBLISHED
 
 {{ticket.ticket_field_24114846}}
 
-{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}{% comment %}
-BEGIN: IF MARKED AS NO VERSION ALLOWED
+{% if ticket.ticket_field_24072163 == 'no_version_allowed' and ticket.ticket_field_25612958 == '1'%}{% comment %}
+BEGIN: IF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY
 {% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_no' or ticket.ticket_field_24071633 == blank %}{% comment %}
     BEGIN: IF "IS THERE AN APC" IS BLANK OR "NO"
     {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this manuscript openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.{% endif %}{% comment %}
     END: IF "IS THERE AN APC" IS BLANK OR "NO"
     {% endcomment %}{% endif %}{% comment %}
-END: IF MARKED AS NO VERSION ALLOWED
+END: IF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY
 {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71509888 == '1' %}{% comment %}
 
 BEGIN: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
