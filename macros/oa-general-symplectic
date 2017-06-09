@@ -1,38 +1,44 @@
 Dear {{ticket.requester.name}},
 
-Thank you for uploading your paper. {% if ticket.ticket_field_25612958 != '1' %}{% comment %}
+{% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
 
-BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
-    {% endcomment %}{% if ticket.ticket_field_24117286 == '1' %}{% comment %}
-    BEGIN: IF MARKED AS RETROSPECTIVE DEPOSIT
-    {% endcomment %}Because it was accepted by the journal more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the acceptance date. {% if ticket.ticket_field_77355348 == '1' %}{% comment %}
-        BEGIN: IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-        {% endcomment %}During the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication, so this article will still be eligible for the REF, but this flexibility will be subject to a review in autumn 2017.{% endif %}{% comment %}
-        END: IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-        {% endcomment %}
+BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
+    {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_25612958 != '1' %}{% comment %}
+
+    BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
+        {% endcomment %}{% if ticket.ticket_field_24117286 == '1' %}{% comment %}
+        BEGIN: IF MARKED AS RETROSPECTIVE DEPOSIT
+        {% endcomment %}Because it was accepted by the journal more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the acceptance date. {% if ticket.ticket_field_77355348 == '1' %}{% comment %}
+            BEGIN: IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+            {% endcomment %}During the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication, so this article will still be eligible for the REF, but this flexibility will be subject to a review in autumn 2017.{% endif %}{% comment %}
+            END: IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+            {% endcomment %}
 
 W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% endif %}{% comment %}
-    END: IF MARKED AS RETROSPECTIVE DEPOSIT
-    {% endcomment %}{% else %}W{% endif %}{% comment %}
-END: IF NOT MARKED AS HEFCE OUT OF SCOPE
+        END: IF MARKED AS RETROSPECTIVE DEPOSIT
+        {% endcomment %}{% else %}W{% endif %}{% comment %}
+    END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 
-{% endcomment %}e have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
+    {% endcomment %}e have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
 
-BEGIN: IF NOT MARKED AS PUBLISHED
-    {% endcomment %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
-    BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS
-    {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% comment %}
-    END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS
-    {% endcomment %}{% endif %}{% comment %}
-END: IF NOT MARKED AS PUBLISHED
+    BEGIN: IF NOT MARKED AS PUBLISHED
+        {% endcomment %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+        BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS
+        {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% comment %}
+        END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS
+        {% endcomment %}{% endif %}{% comment %}
+    END: IF NOT MARKED AS PUBLISHED
 
-{% endcomment %}. Your manuscript can be found in Apollo at the following link:
+    {% endcomment %}. Your manuscript can be found in Apollo at the following link:
 
 {{ticket.ticket_field_24114846}}
 
-{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
-BEGIN: IF MARKED AS GOLD TEAM NEEDS PROCESSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
-{% endcomment %}We will be in touch shortly to discuss your other funder open access requirements.
+{% endif %}{% comment %}
+END: IF GOLD TEAM NOT MARKED AS PROCESSED
+{% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
+
+BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
+    {% endcomment %}We will be in touch shortly to discuss your other funder open access requirements.
 {% elsif ticket.ticket_field_24072163 == 'no_version_allowed' and ticket.ticket_field_25612958 == '1'%}{% if ticket.ticket_field_24071633 == 'payment_no' or ticket.ticket_field_24071633 == blank %}{% comment %}
     BEGIN: IF "IS THERE AN APC" IS BLANK OR "NO"
     {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this manuscript openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.{% endif %}{% comment %}
@@ -40,22 +46,22 @@ BEGIN: IF MARKED AS GOLD TEAM NEEDS PROCESSING; ELSIF MARKED AS NO VERSION ALLOW
     {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71509888 == '1' %}{% comment %}
 
     BEGIN: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
-    {% endcomment %}The paper is also covered by the following open access policy/policies:
+    {% endcomment %}Your paper is also covered by the following open access policy/policies:
 
 {% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
 {% endif %}{% if ticket.ticket_field_24117196 == '1' %}* [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
 {% endif %}{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy)
 {% endif %}{% if ticket.ticket_field_71509888 == '1' %}* [NIHR](https://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm)
-{% endif %}{% endif %}{% comment %}
+{% endif %}
+{% endif %}{% comment %}
 END: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
 
 {% endcomment %}{% endif %}{% comment %}
-END: IF MARKED AS GOLD TEAM NEEDS PROCESSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
-{% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' %}{% comment %}
-
-BEGIN: IF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
-{% endcomment %}
-{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}{% comment %}
+END: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
+{% endcomment %}{% if ticket.ticket_field_80650548 == '1' %}{% comment %}
+BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
+{% endcomment %}We noticed that your paper has already been published open access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
+{% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' %}{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}{% comment %}
     BEGIN: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
     {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}To comply with this/these you'll need to select the journal's option for immediate Open Access.{% endif %}{% comment %}
     END: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
@@ -110,7 +116,7 @@ Our VAT no., should it be required, is GB 823 8476 09.
     END: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
     
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case.**{% endif %}{% comment %}
-END: IF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
+END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
 
 {% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
 
