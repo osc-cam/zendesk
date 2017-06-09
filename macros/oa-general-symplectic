@@ -30,18 +30,17 @@ END: IF NOT MARKED AS PUBLISHED
 
 {{ticket.ticket_field_24114846}}
 
-{% if ticket.ticket_field_24072163 == 'no_version_allowed' and ticket.ticket_field_25612958 == '1'%}{% comment %}
-BEGIN: IF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY
-{% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_no' or ticket.ticket_field_24071633 == blank %}{% comment %}
+{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
+BEGIN: IF MARKED AS GOLD TEAM NEEDS PROCESSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
+{% endcomment %}We will be in touch shortly to discuss your other funder open access requirements.
+{% elsif ticket.ticket_field_24072163 == 'no_version_allowed' and ticket.ticket_field_25612958 == '1'%}{% if ticket.ticket_field_24071633 == 'payment_no' or ticket.ticket_field_24071633 == blank %}{% comment %}
     BEGIN: IF "IS THERE AN APC" IS BLANK OR "NO"
     {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this manuscript openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.{% endif %}{% comment %}
     END: IF "IS THERE AN APC" IS BLANK OR "NO"
-    {% endcomment %}{% endif %}{% comment %}
-END: IF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY
-{% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71509888 == '1' %}{% comment %}
+    {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71509888 == '1' %}{% comment %}
 
-BEGIN: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
-{% endcomment %}The paper is also covered by the following open access policy/policies:
+    BEGIN: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
+    {% endcomment %}The paper is also covered by the following open access policy/policies:
 
 {% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
 {% endif %}{% if ticket.ticket_field_24117196 == '1' %}* [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
@@ -50,6 +49,8 @@ BEGIN: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
 {% endif %}{% endif %}{% comment %}
 END: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
 
+{% endcomment %}{% endif %}{% comment %}
+END: IF MARKED AS GOLD TEAM NEEDS PROCESSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
 {% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' %}{% comment %}
 
 BEGIN: IF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
