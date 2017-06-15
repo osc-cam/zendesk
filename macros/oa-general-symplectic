@@ -19,15 +19,19 @@ W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk
         {% endcomment %}{% else %}W{% endif %}{% comment %}
     END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 
-    {% endcomment %}e have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
+    {% endcomment %}e have added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0'%}{% comment %}
 
-    BEGIN: IF NOT MARKED AS PUBLISHED
-        {% endcomment %}, with an embargo until publication{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
-        BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS
+    BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE
+        {% endcomment %}. It is currently under an indefinite embargo as it is not yet published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+        BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
+        {% endcomment %} to a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% comment %}
+        END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
+        {% endcomment %} once publication takes place{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+        BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<2>>
         {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month embargo{% endif %}{% comment %}
-        END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS
+        END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<2>>
         {% endcomment %}{% endif %}{% comment %}
-    END: IF NOT MARKED AS PUBLISHED
+    END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE
 
     {% endcomment %}. Your manuscript can be found in Apollo at the following link:
 
