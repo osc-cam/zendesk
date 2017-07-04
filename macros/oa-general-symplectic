@@ -72,11 +72,15 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSE PRINT VALUE OF APC
     {% endcomment %}
-    **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %} The article processing charge for articles published in this journal {% if {{ticket.ticket_field_24069543 | upcase}} == "ROYAL SOCIETY OF CHEMISTRY" %}{% comment %}
+    **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %} The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
         BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
-    {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
+        {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
-{% else %}is XXXX + VAT. {% endif %}{% endif %}{% comment %}
+{% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**.
+
+{% else %}is XXXX + VAT. {% endif %}{% comment %}
+        END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
+        {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' and ticket.ticket_field_24117256 == '1' %}{% comment %}
     BEGIN: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
