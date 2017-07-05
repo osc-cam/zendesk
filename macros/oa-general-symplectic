@@ -6,16 +6,10 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
     {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_25612958 != '1' %}{% comment %}
 
     BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
-        {% endcomment %}{% if ticket.ticket_field_24117286 == '1' %}{% comment %}
-        BEGIN: IF MARKED AS RETROSPECTIVE DEPOSIT
-        {% endcomment %}Because it was accepted by the journal more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the acceptance date. {% if ticket.ticket_field_77355348 == '1' %}{% comment %}
-            BEGIN: IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-            {% endcomment %}During the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication, so this article will still be eligible for the REF, but this flexibility will be subject to a review in autumn 2017.{% endif %}{% comment %}
-            END: IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-            {% endcomment %}
-
-W{% else %} To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% endif %}{% comment %}
-        END: IF MARKED AS RETROSPECTIVE DEPOSIT
+        {% endcomment %}{% if ticket.ticket_field_24117286 != '1' or ticket.ticket_field_77355348 == '1' %}{% comment %}
+        BEGIN: IF NOT MARKED AS RETROSPECTIVE DEPOSIT OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+        {% endcomment %}To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% else %}W{% endif %}{% comment %}
+        END: IF NOT MARKED AS RETROSPECTIVE DEPOSIT OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
         {% endcomment %}{% else %}W{% endif %}{% comment %}
     END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 
@@ -130,6 +124,19 @@ Our VAT no., should it be required, is GB 823 8476 09.
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case.**{% endif %}{% comment %}
 END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
 
+{% endcomment %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
+BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
+    {% endcomment %}{% if ticket.ticket_field_24117286 == '1' %}{% comment %}
+    BEGIN: IF MARKED AS RETROSPECTIVE DEPOSIT
+        {% endcomment %}#### HEFCE compliance
+{% if ticket.ticket_field_77355348 == '0' %}{% comment %}
+        BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+        {% endcomment %}Because this manuscript was accepted by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted {% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication. However, this flexibility will be subject to a review in autumn 2017, so please upload your manuscripts {% endif %}to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4).{% comment %}
+        END: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+    {% endcomment %}{% endif %}{% comment %}
+    END: IF MARKED AS RETROSPECTIVE DEPOSIT
+{% endcomment %}{% endif %}{% comment %}
+END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 {% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
 
 **Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
