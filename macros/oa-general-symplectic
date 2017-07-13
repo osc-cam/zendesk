@@ -1,4 +1,25 @@
-Dear {{ticket.requester.name}},
+{% comment %}
+BLOCK: DATA VALIDATION WARNINGS 
+{% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" %}{% comment %}
+BEGIN: PUBLISHER IS SPRINGER
+{% endcomment %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
+    BEGIN: NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
+    {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
+        BEGIN: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
+        {% endcomment %}WARNING: Publisher is Springer and it appears that this paper has not been published yet. Please consider whether this requires the attention of the Gold Team. If it has not been published yet, please consider selecting "Springer Compact" in "Is there an APC payment?" and setting "Gold team" to "-" (blank).
+        
+        {% elsif ticket.ticket_field_24071633 != 'springer_compact' %}WARNING: Publisher is Springer. Please consider selecting "Springer Compact" in "Is there an APC payment?"
+        
+{% endif %}{% comment %}
+        END: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'springer_compact' %}WARNING: Although the publisher is Springer, this has already been published, so it is unlikely that Springer Compact is still an option. Please consider modifying "Is there an APC payment?"
+    
+{% endif %}{% comment %}
+    END: NOT MARKED AS PUBLISHED
+{% endcomment %}{% endif %}{% comment %}
+END: PUBLISHER IS SPRINGER; ELSIF MARKED AS SPRINGER COMPACT
+BLOCK END: DATA VALIDATION WARNINGS
+{% endcomment %}Dear {{ticket.requester.name}},
 
 {% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
 
@@ -61,18 +82,20 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 {% endcomment %}We noticed that your paper has already been published open access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
 {% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' %}{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}{% comment %}
     BEGIN: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
-    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}To comply with this/these you'll need to select the journal's option for immediate Open Access.{% endif %}{% comment %}
+    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% comment %}
+    ###############Minor bug: This condition is matched by all Springer Compact items, including those that are not covered by any of the funders' OA policies. In these cases, we would ideally not print "To comply with this/these..." ###############################
+    {% endcomment %}To comply with this/these you'll need to select the journal's option for immediate Open Access.{% endif %}{% comment %}
     END: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSE PRINT VALUE OF APC
     {% endcomment %}
     **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %} The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
-        BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
+        BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIF JOURNAL TITLE IS SCIENTIFIC REPORTS; ELSE XXXX
         {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
 {% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**.
 
-{% else %}is XXXX + VAT. {% endif %}{% comment %}
+{% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
         END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSE PRINT VALUE OF APC
@@ -84,13 +107,19 @@ According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/fu
 
 >From the commencement of this policy (see above) the cost of APCs and other appropriate publication charges will be supported either through the original NIHR award, or where applicable an NIHR Open Access Fund. Researchers will need to contact the awarding NIHR Programme Coordinating Centre to review the correct approach. This does not apply to any recipient of NIHR funding prior to 1st April 2014, which remain under the requirements of their original contract.{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% comment %}
     END: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSEIF MARKED AS NIHR POLICY ONLY AND OTHER INSTITUTION PAYMENT; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
+    {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
+    BEGIN: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
     {% endcomment %}
-
+    
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders.**
 
 (Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements.)
 
-{% if ticket.ticket_field_24071633 == 'payment_yes' %}{% comment %}
+Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+
+{% endif %}{% comment %}
+    END: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
+    {% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_yes' %}{% comment %}
     BEGIN: IF MARKED AS APC PAYMENT
     {% endcomment %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% comment %}
     
@@ -115,7 +144,7 @@ Our VAT no., should it be required, is GB 823 8476 09.
         END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
     {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS APC PAYMENT
-    {% endcomment %}Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}{% comment %}
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}{% comment %}
 
     BEGIN: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
     {% endcomment %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
@@ -160,7 +189,7 @@ We note that this work is EPSRC and BBSRC funded. Both the EPSRC and BBSRC requi
 #### EPSRC research data
 We note that this work is EPSRC funded. The EPSRC requires research data generated as a result of EPSRC support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [EPSRC](http://www.data.cam.ac.uk/funders/epsrc-funded-researchers) data policy visit our website or e-mail info@data.cam.ac.uk.
 {% elsif ticket.ticket_field_28673728 == '0' and ticket.ticket_field_28673718 == '1' %}
-### BBSRC research data
+#### BBSRC research data
 We note that this work is BBSRC funded. The BBSRC requires research data generated as a result of BBSRC support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [BBSRC](http://www.data.cam.ac.uk/funders/bbsrc) data policy visit our website or e-mail info@data.cam.ac.uk.
 {% elsif ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673708 == '1' or ticket.ticket_field_28676917 == '1' or ticket.ticket_field_28673748 == '1' or ticket.ticket_field_28676927 == '1' or ticket.ticket_field_24071783 == '1' %}
 #### RCUK research data
