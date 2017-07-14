@@ -166,10 +166,14 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
     END: IF MARKED AS RETROSPECTIVE DEPOSIT
 {% endcomment %}{% endif %}{% comment %}
 END: IF NOT MARKED AS HEFCE OUT OF SCOPE
-{% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' %}
+{% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' or ticket.ticket_field_71509888 %}{% comment %}
+BEGIN: IF MARKED AS COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
+{% endcomment %}
 
 **Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
-{% endif %}{% if ticket.ticket_field_26329848 == '1' %}
+{% endif %}{% comment %}
+END: IF MARKED AS COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
+{% endcomment %}{% if ticket.ticket_field_26329848 == '1' %}
 #### Wellcome Trust Open Access sanctions for non-compliance
 
 Where Wellcome-funded researchers have not complied with the Trust's Open Access policy, [three sanctions will apply](https://wellcome.ac.uk/funding/managing-grant/complying-our-open-access-policy):
