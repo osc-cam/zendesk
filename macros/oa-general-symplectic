@@ -41,10 +41,10 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
         BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
         {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
         END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
-        {% endcomment %} once publication takes place{% else %}{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
-        BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<2>>
+        {% endcomment %} once publication takes place{% else %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+        BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
         {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
-        END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<2>>
+        END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
         {% endcomment %}{% endif %}{% comment %}
     END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE
 
@@ -87,9 +87,9 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     {% endcomment %}To comply with this/these you'll need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
     END: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
-    BEGIN: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSE PRINT VALUE OF APC
+    BEGIN: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}
-    **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
+    **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
         BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIF JOURNAL TITLE IS SCIENTIFIC REPORTS; ELSE XXXX
         {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
@@ -98,29 +98,24 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 {% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
         END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
         {% endcomment %}{% endif %}{% comment %}
-    END: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSE PRINT VALUE OF APC
+    END: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' and ticket.ticket_field_24117256 == '1' %}{% comment %}
-    BEGIN: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
+    BEGIN: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
     {% endcomment %}The Bill & Melinda Gates Foundation should pay this fee to effect publication on the terms of their open access policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. {% elsif ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' and ticket.ticket_field_71509888 == '1' and ticket.ticket_field_24117266 == '1' %}Funds for this should have been included in your original NIHR grant, or they may be available from the NIHR. **You should contact your NIHR programme manager if you have any questions regarding this requirement.**
     
 According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm):
 
->From the commencement of this policy (see above) the cost of APCs and other appropriate publication charges will be supported either through the original NIHR award, or where applicable an NIHR Open Access Fund. Researchers will need to contact the awarding NIHR Programme Coordinating Centre to review the correct approach. This does not apply to any recipient of NIHR funding prior to 1st April 2014, which remain under the requirements of their original contract.{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
+>From the commencement of this policy (see above) the cost of APCs and other appropriate publication charges will be supported either through the original NIHR award, or where applicable an NIHR Open Access Fund. Researchers will need to contact the awarding NIHR Programme Coordinating Centre to review the correct approach. This does not apply to any recipient of NIHR funding prior to 1st April 2014, which remain under the requirements of their original contract.{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %} Funds to pay for this should be sought from the corresponding author(s) institution(s). {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
         {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for open access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly. {% else %}Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% comment %}
         END: IF MARKED AS APC INVOICE PROCESSED
         {% endcomment %}{% endif %}{% comment %}
-    END: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSEIF MARKED AS NIHR POLICY ONLY AND OTHER INSTITUTION PAYMENT; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
+    END: IF MARKED AS GATES POLICY AND OTHER INSTITUTION PAYMENT; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
     {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
     {% endcomment %}
     
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders.**
-
-(Please note, other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements.)
-
-Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
-
+**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 {% endif %}{% comment %}
     END: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_yes' %}{% comment %}
@@ -212,8 +207,8 @@ We note that this work is RCUK funded. Research Councils UK require research dat
 The Wellcome Trust requires research data generated as a result of Wellcome Trust support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [Wellcome Trust's website](https://wellcome.ac.uk/funding/managing-grant/policy-data-management-and-sharing) or you can e-mail info@data.cam.ac.uk.
 {% endif %}{% if ticket.ticket_field_26352357 == '1' %}
 #### Cancer Research UK research data
-We {% if ticket.ticket_field_26329848 == '1' or ticket.ticket_field_24071783 == '1'%}also {% endif %}note that this work is CRUK funded. CRUK requires research data generated as a result of CRUK support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [CRUK website](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines) or you can e-mail info@data.cam.ac.uk.{% endif %}
-
+We {% if ticket.ticket_field_26329848 == '1' or ticket.ticket_field_24071783 == '1'%}also {% endif %}note that this work is CRUK funded. CRUK requires research data generated as a result of CRUK support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [CRUK website](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines) or you can e-mail info@data.cam.ac.uk.
+{% endif %}
 We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
 
 Best wishes,
