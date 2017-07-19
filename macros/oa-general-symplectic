@@ -95,7 +95,7 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 {% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**.
 
-{% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
+{% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% elsif ticket.ticket_field_24069493 == "Nature Communications" %}is £3,150 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
         END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
@@ -126,7 +126,8 @@ According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/fu
         {% endcomment %}{% if ticket.ticket_field_29294538 == '0' %}{% comment %}
             
             BEGIN: IF NOT MARKED AS APC INVOICE PROCESSED
-            {% endcomment %}When filling in our invoicing details you should give the billing address as:
+            {% endcomment %}
+When filling in our invoicing details you should give the billing address as:
 
 University of Cambridge
 Open Access
@@ -172,13 +173,11 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
 END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 {% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' or ticket.ticket_field_71509888 == '1' %}{% comment %}
 BEGIN: IF MARKED AS COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
-{% endcomment %}
+{% endcomment %}**Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
 
-**Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
 {% endif %}{% comment %}
 END: IF MARKED AS COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
-{% endcomment %}{% if ticket.ticket_field_26329848 == '1' %}
-#### Wellcome Trust Open Access sanctions for non-compliance
+{% endcomment %}{% if ticket.ticket_field_26329848 == '1' %}#### Wellcome Trust Open Access sanctions for non-compliance
 
 Where Wellcome-funded researchers have not complied with the Trust's Open Access policy, [three sanctions will apply](https://wellcome.ac.uk/funding/managing-grant/complying-our-open-access-policy):
 
@@ -190,26 +189,26 @@ These sanctions apply to:
 
 * all original Wellcome-funded research papers published since 1 October 2009
 * to monographs and book chapters for which a contract was signed after 1 October 2014.
-{% endif %}{% if ticket.ticket_field_28673728 == '1' and ticket.ticket_field_28673718 == '1' %}
-#### EPSRC and BBSRC research data
+
+{% endif %}{% if ticket.ticket_field_28673728 == '1' and ticket.ticket_field_28673718 == '1' %}#### EPSRC and BBSRC research data
 We note that this work is EPSRC and BBSRC funded. Both the EPSRC and BBSRC require research data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [EPSRC](http://www.data.cam.ac.uk/funders/epsrc-funded-researchers) and [BBSRC](http://www.data.cam.ac.uk/funders/bbsrc) data policies visit our website or e-mail info@data.cam.ac.uk.
-{% elsif ticket.ticket_field_28673728 == '1' and ticket.ticket_field_28673718 == '0' %}
-#### EPSRC research data
+
+{% elsif ticket.ticket_field_28673728 == '1' and ticket.ticket_field_28673718 == '0' %}#### EPSRC research data
 We note that this work is EPSRC funded. The EPSRC requires research data generated as a result of EPSRC support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [EPSRC](http://www.data.cam.ac.uk/funders/epsrc-funded-researchers) data policy visit our website or e-mail info@data.cam.ac.uk.
-{% elsif ticket.ticket_field_28673728 == '0' and ticket.ticket_field_28673718 == '1' %}
-#### BBSRC research data
+
+{% elsif ticket.ticket_field_28673728 == '0' and ticket.ticket_field_28673718 == '1' %}#### BBSRC research data
 We note that this work is BBSRC funded. The BBSRC requires research data generated as a result of BBSRC support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [BBSRC](http://www.data.cam.ac.uk/funders/bbsrc) data policy visit our website or e-mail info@data.cam.ac.uk.
-{% elsif ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673708 == '1' or ticket.ticket_field_28676917 == '1' or ticket.ticket_field_28673748 == '1' or ticket.ticket_field_28676927 == '1' or ticket.ticket_field_24071783 == '1' %}
-#### RCUK research data
+
+{% elsif ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673708 == '1' or ticket.ticket_field_28676917 == '1' or ticket.ticket_field_28673748 == '1' or ticket.ticket_field_28676927 == '1' or ticket.ticket_field_24071783 == '1' %}#### RCUK research data
 We note that this work is RCUK funded. Research Councils UK require research data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [RCUK website](http://www.rcuk.ac.uk/research/datapolicy/) or you can e-mail info@data.cam.ac.uk.
-{% endif %}{% if ticket.ticket_field_26329848 == '1' %}
-#### Wellcome Trust research data
+
+{% endif %}{% if ticket.ticket_field_26329848 == '1' %}#### Wellcome Trust research data
 The Wellcome Trust requires research data generated as a result of Wellcome Trust support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [Wellcome Trust's website](https://wellcome.ac.uk/funding/managing-grant/policy-data-management-and-sharing) or you can e-mail info@data.cam.ac.uk.
-{% endif %}{% if ticket.ticket_field_26352357 == '1' %}
-#### Cancer Research UK research data
+
+{% endif %}{% if ticket.ticket_field_26352357 == '1' %}#### Cancer Research UK research data
 We {% if ticket.ticket_field_26329848 == '1' or ticket.ticket_field_24071783 == '1'%}also {% endif %}note that this work is CRUK funded. CRUK requires research data generated as a result of CRUK support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [CRUK website](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines) or you can e-mail info@data.cam.ac.uk.
-{% endif %}
-We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
+
+{% endif %}We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
 
 Best wishes,
 {{ticket.assignee.first_name}}
