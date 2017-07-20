@@ -1,23 +1,31 @@
 {% comment %}
 BLOCK: DATA VALIDATION WARNINGS 
-{% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" %}{% comment %}
-BEGIN: PUBLISHER IS SPRINGER
 {% endcomment %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
-    BEGIN: NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
+BEGIN: IF NOT MARKED AS PUBLISHED
+{% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" or ticket.ticket_field_24069543 == "springer" or ticket.ticket_field_24069543 == "SPRINGER" %}{% comment %}
+    BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
     {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
         BEGIN: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
         {% endcomment %}WARNING: Publisher is Springer and it appears that this paper has not been published yet. Please consider whether this requires the attention of the Gold Team. If it has not been published yet, please consider selecting "Springer Compact" in "Is there an APC payment?" and setting "Gold team" to "-" (blank).
         
-        {% elsif ticket.ticket_field_24071633 != 'springer_compact' %}WARNING: Publisher is Springer. Please consider selecting "Springer Compact" in "Is there an APC payment?"
+        {% elsif ticket.ticket_field_24071633 != 'springer_compact' %}WARNING: Publisher is Springer. Please consider selecting "Springer Compact" in field "Is there an APC payment?"
         
 {% endif %}{% comment %}
         END: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
     {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'springer_compact' %}WARNING: Although the publisher is Springer, this has already been published, so it is unlikely that Springer Compact is still an option. Please consider modifying "Is there an APC payment?"
     
+{% elsif ticket.ticket_field_24071633 == 'payment_yes' %}{% if ticket.ticket_field_24069543 == "Oxford University Press" or ticket.ticket_field_24069543 == "OUP" or ticket.ticket_field_24069543 == "Oxford" %}{% comment %}
+        BEGIN: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
+        {% endcomment %}WARNING: Publisher is OUP. Please consider selecting "OUP Prepayment Account" instead of "Yes" in field "Is there an APC payment?"
+    
+{% elsif ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
+
 {% endif %}{% comment %}
-    END: NOT MARKED AS PUBLISHED
-{% endcomment %}{% endif %}{% comment %}
-END: PUBLISHER IS SPRINGER; ELSIF MARKED AS SPRINGER COMPACT
+        END: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
+        {% endcomment %}{% endif %}{% comment %}
+    END: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
+    {% endcomment %}{% endif %}{% comment %}
+END: IF NOT MARKED AS PUBLISHED
 BLOCK END: DATA VALIDATION WARNINGS
 {% endcomment %}Dear {{ticket.requester.name}},
 
@@ -116,6 +124,7 @@ According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/fu
     {% endcomment %}
     
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+
 {% endif %}{% comment %}
     END: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_yes' %}{% comment %}
@@ -126,8 +135,7 @@ According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/fu
         {% endcomment %}{% if ticket.ticket_field_29294538 == '0' %}{% comment %}
             
             BEGIN: IF NOT MARKED AS APC INVOICE PROCESSED
-            {% endcomment %}
-When filling in our invoicing details you should give the billing address as:
+            {% endcomment %}When filling in our invoicing details you should give the billing address as:
 
 University of Cambridge
 Open Access
@@ -155,7 +163,9 @@ Our VAT no., should it be required, is GB 823 8476 09.
     {% endcomment %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
     END: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
     
-    {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case.**{% endif %}{% comment %}
+    {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case**.
+    
+{% endif %}{% comment %}
 END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
 
 {% endcomment %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
