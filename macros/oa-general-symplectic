@@ -1,7 +1,7 @@
 {% comment %}
 BLOCK: DATA VALIDATION WARNINGS 
 {% endcomment %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
-BEGIN: IF NOT MARKED AS PUBLISHED
+BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
 {% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" or ticket.ticket_field_24069543 == "springer" or ticket.ticket_field_24069543 == "SPRINGER" %}{% comment %}
     BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
     {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
@@ -12,20 +12,20 @@ BEGIN: IF NOT MARKED AS PUBLISHED
         
 {% endif %}{% comment %}
         END: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
-    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'springer_compact' %}WARNING: Although the publisher is Springer, this has already been published, so it is unlikely that Springer Compact is still an option. Please consider modifying "Is there an APC payment?"
-    
-{% elsif ticket.ticket_field_24071633 == 'payment_yes' %}{% if ticket.ticket_field_24069543 == "Oxford University Press" or ticket.ticket_field_24069543 == "OUP" or ticket.ticket_field_24069543 == "Oxford" %}{% comment %}
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_yes' %}{% if ticket.ticket_field_24069543 == "Oxford University Press" or ticket.ticket_field_24069543 == "OUP" or ticket.ticket_field_24069543 == "Oxford" %}{% comment %}
         BEGIN: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
         {% endcomment %}WARNING: Publisher is OUP. Please consider selecting "OUP Prepayment Account" instead of "Yes" in field "Is there an APC payment?"
     
-{% elsif ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
+{% elsif ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
 
 {% endif %}{% comment %}
         END: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
         {% endcomment %}{% endif %}{% comment %}
     END: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
-    {% endcomment %}{% endif %}{% comment %}
-END: IF NOT MARKED AS PUBLISHED
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'springer_compact' %}WARNING: This has already been published, so it is unlikely that Springer Compact is still an option. Please consider modifying "Is there an APC payment?"
+    
+{% endif %}{% comment %}
+END: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
 BLOCK END: DATA VALIDATION WARNINGS
 {% endcomment %}Dear {{ticket.requester.name}},
 
@@ -86,8 +86,15 @@ END: IF MARKED AS COVERED BY COAF, RCUK, GATES FOUNDATION, NIHR POLICIES
 {% endcomment %}{% endif %}{% comment %}
 END: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
 {% endcomment %}{% if ticket.ticket_field_80650548 == '1' %}{% comment %}
-BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
+BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
 {% endcomment %}We noticed that your paper has already been published open access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
+
+{% elsif ticket.ticket_field_80935588 == '1' %}To comply with this/these funder policies, you should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. To receive our advice before having to sign an agreement with the publisher, please upload your future publications to us as soon as possible after acceptance.
+
+{% elsif ticket.ticket_field_24117436 == '1' %}To comply with this/these funder policies, we have already approved immediate open access for this article via the University's prepayment deal with the publisher. 
+
+**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+
 {% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' %}{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}{% comment %}
     BEGIN: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
     {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% comment %}
@@ -96,8 +103,7 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     END: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS SPRINGER COMPACT; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
-    {% endcomment %}
-    **The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
+    {% endcomment %}**The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
         BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIF JOURNAL TITLE IS SCIENTIFIC REPORTS; ELSE XXXX
         {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
@@ -166,7 +172,7 @@ Our VAT no., should it be required, is GB 823 8476 09.
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case**.
     
 {% endif %}{% comment %}
-END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
+END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
 
 {% endcomment %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
 BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
@@ -175,7 +181,9 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
         {% endcomment %}#### HEFCE compliance
 {% if ticket.ticket_field_77355348 == '0' %}{% comment %}
         BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-        {% endcomment %}Because this manuscript was accepted by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted {% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication. However, this flexibility will be subject to a review in autumn 2017, so please upload your manuscripts {% endif %}to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4).{% comment %}
+        {% endcomment %}Because this manuscript was accepted by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted {% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication. However, this flexibility will be subject to a review in autumn 2017, so please upload your manuscripts {% endif %}to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4).
+        
+{% comment %}
         END: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
     {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS RETROSPECTIVE DEPOSIT
