@@ -98,7 +98,7 @@ Wellcome payment,24029868,checkbox,True,wellcome_payment,https://camacuk.zendesk
 Self-billed VAT - Wellcome,24023477,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24023477.json
 ERC,71064067,checkbox,True,erc,https://camacuk.zendesk.com/api/v2/ticket_fields/71064067.json
 Awarding institution,46901507,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46901507.json
-Submitter email address,48984068,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/48984068.json
+Impersonator email address,48984068,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/48984068.json
 Workflow Item ID,39618567,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/39618567.json
 Symplectic acceptance date (YYYY-MM-DD),45109768,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/45109768.json
 Arthritis Research UK,26352397,checkbox,True,arthritis_research_uk,https://camacuk.zendesk.com/api/v2/ticket_fields/26352397.json
@@ -143,6 +143,7 @@ Membership invoice processed,48024147,checkbox,True,membership_invoice_processed
 HEFCE transitional deadline met,77355348,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/77355348.json
 DSpace done - needs email,24522837,checkbox,True,needs_dspace_email,https://camacuk.zendesk.com/api/v2/ticket_fields/24522837.json
 published,77352028,checkbox,True,already_published,https://camacuk.zendesk.com/api/v2/ticket_fields/77352028.json
+Corresponding author(s)' affiliation(s),80911708,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80911708.json
 Promote on Twitter?,40547167,checkbox,True,promote_twitter,https://camacuk.zendesk.com/api/v2/ticket_fields/40547167.json
 External email address,46901347,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46901347.json
 Page/colour invoice number,48023907,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/48023907.json
@@ -164,6 +165,7 @@ APC invoice paid,58141568,checkbox,True,apc_invoice_paid,https://camacuk.zendesk
 Technical Issue,30146437,checkbox,True,repository_technical_issue,https://camacuk.zendesk.com/api/v2/ticket_fields/30146437.json
 Other exception type,76949128,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/76949128.json
 Commitment note,29294987,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29294987.json
+publication type,80501387,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80501387.json
 Thesis awarded date,46903947,date,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46903947.json
 Page/colour fee paid on CUFS,48023947,checkbox,True,add_page_colour_cufs_data,https://camacuk.zendesk.com/api/v2/ticket_fields/48023947.json
 Date added to Apollo (YYYY-MM-DD),29294988,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29294988.json
@@ -180,6 +182,7 @@ HEFCE Out of Scope,25612958,checkbox,True,book_chapter,https://camacuk.zendesk.c
 Twitter handles,40547487,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40547487.json
 In Dark Collection,29097378,checkbox,True,dark_collection,https://camacuk.zendesk.com/api/v2/ticket_fields/29097378.json
 Data supporting a publication?,40426148,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40426148.json
+RCUK failure,80935588,checkbox,True,rcuk_failure,https://camacuk.zendesk.com/api/v2/ticket_fields/80935588.json
 Thesis title,46902187,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46902187.json
 AHRC,28673708,checkbox,True,ahrc,https://camacuk.zendesk.com/api/v2/ticket_fields/28673708.json
 Licence applied by publisher,29275308,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29275308.json
