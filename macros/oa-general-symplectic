@@ -44,10 +44,10 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
         {% endcomment %}{% else %}W{% endif %}{% comment %}
     END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 
-    {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0'%}{% comment %}
+    {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
 
-    BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE
-        {% endcomment %}{% if ticket.ticket_field_24114846 == blank %}, with {% else %}. It is currently under {% endif %}an indefinite embargo as it is not yet published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+    BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
+        {% endcomment %}{% if ticket.ticket_field_24114846 == blank %}, with {% else %}. It is currently under {% endif %}an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
         BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
         {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
         END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
@@ -56,7 +56,7 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
         {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
         END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
         {% endcomment %}{% endif %}{% comment %}
-    END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE
+    END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
 
     {% endcomment %}. {% if ticket.ticket_field_24114846 == blank %}We'll let you know when we've done this.
     
@@ -72,22 +72,31 @@ BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLO
     {% endcomment %}We will be in touch shortly to discuss your other funder open access requirements.
 {% elsif ticket.ticket_field_24072163 == 'no_version_allowed' and ticket.ticket_field_25612958 == '1'%}{% if ticket.ticket_field_24071633 == 'payment_no' or ticket.ticket_field_24071633 == blank %}{% comment %}
     BEGIN: IF "IS THERE AN APC" IS BLANK OR "NO"
-    {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this manuscript openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.{% endif %}{% comment %}
+    {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this manuscript openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.
+    
+{% endif %}{% comment %}
     END: IF "IS THERE AN APC" IS BLANK OR "NO"
-    {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71509888 == '1' or ticket.ticket_field_73663128 == '1' or ticket.ticket_field_71064067 == '1' or ticket.ticket_field_73176687 == '1' %}{% comment %}
-        BEGIN: IF MARKED AS RCUK, COAF, GATES, NIHR, H2020, ERC or FP7 POLICIES
+    {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}{% comment %}
+
+        BEGIN: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
         {% endcomment %}Your paper is also covered by the following open access policy/policies:
 
 {% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
-{% endif %}{% if ticket.ticket_field_24117196 == '1' %}* [COAF](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
+{% endif %}{% if ticket.ticket_field_26352397 == '1' %}* [Arthritis Research UK](http://www.arthritisresearchuk.org/research/information-for-award-holders/open-access-and-travel-support/open-access.aspx)
 {% endif %}{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy)
-{% endif %}{% if ticket.ticket_field_71509888 == '1' %}* [NIHR](https://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm)
-{% endif %}{% if ticket.ticket_field_73663128 == '1' %}* [H2020](https://www.openaire.eu/open-access-in-horizon-2020)
+{% endif %}{% if ticket.ticket_field_26329928 == '1' %}* [Bloodwise](https://bloodwise.org.uk/research/policies/open-access)
+{% endif %}{% if ticket.ticket_field_26352407 == '1' %}* [Breast Cancer Now](http://breastcancernow.org/sites/default/files/public/revised_bcn_open_access_policy_sept_16_0.pdf)
+{% endif %}{% if ticket.ticket_field_26352377 == '1' %}* [British Heart Foundation](https://www.bhf.org.uk/research/information-for-researchers/managing-your-grant/open-access-policy)
+{% endif %}{% if ticket.ticket_field_26352357 == '1' %}* [Cancer Research UK](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/policy-on-open-access)
 {% endif %}{% if ticket.ticket_field_71064067 == '1' %}* [ERC](https://erc.europa.eu/sites/default/files/document/file/ERC_Open_Access_Guidelines-revised_feb_2016.pdf)
 {% endif %}{% if ticket.ticket_field_73176687 == '1' %}* [FP7](https://www.openaire.eu/open-access-in-fp7-seventh-research-framework-programme)
+{% endif %}{% if ticket.ticket_field_73663128 == '1' %}* [H2020](https://www.openaire.eu/open-access-in-horizon-2020)
+{% endif %}{% if ticket.ticket_field_71509888 == '1' %}* [NIHR](https://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm)
+{% endif %}{% if ticket.ticket_field_28241947 == '1' %}* [Parkinson's UK](https://www.parkinsons.org.uk/sites/default/files/openaccesspublishing_infoforauthors.pdf)
+{% endif %}{% if ticket.ticket_field_24117196 == '1' %}* [Wellcome Trust](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
 {% endif %}
 {% endif %}{% comment %}
-END: IF MARKED AS RCUK, COAF, GATES, NIHR, H2020, ERC or FP7 POLICIES
+END: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
 
 {% endcomment %}{% endif %}{% comment %}
 END: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
@@ -103,53 +112,59 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 {% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' or ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}{% if ticket.ticket_field_24072163 == 'no_version_allowed' %}{% comment %}
     BEGIN: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
-    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71509888 == '1' or ticket.ticket_field_73663128 == '1' or ticket.ticket_field_71064067 == '1' or ticket.ticket_field_73176687 == '1' %}{% comment %}
-        BEGIN: IF MARKED AS RCUK, COAF, GATES, NIHR, H2020, ERC or FP7 POLICIES
+    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}{% comment %}
+        BEGIN: IF MARKED AS RCUK, COAF, or OTHER FUNDER POLICIES
         {% endcomment %}To comply with this/these you'll need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
-        END: IF MARKED AS RCUK, COAF, GATES, NIHR, H2020, ERC or FP7 POLICIES
+        END: IF MARKED AS RCUK, COAF, or OTHER FUNDER POLICIES
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS NO VERSION ALLOWED (PROXY FOR FULLY OPEN ACCESS JOURNALS)
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS SPRINGER COMPACT; ELSEIF JOURNAL IS "Journal of Experimental Botany"; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT OR OTHER INSTITUTION PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}**The University is part of the [Springer Compact](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990) agreement.** You MUST select this when you complete the publishing agreement with Springer. However, this means that Springer will make your paper fully Open Access **at no extra cost to the University**.{% elsif ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal. Please inform Oxford University Press that the University of Cambridge is a subscriber to benefit from this offer. {% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' or ticket.ticket_field_24117256 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW (Grant payment or author/department payment or other institution payment) {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
-        BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIF JOURNAL TITLE IS SCIENTIFIC REPORTS; ELSIF JOURNAL TITLE IS JOURNAL OF EXPERIMENTAL BOTANY; ELSE XXXX
+        BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIFs FOR SPECIFIC JOURNALS; ELSE XXXX
         {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
-{% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**.
+{% elsif ticket.ticket_field_24069543 == "American Society for Microbiology" or ticket.ticket_field_24069543 == "ASM" %}is $3000. Members of the American Society for Microbiology are entitled to a $750 discount so, if you are a member, please let the publisher know.
 
-{% elsif ticket.ticket_field_24069493 == "Nature Communications" %}is £3,150 + VAT. {% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
-        END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSE XXXX
+{% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
+
+{% elsif ticket.ticket_field_24069493 == "Nature Communications" %}is £3,150 + VAT. {% elsif ticket.ticket_field_24069493 == "Science Advances" %}is $4,922 + VAT. {% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
+        END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIFs FOR SPECIFIC JOURNALS; ELSE XXXX
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS SPRINGER COMPACT; ELSEIF JOURNAL IS "Journal of Experimental Botany"; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT OR OTHER INSTITUTION PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' %}{% comment %}
     BEGIN: IF MARKED AS GATES POLICY; ELSEIF MARKED AS GRANT PAYMENT (TEST OTHER FUNDER POLICIES); ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
     {% endcomment %}The Bill & Melinda Gates Foundation should pay the fees for immediate open access (if applicable) to effect publication on the terms of their policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. {% elsif ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' and ticket.ticket_field_24117266 == '1' %}{% if ticket.ticket_field_71509888 == '1' %}{% comment %}
-        BEGIN: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; 
+        BEGIN: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; ELSIF MARKED AS BREAST CANCER NOW
         {% endcomment %}Funds for this should have been included in your original NIHR grant, or they may be available from the NIHR. **You should contact your NIHR programme manager if you have any questions regarding this requirement.**
     
 According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm):
 
 >From the commencement of this policy (see above) the cost of APCs and other appropriate publication charges will be supported either through the original NIHR award, or where applicable an NIHR Open Access Fund. Researchers will need to contact the awarding NIHR Programme Coordinating Centre to review the correct approach. This does not apply to any recipient of NIHR funding prior to 1st April 2014, which remain under the requirements of their original contract.
 
-{% elsif ticket.ticket_field_73663128 == '1' %}Open access fees are an [eligible expense](http://ec.europa.eu/research/participants/data/ref/h2020/grants_manual/amga/h2020-amga_en.pdf#page=83) that can be charged to H2020 grants.
+{% elsif ticket.ticket_field_73663128 == '1' %}Open access fees are an [eligible expense](http://ec.europa.eu/research/participants/data/ref/h2020/grants_manual/amga/h2020-amga_en.pdf#page=236) that can be charged to H2020 grants.
 
-If a H2020 beneficiary breaches any of its obligations, the grant may be reduced (see Article 43). Such a breach may also lead to any of the other measures described in [Chapter 6 of the Annotated Model Grant Agreement, Version 2.1.1, July 1, 2016)](http://ec.europa.eu/research/participants/data/ref/h2020/grants_manual/amga/h2020-amga_en.pdf#page=268).
+If a H2020 beneficiary breaches any of its obligations, the grant may be reduced (see Article 43). Such a breach may also lead to any of the other measures described in [Chapter 6 of the Annotated Model Grant Agreement, Version 4.0.1, 20 June 2017)](http://ec.europa.eu/research/participants/data/ref/h2020/grants_manual/amga/h2020-amga_en.pdf#page=285).
 
 {% elsif ticket.ticket_field_71064067 == '1' %}**Open access fees are eligible costs that can be charged against ERC grants, provided they are incurred during the duration of the project**.
 
-{% elsif ticket.ticket_field_73176687 == '1' %}**Open access fees are eligible costs that can be charged against ERC grants, provided they are incurred during the duration of the project**.{% endif %}{% comment %}
+{% elsif ticket.ticket_field_73176687 == '1' %}**Open access fees are eligible costs that can be charged against FP7 grants, provided they are incurred during the duration of the project**.
+
+{% elsif ticket.ticket_field_26352407 == '1' %}**Open access fees can be paid using any underspend on existing Breast Cancer Now grants**.
+
+{% endif %}{% comment %}
         END: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; 
-    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %} Funds to pay for this should be sought from the corresponding author(s) institution(s). {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
+    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for open access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
-        {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for open access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly. {% else %}Please ask the publishers to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article. {% endif %}{% comment %}
+        {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for open access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly. {% else %}Please ask the publisher to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
+        
+{% endif %}{% comment %}
         END: IF MARKED AS APC INVOICE PROCESSED
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS GATES POLICY; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
-    {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
-    BEGIN: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
-    {% endcomment %}
-    
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+    {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71064067 == '1' or ticket.ticket_field_73176687 == '1' or ticket.ticket_field_73663128 == '1' or ticket.ticket_field_71509888 == '1' or ticket.ticket_field_26352407 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
+    BEGIN: IF MARKED AS RCUK, COAF, GATES, ERC, FP7, H2020, NIHR or BREAST CANCER NOW POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
+    {% endcomment %}**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 
 {% endif %}{% comment %}
     END: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
@@ -183,11 +198,10 @@ Our VAT no., should it be required, is GB 823 8476 09.
         END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
     {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS APC PAYMENT
-    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}{% comment %}
-
-    BEGIN: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
-    {% endcomment %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
-    END: IF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
+    BEGIN: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
+    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' open access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
+    END: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
     
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case**.
     
@@ -196,8 +210,8 @@ END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAI
 
 {% endcomment %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
 BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
-    {% endcomment %}{% if ticket.ticket_field_24117286 == '1' %}{% comment %}
-    BEGIN: IF MARKED AS RETROSPECTIVE DEPOSIT
+    {% endcomment %}{% if ticket.ticket_field_24071873 == '1' %}{% comment %}
+    BEGIN: IF MARKED AS HEFCE FAILURE
         {% endcomment %}#### HEFCE compliance
 {% if ticket.ticket_field_77355348 == '0' %}{% comment %}
         BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
@@ -206,15 +220,23 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
 {% comment %}
         END: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
     {% endcomment %}{% endif %}{% comment %}
-    END: IF MARKED AS RETROSPECTIVE DEPOSIT
+    END: IF MARKED AS HEFCE FAILURE
 {% endcomment %}{% endif %}{% comment %}
 END: IF NOT MARKED AS HEFCE OUT OF SCOPE
-{% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' or ticket.ticket_field_71509888 == '1' %}{% comment %}
-BEGIN: IF MARKED AS COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
-{% endcomment %}**Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than six months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
+{% endcomment %}{% if ticket.ticket_field_24117196 == '1' or ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673718 == '1' or ticket.ticket_field_71509888 == '1' or ticket.ticket_field_26352407 == '1' %}{% comment %}
+BEGIN: IF MARKED AS COVERED BY COAF, MRC, BBSRC, NIHR OR BREAST CANCER NOW POLICIES
+{% endcomment %}{% if ticket.ticket_field_24069493 != 'Proceedings of the National Academy of Sciences of the United States of America' and ticket.ticket_field_24069493 != 'Proceedings of the National Academy of Sciences (PNAS)' and ticket.ticket_field_24069493 != 'PNAS' %}{% comment %}
+    BEGIN: IF JOURNAL IS NOT PNAS
+    {% endcomment %}**Please note that it is a requirement of your funding that this article MUST be deposited in [Europe PMC](http://europepmc.org/) no later than {% if ticket.ticket_field_24117196 == '0' and ticket.ticket_field_28673738 == '0' and ticket.ticket_field_28673718 == '0' and ticket.ticket_field_71509888 == '0' and ticket.ticket_field_26352407 == '1' %}{% comment %}
+        BEGIN: IF MARKED AS COVERED BY BREAST CANCER NOW POLICY AND NOT COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
+        {% endcomment %}12 {% else %}6 {% endif %}{% comment %}
+        END: IF MARKED AS COVERED BY BREAST CANCER NOW POLICY AND NOT COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
+    {% endcomment %}months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
 
 {% endif %}{% comment %}
-END: IF MARKED AS COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
+    END: IF JOURNAL IS NOT PNAS
+{% endcomment %}{% endif %}{% comment %}
+END: IF MARKED AS COVERED BY COAF, MRC, BBSRC, NIHR OR BREAST CANCER NOW POLICIES
 {% endcomment %}{% if ticket.ticket_field_26329848 == '1' %}#### Wellcome Trust Open Access sanctions for non-compliance
 
 Where Wellcome-funded researchers have not complied with the Trust's Open Access policy, [three sanctions will apply](https://wellcome.ac.uk/funding/managing-grant/complying-our-open-access-policy):
