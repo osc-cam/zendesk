@@ -101,7 +101,7 @@ END: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
 {% endcomment %}{% endif %}{% comment %}
 END: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
 {% endcomment %}{% if ticket.ticket_field_80650548 == '1' %}{% comment %}
-BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
+BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO' AND INVITED REVIEW AND OA JOURNAL; ELSIF APC PAYMENT MARKED AS 'NO'
 {% endcomment %}We noticed that your paper has already been published open access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
 
 {% elsif ticket.ticket_field_80935588 == '1' %}To comply with this/these funder policies, you should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. To receive our advice before having to sign an agreement with the publisher, please upload your future publications to us as soon as possible after acceptance.
@@ -198,15 +198,17 @@ Our VAT no., should it be required, is GB 823 8476 09.
         END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
     {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS APC PAYMENT
-    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
-    BEGIN: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
-    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' open access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1'% or ticket.ticket_field_61116627 == '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
-    END: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR GATES FOUNDATION POLICIES
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' and ticket.ticket_field_80501387 == 'invited_review' and ticket.ticket_field_24072163 == 'no_version_allowed' %}Invited reviews are not covered by RCUK or COAF open access policies so we will not be able to charge open access fees (if any) to the university's block grants in this case. If you would like to receive a letter from us to support a waiver application, please let us know.
+    
+{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
+    BEGIN: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
+    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' open access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
+    END: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
     
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case**.
     
 {% endif %}{% comment %}
-END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO'
+END: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO' AND INVITED REVIEW AND OA JOURNAL; ELSIF APC PAYMENT MARKED AS 'NO'
 
 {% endcomment %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
 BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
