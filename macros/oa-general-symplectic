@@ -18,7 +18,7 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
         BEGIN: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
         {% endcomment %}WARNING: Publisher is OUP. Please consider selecting "OUP Prepayment Account" instead of "Yes" in field "Is there an APC payment?"
     
-{% elsif ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
+{% elsif ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" ticket.ticket_field_24069543 == "Wiley-Blackwell" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
 
 {% endif %}{% comment %}
         END: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
@@ -140,7 +140,9 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     END: IF MARKED AS SPRINGER COMPACT; ELSEIF JOURNAL IS "Journal of Experimental Botany"; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT OR OTHER INSTITUTION PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' %}{% comment %}
     BEGIN: IF MARKED AS GATES POLICY; ELSEIF MARKED AS GRANT PAYMENT (TEST OTHER FUNDER POLICIES); ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
-    {% endcomment %}The Bill & Melinda Gates Foundation should pay the fees for immediate open access (if applicable) to effect publication on the terms of their policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. {% elsif ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' and ticket.ticket_field_24117266 == '1' %}{% if ticket.ticket_field_71509888 == '1' %}{% comment %}
+    {% endcomment %}The Bill & Melinda Gates Foundation should pay the fees for immediate open access (if applicable) to effect publication on the terms of their policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. 
+    
+{% elsif ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' and ticket.ticket_field_24117266 == '1' %}{% if ticket.ticket_field_71509888 == '1' %}{% comment %}
         BEGIN: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; ELSIF MARKED AS BREAST CANCER NOW
         {% endcomment %}Funds for this should have been included in your original NIHR grant, or they may be available from the NIHR. **You should contact your NIHR programme manager if you have any questions regarding this requirement.**
     
@@ -180,7 +182,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
     BEGIN: IF MARKED AS APC PAYMENT
     {% endcomment %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% comment %}
     
-        BEGIN: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
+        BEGIN: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US); ELSIF OA JOURNAL AND AUTHOR/DEPARTMENT PAYMENT
         {% endcomment %}{% if ticket.ticket_field_29294538 == '0' %}{% comment %}
             
             BEGIN: IF NOT MARKED AS APC INVOICE PROCESSED
@@ -202,13 +204,13 @@ Our VAT no., should it be required, is GB 823 8476 09.
 
 {% endif %}{% comment %}
             END: IF NOT MARKED AS APC INVOICE PROCESSED
-            {% endcomment %}{% endif %}{% comment %}
-        END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US)
+        {% endcomment %}{% elsif ticket.ticket_field_24072163 == 'oa_journal_conference' and ticket.ticket_field_24071853 == '1' %}{% if ticket.ticket_field_80501387 == 'invited_review' %}Invited reviews are {% else %}Your manuscript is {% endif %}not covered by RCUK or COAF open access policies so we will not be able to charge open access fees (if any) to the university's block grants in this case. If you would like to receive a letter from us to support a waiver application, please let us know.
+    
+{% endif %}{% comment %}
+        END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US); ELSIF OA JOURNAL AND AUTHOR/DEPARTMENT PAYMENT
     {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS APC PAYMENT
-    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' and ticket.ticket_field_80501387 == 'invited_review' and ticket.ticket_field_24072163 == 'no_version_allowed' %}Invited reviews are not covered by RCUK or COAF open access policies so we will not be able to charge open access fees (if any) to the university's block grants in this case. If you would like to receive a letter from us to support a waiver application, please let us know.
-    
-{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
     BEGIN: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
     {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' open access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% comment %}
     END: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
