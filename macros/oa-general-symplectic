@@ -18,7 +18,7 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
         BEGIN: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
         {% endcomment %}WARNING: Publisher is OUP. Please consider selecting "OUP Prepayment Account" instead of "Yes" in field "Is there an APC payment?"
     
-{% elsif ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" ticket.ticket_field_24069543 == "Wiley-Blackwell" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
+{% elsif ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" or ticket.ticket_field_24069543 == "Wiley-Blackwell" or ticket.ticket_field_24069543 == "EMBO Press" or ticket.ticket_field_24069543 == "EMBO" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
 
 {% endif %}{% comment %}
         END: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
@@ -104,7 +104,7 @@ END: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWE
 BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO' AND INVITED REVIEW AND OA JOURNAL; ELSIF APC PAYMENT MARKED AS 'NO'
 {% endcomment %}We noticed that your paper has already been published open access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
 
-{% elsif ticket.ticket_field_80935588 == '1' %}To comply with this/these funder policies, you should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. To receive our advice before having to sign an agreement with the publisher, please upload your future publications to us as soon as possible after acceptance.
+{% elsif ticket.ticket_field_80935588 == '1' or ticket.ticket_field_80684087 == '1' %}To comply with this/these funder policies, you should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. {% if ticket.ticket_field_81107788 == 'request_retrospective_oa' %}We will contact the publisher shortly to request that this licence be applied retrospectively. {% else %}To receive our advice before having to sign an agreement with the publisher, please upload your future publications to us as soon as possible after acceptance. {% endif %}
 
 {% elsif ticket.ticket_field_24117436 == '1' %}To comply with this/these funder policies, we have already approved immediate open access for this article via the University's prepayment deal with the publisher. 
 
@@ -162,7 +162,13 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
 
 {% endif %}{% comment %}
         END: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; 
-    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for open access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
+    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for open access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
+    
+{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
+    
+{% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. 
+
+{% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
         {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for open access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly.
         

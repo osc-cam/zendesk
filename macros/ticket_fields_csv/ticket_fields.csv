@@ -37,12 +37,12 @@ Voucher/membership/offset payment,24117276,checkbox,True,voucher_membership_offs
 Author/department payment,24071853,checkbox,True,author_dept_payment,https://camacuk.zendesk.com/api/v2/ticket_fields/24071853.json
 Repository status,24069553,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24069553.json
 Repository link,24114846,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24114846.json
-Action - manuscript deposit (Dspace),24117066,checkbox,True,action_deposit_dspace,https://camacuk.zendesk.com/api/v2/ticket_fields/24117066.json
-Action - manuscript deposit (other),24071643,checkbox,True,action_deposit_other,https://camacuk.zendesk.com/api/v2/ticket_fields/24071643.json
-Action - APC payment,24117086,checkbox,True,action_apc_payment,https://camacuk.zendesk.com/api/v2/ticket_fields/24117086.json
-Action - HEFCE exception,24071863,checkbox,True,action_hefce_exception,https://camacuk.zendesk.com/api/v2/ticket_fields/24071863.json
-Action - failure,24071873,checkbox,True,action_failure,https://camacuk.zendesk.com/api/v2/ticket_fields/24071873.json
-Action - retrospective deposit,24117286,checkbox,True,action_retrospective_deposit,https://camacuk.zendesk.com/api/v2/ticket_fields/24117286.json
+Manuscript deposit (Apollo),24117066,checkbox,True,action_deposit_dspace,https://camacuk.zendesk.com/api/v2/ticket_fields/24117066.json
+Manuscript deposit (PMC; other),24071643,checkbox,True,action_deposit_other,https://camacuk.zendesk.com/api/v2/ticket_fields/24071643.json
+APC payment from block grants,24117086,checkbox,True,action_apc_payment,https://camacuk.zendesk.com/api/v2/ticket_fields/24117086.json
+HEFCE exception,24071863,checkbox,True,action_hefce_exception,https://camacuk.zendesk.com/api/v2/ticket_fields/24071863.json
+HEFCE failure,24071873,checkbox,True,action_failure,https://camacuk.zendesk.com/api/v2/ticket_fields/24071873.json
+Retrospective (accepted pre-April 2016),24117286,checkbox,True,action_retrospective_deposit,https://camacuk.zendesk.com/api/v2/ticket_fields/24117286.json
 No further action,24117296,checkbox,True,no_further_action,https://camacuk.zendesk.com/api/v2/ticket_fields/24117296.json
 Notes,24069593,textarea,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24069593.json
 APC charged to RCUK (EBDU),24117386,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24117386.json
@@ -59,7 +59,7 @@ APC invoice number,24071953,text,True,,https://camacuk.zendesk.com/api/v2/ticket
 Entered on Voyager,24117396,date,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/24117396.json
 Self-billed VAT - RCUK,24071973,decimal,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/24071973.json
 Self-billed VAT - COAF,24117566,decimal,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/24117566.json
-Invoice approved,24117436,checkbox,False,invoice_approved,https://camacuk.zendesk.com/api/v2/ticket_fields/24117436.json
+OA approved via prepayment deal,24117436,checkbox,True,prepayment_approved,https://camacuk.zendesk.com/api/v2/ticket_fields/24117436.json
 When was invoice paid?,24071993,date,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/24071993.json
 Original commitment - RCUK,24072293,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24072293.json
 Original commitment - COAF,24117636,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24117636.json
@@ -75,7 +75,7 @@ Total expenditure - COAF,24117576,decimal,True,,https://camacuk.zendesk.com/api/
 Total expenditure - Wellcome,24029858,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24029858.json
 Published,24114856,checkbox,True,published,https://camacuk.zendesk.com/api/v2/ticket_fields/24114856.json
 Published online,24069573,checkbox,True,published_online,https://camacuk.zendesk.com/api/v2/ticket_fields/24069573.json
-Publication date,24069583,date,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/24069583.json
+Publication date,24069583,date,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24069583.json
 DOI (like 10.123/abc456),24069563,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/24069563.json
 Compliant - COAF,24071803,checkbox,True,compliant_coaf,https://camacuk.zendesk.com/api/v2/ticket_fields/24071803.json
 Compliant - HEFCE,24071813,checkbox,True,compliant_hefce,https://camacuk.zendesk.com/api/v2/ticket_fields/24071813.json
@@ -105,7 +105,7 @@ Arthritis Research UK,26352397,checkbox,True,arthritis_research_uk,https://camac
 Date deposit completed (YYYY-MM-DD),29313297,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29313297.json
 OASIS type,77143828,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/77143828.json
 Legacy Thesis,30126358,checkbox,True,legacy_thesis,https://camacuk.zendesk.com/api/v2/ticket_fields/30126358.json
-Breast Cancer Campaign,26352407,checkbox,True,breast_cancer_campaign,https://camacuk.zendesk.com/api/v2/ticket_fields/26352407.json
+Breast Cancer Now (Breast Cancer Campaign),26352407,checkbox,True,breast_cancer_campaign,https://camacuk.zendesk.com/api/v2/ticket_fields/26352407.json
 College,46901527,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46901527.json
 Thesis access level,46829848,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46829848.json
 Date publisher fulfilled funder requirements (YYYY-MM-DD),29313817,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29313817.json
@@ -124,6 +124,7 @@ Access exception type,76512047,tagger,True,,https://camacuk.zendesk.com/api/v2/t
 Page/colour invoice paid,58141748,checkbox,False,page_colour_invoice_paid,https://camacuk.zendesk.com/api/v2/ticket_fields/58141748.json
 APC already paid?,80650548,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80650548.json
 ESRC,28676917,checkbox,True,esrc,https://camacuk.zendesk.com/api/v2/ticket_fields/28676917.json
+COAF failure,80684087,checkbox,True,coaf_failure,https://camacuk.zendesk.com/api/v2/ticket_fields/80684087.json
 Exception type,30491447,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/30491447.json
 Data - Additional information,40547127,textarea,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40547127.json
 Request a Copy (Article),30145847,checkbox,True,request_a_copy,https://camacuk.zendesk.com/api/v2/ticket_fields/30145847.json
@@ -190,7 +191,7 @@ Publication in Apollo,36260527,checkbox,True,,https://camacuk.zendesk.com/api/v2
 SWORD Deposit Thesis,40666287,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40666287.json
 COAF cost centre,46241967,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46241967.json
 Added to Apollo,29275568,date,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/29275568.json
-Online Publication Date (OLD),47509168,date,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/47509168.json
+Online Publication Date,47509168,date,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/47509168.json
 Membership fees - COAF (EBDV),29275058,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29275058.json
 BBSRC,28673718,checkbox,True,bbsrc,https://camacuk.zendesk.com/api/v2/ticket_fields/28673718.json
 Accessible to peer-reviewers?,40426168,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40426168.json
@@ -211,6 +212,7 @@ Deposit exception type,76512207,tagger,True,,https://camacuk.zendesk.com/api/v2/
 Gates Foundation,61116627,checkbox,True,gates_foundation,https://camacuk.zendesk.com/api/v2/ticket_fields/61116627.json
 STFC,28673748,checkbox,True,stfc,https://camacuk.zendesk.com/api/v2/ticket_fields/28673748.json
 Request a Copy (Thesis),32750548,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/32750548.json
+Deposit date (date accessioned Apollo),80697047,date,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80697047.json
 Thesis Embargo,40666587,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40666587.json
 Degree title,46829788,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46829788.json
 Compliance first checked,29295327,date,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/29295327.json
