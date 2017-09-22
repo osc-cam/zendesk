@@ -147,7 +147,11 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 {% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
 
-{% elsif ticket.ticket_field_24069493 == "Nature Communications" %}is £3,150 + VAT. {% elsif ticket.ticket_field_24069493 == "Science Advances" %}is $4,922 + VAT. {% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% endif %}{% comment %}
+{% elsif ticket.ticket_field_24069493 == "Nature Communications" %}is £3,150 + VAT. {% elsif ticket.ticket_field_24069493 == "Science Advances" %}is $4,922 + VAT. {% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% if ticket.ticket_field_24069543 == "BioMed Central" %}{% comment %}
+            BEGIN: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS
+            {% endcomment %}All Cambridge authors are eligible to a 15% discount as part of the university's BioMed Central Supporter Membership. **Please ask the publisher to apply this discount**. {% endif %}{% comment %}
+            END: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS
+            {% endcomment %}{% endif %}{% comment %}
         END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIFs FOR SPECIFIC JOURNALS; ELSE XXXX
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS SPRINGER COMPACT; ELSEIF JOURNAL IS "Journal of Experimental Botany"; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT OR OTHER INSTITUTION PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
