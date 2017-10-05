@@ -8,9 +8,9 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
     BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
     {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
         BEGIN: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
-        {% endcomment %}WARNING: Publisher is Springer and it appears that this paper has not been published yet. Please consider whether this requires the attention of the Gold Team. If it has not been published yet, please consider selecting "Springer Compact" in "Is there an APC payment?" and setting "Gold team" to "-" (blank).
+        {% endcomment %}WARNING: Publisher is Springer and it appears that this paper has not been published yet. Please consider whether this requires the attention of the Gold Team. If it has not been published yet, please consider selecting "Springer Compact" in "Is there an APC payment?" and setting "Gold team" to "-" (blank). A list of journals included in the Springer Compact deal is available here: http://resource-cms.springer.com/springer-cms/rest/v1/content/7476756/data/v3/Open+Choice+journals+title+list
         
-        {% elsif ticket.ticket_field_24071633 != 'springer_compact' %}WARNING: Publisher is Springer. Please consider selecting "Springer Compact" in field "Is there an APC payment?"
+        {% elsif ticket.ticket_field_24071633 != 'springer_compact' %}WARNING: Publisher is Springer. Please consider selecting "Springer Compact" in field "Is there an APC payment?" if journal is included in this list http://resource-cms.springer.com/springer-cms/rest/v1/content/7476756/data/v3/Open+Choice+journals+title+list
         
 {% endif %}{% comment %}
         END: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
@@ -285,25 +285,25 @@ These sanctions apply to:
 * all original Wellcome-funded research papers published since 1 October 2009
 * to monographs and book chapters for which a contract was signed after 1 October 2014.
 
-{% endif %}{% if ticket.ticket_field_28673728 == '1' and ticket.ticket_field_28673718 == '1' %}#### EPSRC and BBSRC research data
-We note that this work is EPSRC and BBSRC funded. Both the EPSRC and BBSRC require research data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [EPSRC](http://www.data.cam.ac.uk/funders/epsrc-funded-researchers) and [BBSRC](http://www.data.cam.ac.uk/funders/bbsrc) data policies visit our website or e-mail info@data.cam.ac.uk.
+{% endif %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_26329848 == '1' or ticket.ticket_field_26352357 == '1' %}{% comment %}
+BEGIN: IF FUNDED BY RCUK, WELLCOME OR CRUK
+{% endcomment %}#### Research data
+The funder(s) of this research require data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload.
 
-{% elsif ticket.ticket_field_28673728 == '1' and ticket.ticket_field_28673718 == '0' %}#### EPSRC research data
-We note that this work is EPSRC funded. The EPSRC requires research data generated as a result of EPSRC support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [EPSRC](http://www.data.cam.ac.uk/funders/epsrc-funded-researchers) data policy visit our website or e-mail info@data.cam.ac.uk.
+For more information about the applicable data policies, click on the links below:
 
-{% elsif ticket.ticket_field_28673728 == '0' and ticket.ticket_field_28673718 == '1' %}#### BBSRC research data
-We note that this work is BBSRC funded. The BBSRC requires research data generated as a result of BBSRC support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. For more information about the [BBSRC](http://www.data.cam.ac.uk/funders/bbsrc) data policy visit our website or e-mail info@data.cam.ac.uk.
+{% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/datapolicy/)
+{% endif %}{% if ticket.ticket_field_28673718 == '1' %}  * [BBSRC](http://www.data.cam.ac.uk/funders/bbsrc) 
+{% endif %}{% if ticket.ticket_field_28673728 == '1' %}  * [EPSRC](http://www.data.cam.ac.uk/funders/epsrc-funded-researchers)
+{% endif %}{% if ticket.ticket_field_26352357 == '1' %}* [CRUK](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines)
+{% endif %}{% if ticket.ticket_field_26329848 == '1' %}* [Wellcome Trust](https://wellcome.ac.uk/funding/managing-grant/policy-data-management-and-sharing)
+{% endif %}
 
-{% elsif ticket.ticket_field_28673738 == '1' or ticket.ticket_field_28673708 == '1' or ticket.ticket_field_28676917 == '1' or ticket.ticket_field_28673748 == '1' or ticket.ticket_field_28676927 == '1' or ticket.ticket_field_24071783 == '1' %}#### RCUK research data
-We note that this work is RCUK funded. Research Councils UK require research data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [RCUK website](http://www.rcuk.ac.uk/research/datapolicy/) or you can e-mail info@data.cam.ac.uk.
+For further advice on data sharing, you can also e-mail info@data.cam.ac.uk
 
-{% endif %}{% if ticket.ticket_field_26329848 == '1' %}#### Wellcome Trust research data
-The Wellcome Trust requires research data generated as a result of Wellcome Trust support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [Wellcome Trust's website](https://wellcome.ac.uk/funding/managing-grant/policy-data-management-and-sharing) or you can e-mail info@data.cam.ac.uk.
-
-{% endif %}{% if ticket.ticket_field_26352357 == '1' %}#### Cancer Research UK research data
-We {% if ticket.ticket_field_26329848 == '1' or ticket.ticket_field_24071783 == '1'%}also {% endif %}note that this work is CRUK funded. CRUK requires research data generated as a result of CRUK support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload. More information is available on the [CRUK website](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/submission-of-a-data-sharing-and-preservation-strategy/data-sharing-guidelines) or you can e-mail info@data.cam.ac.uk.
-
-{% endif %}We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
+{% endif %}{% comment %}
+END: IF FUNDED BY RCUK, WELLCOME OR CRUK
+{% endcomment %}We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
 
 Best wishes,
 {{ticket.assignee.first_name}}
