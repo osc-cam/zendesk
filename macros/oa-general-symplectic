@@ -48,10 +48,10 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
         
 {% else %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
         BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
-            {% endcomment %}{% if ticket.ticket_field_24117286 != '1' or ticket.ticket_field_77355348 == '1' %}{% comment %}
-            BEGIN: IF NOT MARKED AS RETROSPECTIVE DEPOSIT OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+            {% endcomment %}{% if ticket.ticket_field_24071873 != '1' or ticket.ticket_field_77355348 == '1' %}{% comment %}
+            BEGIN: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% else %}W{% endif %}{% comment %}
-            END: IF NOT MARKED AS RETROSPECTIVE DEPOSIT OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
+            END: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}{% else %}W{% endif %}{% comment %}
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 
@@ -254,7 +254,7 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
         {% endcomment %}#### HEFCE compliance
 {% if ticket.ticket_field_77355348 == '0' %}{% comment %}
         BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-        {% endcomment %}Because this manuscript was accepted by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted {% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months after the date of publication. However, this flexibility will be subject to a review in autumn 2017, so please upload your manuscripts {% endif %}to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4).
+        {% endcomment %}Because this manuscript was accepted by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted {% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months from the date of publication, instead of three months from the date of acceptance. However, this flexibility will be subject to a review in autumn 2017, so please upload your manuscripts {% endif %}to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4).
         
 {% comment %}
         END: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
