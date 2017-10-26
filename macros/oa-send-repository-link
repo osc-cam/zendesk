@@ -1,0 +1,32 @@
+Dear {{ticket.requester.name}},
+
+We've added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
+BEGIN: IF NOT MARKED AS PUBLISHED; ELSE
+    {% endcomment %}. It is currently under an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+    BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
+        {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
+    END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
+    {% endcomment %} once publication takes place{% else %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+    BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
+        {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
+    END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
+    {% endcomment %}{% endif %}{% comment %}
+END: IF NOT MARKED AS PUBLISHED, ELSE
+{% endcomment %}. Your manuscript can be found in Apollo at the following link:
+
+{{ticket.ticket_field_24114846}}
+
+Please let us know if there is anything that needs to be updated or changed.
+
+{% if ticket.ticket_field_24117196 == '1' %}{% comment %}
+BEGIN: IF COAF POLICY TICKED
+    {% endcomment %}{% if ticket.ticket_field_24069553 == 'deposit_completed' or ticket.ticket_field_24069553 == 'symplectic_completed' or ticket.ticket_field_77352028 == '1' %}{% comment %}
+    BEGIN: IF DEPOSIT COMPLETED (PROXY FOR ALREADY PUBLISHED) OR MARKED AS PUBLISHED
+        {% endcomment %}Now that your paper has been published in its final form it's a good idea to check that it's been added to PubMed Central so that you're compliant with the COAF open access policy.
+        
+{% endif %}{% comment %}
+    END: IF DEPOSIT COMPLETED (PROXY FOR ALREADY PUBLISHED) OR MARKED AS PUBLISHED
+    {% endcomment %}{% endif %}{% comment %}
+END: IF COAF POLICY TICKED
+{% endcomment %}Yours sincerely,
+{{current_user.first_name}}
