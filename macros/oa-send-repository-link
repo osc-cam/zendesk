@@ -2,11 +2,23 @@ Dear {{ticket.requester.name}},
 
 We've added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
 BEGIN: IF NOT MARKED AS PUBLISHED; ELSE
-    {% endcomment %}. It is currently under an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
-    BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
-        {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
-    END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
-    {% endcomment %} once publication takes place{% else %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+    {% endcomment %}. It is currently under an indefinite embargo until it is published. {% if ticket.ticket_field_24071633 == blank or ticket.ticket_field_24071633 == 'payment_no' %}{% comment %}
+    BEGIN: IF 'IS THERE AN APC PAYMENT' BLANK OR NO; ELSE
+        {% endcomment %}This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+        BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
+            {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
+        END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
+        {% endcomment %} once publication takes place{% else %}{% comment %}
+    ELSE FOR: IF 'IS THERE AN APC PAYMENT' BLANK OR NO
+        {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% comment %}
+        BEGIN: IF SPRINGER COMPACT, RCUK PAYMENT OR COAF PAYMENT
+            {% endcomment %}Once the final version has been published with a CC BY licence, we'll be able to make it openly available in the repository{% endif %}{% comment %}
+        END: IF SPRINGER COMPACT, RCUK PAYMENT OR COAF PAYMENT
+        {% endcomment %}{% endif %}{% comment %}
+    END: IF 'IS THERE AN APC PAYMENT' BLANK OR NO; ELSE
+    {% endcomment %}{% else %}{% comment %}
+ELSE FOR: IF NOT MARKED AS PUBLISHED; ELSE
+    {% endcomment %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
     BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
         {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
     END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
@@ -30,3 +42,5 @@ BEGIN: IF COAF POLICY TICKED
 END: IF COAF POLICY TICKED
 {% endcomment %}Yours sincerely,
 {{current_user.first_name}}
+
+
