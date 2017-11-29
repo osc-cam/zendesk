@@ -55,23 +55,25 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
             {% endcomment %}{% else %}W{% endif %}{% comment %}
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE
 
-        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
-
-        BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
+        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}it to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
+# BREAK THIS CONDITIONAL
+        BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK; ELSE
             {% endcomment %}. It is currently under an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
             BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
             {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
             END: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
-            {% endcomment %} once publication takes place{% else %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
-            BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
-            {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% elsif ticket.ticket_field_24072173 == '0_months' %}, with an embargo until publication{% endif %}{% comment %}
+            {% endcomment %} once publication takes place{% else %}{% comment %}
+        ELSE FOR: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
+            {% endcomment %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
+            BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS; ELSIF EMBARGO ZERO MONTHS OR OPEN ACCESS JOURNAL 
+            {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% elsif ticket.ticket_field_24072173 == '0_months' or ticket.ticket_field_24072163 == 'oa_journal_conference' %}, with an embargo until publication{% endif %}{% comment %}
             END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
             {% endcomment %}{% endif %}{% comment %}
         END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
 
         {% endcomment %}. {% if ticket.ticket_field_24114846 == blank %}We'll let you know when we've done this.
     
-{% else %}Your manuscript can be found in Apollo at the following link:
+{% else %}Your paper can be found in Apollo at the following link:
 
 {{ticket.ticket_field_24114846}}
 
@@ -83,7 +85,7 @@ END: IF GOLD TEAM NOT MARKED AS PROCESSED
 BEGIN: IF MARKED AS NO VERSION ALLOWED
 {% endcomment %}{% if ticket.ticket_field_24071633 == 'payment_no' or ticket.ticket_field_24071633 == blank %}{% comment %}
     BEGIN: IF "IS THERE AN APC" IS BLANK OR "NO"
-    {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this manuscript openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.
+    {% endcomment %}Due to restrictions imposed by the publisher, we will not be able to make this paper openly available. Instead, users of the repository will be able to fill in a short form to request a copy from the authors.
     
 {% endif %}{% comment %}
     END: IF "IS THERE AN APC" IS BLANK OR "NO"
@@ -91,12 +93,12 @@ BEGIN: IF MARKED AS NO VERSION ALLOWED
 END: IF MARKED AS NO VERSION ALLOWED
 {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
 BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSE, CHECK IF INCLUDED IN OA POLICIES
-    {% endcomment %}We will be in touch shortly to discuss your other funder(s) open access requirements.
+    {% endcomment %}We will be in touch shortly to discuss your other funder(s) Open Access requirements.
 
 {% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}{% comment %}
 
     BEGIN: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
-    {% endcomment %}Your paper is also covered by the following open access policy/policies:
+    {% endcomment %}Your paper is also covered by the following Open Access policy/policies:
 
 {% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
 {% endif %}{% if ticket.ticket_field_26352397 == '1' %}* [Arthritis Research UK](http://www.arthritisresearchuk.org/research/information-for-award-holders/open-access-and-travel-support/open-access.aspx)
@@ -119,17 +121,17 @@ END: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
 END: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSIF MARKED AS NO VERSION ALLOWED AND OUT OF SCOPE OF HEFCE POLICY; ELSE, CHECK IF INCLUDED IN OA POLICIES
 {% endcomment %}{% if ticket.ticket_field_80650548 == '1' %}{% comment %}
 BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY PAID); ELSIF MARKED AS RCUK FAILURE; ELSIF MARKED AS APC PAYMENT OR PREPAYMENT DEAL; ELSIF APC PAYMENT MARKED AS 'NO' AND INVITED REVIEW AND OA JOURNAL; ELSIF APC PAYMENT MARKED AS 'NO'
-{% endcomment %}We noticed that your paper has already been published open access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
+{% endcomment %}We noticed that your paper has already been published Open Access with a licence that complies with the requirements of these policies. Are we right to assume that the article processing charge (if any) has already been taken care of? **Please let us know if that is not the case**.
 
 {% elsif ticket.ticket_field_80935588 == '1' or ticket.ticket_field_80684087 == '1' %}To comply with this/these funder policies, you should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. {% if ticket.ticket_field_81107788 == 'request_retrospective_oa' %}**We will contact the publisher shortly to enquire if this licence can be applied retrospectively**. {% else %}{% endif %}To receive our advice before having to sign an agreement with the publisher, **please upload your future publications to us as soon as possible after acceptance**.
 
-{% elsif ticket.ticket_field_24117436 == '1' %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}We have already approved immediate open access for this article via the University's [Springer Compact agreement](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990), which allows us to make all articles accepted for publication in [eligible journals](http://resource-cms.springer.com/springer-cms/rest/v1/content/7476756/data/v3/Open+Choice+journals+title+list) with a Cambridge corresponding author fully Open Access at no extra cost to the University. {% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}To comply with this/these funder policies, we have already approved immediate open access for this article via the University's prepayment deal with the publisher. {% else %}We have already approved immediate open access for this article via the University's prepayment deal with the publisher. {% endif %}
+{% elsif ticket.ticket_field_24117436 == '1' %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}We have already approved immediate Open Access for this article via the University's [Springer Compact agreement](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990), which allows us to make all articles accepted for publication in [eligible journals](http://resource-cms.springer.com/springer-cms/rest/v1/content/7476756/data/v3/Open+Choice+journals+title+list) with a Cambridge corresponding author fully Open Access at no extra cost to the University. {% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}To comply with this/these funder policies, we have already approved immediate Open Access for this article via the University's prepayment deal with the publisher. {% else %}We have already approved immediate Open Access for this article via the University's prepayment deal with the publisher. {% endif %}
 
 **Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 
 {% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' or ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}{% if ticket.ticket_field_24072163 == 'oa_journal_conference' %}{% comment %}
     BEGIN: IF MARKED AS OPEN ACCESS JOURNAL
-    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully open access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}{% comment %}
+    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully Open Access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}{% comment %}
         BEGIN: IF MARKED AS RCUK, COAF, or OTHER FUNDER POLICIES
         {% endcomment %}To comply with this/these you'll need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
         END: IF MARKED AS RCUK, COAF, or OTHER FUNDER POLICIES
@@ -141,7 +143,7 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     
 {% elsif ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal. Please inform Oxford University Press that the University of Cambridge is a subscriber to benefit from this offer. 
     
-{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for open access. Please contact your unit administrator regarding this.
+{% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for Open Access. Please contact your unit administrator regarding this.
     
 {% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' or ticket.ticket_field_24117256 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW (Grant payment or author/department payment or other institution payment) {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
         BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIFs FOR SPECIFIC JOURNALS; ELSE XXXX
@@ -161,11 +163,11 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     END: IF MARKED AS SPRINGER COMPACT; ELSEIF JOURNAL IS "Journal of Experimental Botany"; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT OR OTHER INSTITUTION PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' %}{% comment %}
     BEGIN: IF MARKED AS GATES POLICY; ELSEIF MARKED AS GRANT PAYMENT (TEST OTHER FUNDER POLICIES); ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
-    {% endcomment %}The Bill & Melinda Gates Foundation should pay the fees for immediate open access (if applicable) to effect publication on the terms of their policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. 
+    {% endcomment %}The Bill & Melinda Gates Foundation should pay the fees for immediate Open Access (if applicable) to effect publication on the terms of their policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. 
     
 {% elsif ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' and ticket.ticket_field_24117266 == '1' %}{% if ticket.ticket_field_71509888 == '1' %}{% comment %}
         BEGIN: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; ELSIF MARKED AS BREAST CANCER NOW
-        {% endcomment %}Funds for this should have been included in your original NIHR grant, or they may be available from the NIHR. **You should contact your NIHR programme manager if you have any questions regarding this requirement.**
+        {% endcomment %}Funds to pay for immediate (Gold) Open Access to comply with this policy should have been included in your original NIHR grant, or they may be available from the NIHR. **You should contact your NIHR programme manager if you have any questions regarding this requirement.**
     
 According to the [NIHR policy page](http://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm):
 
@@ -183,7 +185,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
 
 {% endif %}{% comment %}
         END: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; 
-    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for open access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
+    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for Open Access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
     
 {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
     
@@ -191,7 +193,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
 
 {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
-        {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for open access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly.
+        {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for Open Access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly.
         
 {% else %}You would be eligible for funds from the University's RCUK and/or COAF block grants to pay for this. Please ask the publisher to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
         
@@ -231,7 +233,7 @@ Our VAT no., should it be required, is GB 823 8476 09.
 
 {% endif %}{% comment %}
             END: IF NOT MARKED AS APC INVOICE PROCESSED
-        {% endcomment %}{% elsif ticket.ticket_field_24072163 == 'oa_journal_conference' and ticket.ticket_field_24071853 == '1' %}{% if ticket.ticket_field_80501387 == 'invited_review' %}Invited reviews are {% elsif ticket.ticket_field_80501387 == 'editorial' %}Editorials are {% else %}Your manuscript is {% endif %}not covered by RCUK or COAF open access policies so we will not be able to charge open access fees (if any) to the university's block grants in this case. If you would like to receive a letter from us to support a waiver application, please let us know.
+        {% endcomment %}{% elsif ticket.ticket_field_24072163 == 'oa_journal_conference' and ticket.ticket_field_24071853 == '1' %}{% if ticket.ticket_field_80501387 == 'invited_review' %}Invited reviews are {% elsif ticket.ticket_field_80501387 == 'editorial' %}Editorials are {% else %}Your paper is {% endif %}not covered by RCUK or COAF Open Access policies so we will not be able to charge Open Access fees (if any) to the university's block grants in this case. If you would like to receive a letter from us to support a waiver application, please let us know.
     
 {% endif %}{% comment %}
         END: IF MARKED AS RCUK OR COAF PAYMENT (AN INVOICE WILL BE PROCESSED BY US); ELSIF OA JOURNAL AND AUTHOR/DEPARTMENT PAYMENT
@@ -239,7 +241,7 @@ Our VAT no., should it be required, is GB 823 8476 09.
     END: IF MARKED AS APC PAYMENT
     {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
     BEGIN: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
-    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' open access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117206 == '1' %}{% if ticket.ticket_field_24117196 != '1' and ticket.ticket_field_28673738 != '1' and ticket.ticket_field_28673718 != '1' and ticket.ticket_field_71509888 != '1' and ticket.ticket_field_26352407 != '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% else %}**T{% endif %}{% comment %}
+    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' Open Access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117206 == '1' %}{% if ticket.ticket_field_24117196 != '1' and ticket.ticket_field_28673738 != '1' and ticket.ticket_field_28673718 != '1' and ticket.ticket_field_71509888 != '1' and ticket.ticket_field_26352407 != '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% else %}**T{% endif %}{% comment %}
     END: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
     
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case**.
@@ -281,10 +283,10 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
         {% endcomment %}#### HEFCE compliance
 {% if ticket.ticket_field_77355348 == '0' and ticket.ticket_field_30491447 == blank %}{% comment %}
         BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET AND EXCEPTION TYPE IS BLANK (I.E. NOT MARKED AS HEFCE EXCEPTION); ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSIF MARKED AS EXCEPTION 38F (GOLD OA); ELSIF MARKED AS EXCEPTION (BUT NOT MARKED AS EXCEPTIONS THAT ONLY EXIST IN ELEMENTS)
-        {% endcomment %}Because this manuscript was accepted and published by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that manuscripts are submitted to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
-{% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to three months from the date of publication, instead of three months from the date of acceptance. However, this flexibility will be subject to a review in winter 2017, so please upload your manuscripts to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
+        {% endcomment %}Because this paper was accepted and published by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that papers are submitted to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
+{% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to 3 months from the date of publication, instead of 3 months from the date of acceptance. However, this flexibility will be subject to a review in winter 2017, so please upload your papers to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
 {% elsif ticket.ticket_field_76512207 == 'deposit6___gold_oa__38f_' %}Technically you have submitted your paper too late for us to be able to make it comply with the HEFCE Open Access policy. However, we can mark it as an exception because it was published with immediate (Gold) Open Access status, and it will be REF-eligible.
-{% elsif ticket.ticket_field_30491447 != blank and ticket.ticket_field_30491447 != 'tech1___conference_without_an_issn' and ticket.ticket_field_30491447 != 'unavailable___full_text_not_available' and ticket.ticket_field_30491447 != 'waiver___waiver_has_been_requested' %}I'm afraid we can't make this manuscript comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). However, it may still be eligible for submission to the next REF because the following exception to the policy may apply: 
+{% elsif ticket.ticket_field_30491447 != blank and ticket.ticket_field_30491447 != 'tech1___conference_without_an_issn' and ticket.ticket_field_30491447 != 'unavailable___full_text_not_available' and ticket.ticket_field_30491447 != 'waiver___waiver_has_been_requested' %}I'm afraid we can't make this paper comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). However, it may still be eligible for submission to the next REF because the following exception to the policy may apply: 
 
 * {% if ticket.ticket_field_76512207 == 'deposit1___no_repository_available__38a_' %}{% comment %}
             BEGIN: IF MARKED AS EXCEPTION 38A; ELSIF MARKED AS EACH OF THE OTHER POSSIBLE EXCEPTIONS
@@ -295,14 +297,14 @@ BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
             {% elsif ticket.ticket_field_76512207 == 'deposit5___security_risk__38e_' %}**Deposit exception 38e**: Depositing the output would present a security risk.
             {% elsif ticket.ticket_field_76512207 == 'deposit6___gold_oa__38f_' %}{% comment %}
             THIS ELSIF WILL NEVER RUN BECAUSE THIS CONDITION IS BEING HANDLED OUTSIDE THIS LOOP; SEE ABOVE; LEAVING IT HERE FOR NOW IN CASE WE WANT TO REVERT TO TREATING THIS EXCEPTION LIKE ALL THE OTHERS.
-            {% endcomment %}**Deposit exception 38f**: The output was published as ‘gold’ open access (for example, RCUK-funded projects where an open access article processing charge has been paid). We would strongly encourage these outputs to be deposited in a repository to facilitate preservation, aggregation and text-mining.
-            {% elsif ticket.ticket_field_76512047 == 'access1___3rd_party_content_is_not_open_access__39a_' %}**Access exception 39a**: The output depends on the reproduction of third party content for which open access rights could not be granted (either within the specified timescales, or at all).
+            {% endcomment %}**Deposit exception 38f**: The output was published as ‘gold’ Open Access (for example, RCUK-funded projects where an Open Access article processing charge has been paid). We would strongly encourage these outputs to be deposited in a repository to facilitate preservation, aggregation and text-mining.
+            {% elsif ticket.ticket_field_76512047 == 'access1___3rd_party_content_is_not_open_access__39a_' %}**Access exception 39a**: The output depends on the reproduction of third party content for which Open Access rights could not be granted (either within the specified timescales, or at all).
             {% elsif ticket.ticket_field_76512047 == 'access2___excessive_embargo__39b_' %}**Access exception 39b**: The publication concerned requires an embargo period that exceeds the stated maxima, and was the most appropriate publication for the output.
             {% elsif ticket.ticket_field_76512047 == 'access3___publisher_disallows_deposit__39c_' %}**Access exception 39c**: The publication concerned actively disallows open-access deposit in a repository, and was the most appropriate publication for the output.
             {% elsif ticket.ticket_field_76949068 == 'tech2___other_uk_hei_failed_to_comply__40a_' %}**Technical exception 40a**: At the point of acceptance, the individual whose output is being submitted to the REF was at a different UK HEI which failed to comply with the criteria.
             {% elsif ticket.ticket_field_76949068 == 'tech3___repository_technical_failure__40b_' %}**Technical exception 40b**: The repository experienced a short-term or transient technical failure that prevented compliance with the criteria.
-            {% elsif ticket.ticket_field_76949068 == 'tech4___external_provider_failure__40c_' %}**Technical exception 40c**: An external service provider failure prevented compliance (for instance, a subject repository did not enable open access at the end of the embargo period, or a subject repository ceased to operate).
-            {% elsif ticket.ticket_field_76949128 == 'other___other_exception__41_' %}**Other exception 41**: In very exceptional cases, it may not be possible for an output to meet the open access requirements set out by this policy for a reason not covered by the exceptions listed above. We will require a short written explanation for why the output could not meet the open access requirements at the point of submission to the REF. We expect that such cases should be extremely rare. We will establish the process for considering them as part of our more detailed work to develop the REF 2021.
+            {% elsif ticket.ticket_field_76949068 == 'tech4___external_provider_failure__40c_' %}**Technical exception 40c**: An external service provider failure prevented compliance (for instance, a subject repository did not enable Open Access at the end of the embargo period, or a subject repository ceased to operate).
+            {% elsif ticket.ticket_field_76949128 == 'other___other_exception__41_' %}**Other exception 41**: In very exceptional cases, it may not be possible for an output to meet the Open Access requirements set out by this policy for a reason not covered by the exceptions listed above. We will require a short written explanation for why the output could not meet the Open Access requirements at the point of submission to the REF. We expect that such cases should be extremely rare. We will establish the process for considering them as part of our more detailed work to develop the REF 2021.
             {% endif %}{% comment %}
             END: IF MARKED AS EXCEPTION 38A; ELSIF MARKED AS EACH OF THE OTHER POSSIBLE EXCEPTIONS
         {% endcomment %}{% endif %}{% comment %}
@@ -332,4 +334,5 @@ END: IF FUNDED BY RCUK, WELLCOME OR CRUK
 {% endcomment %}We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
 
 Best wishes,
+
 {{ticket.assignee.first_name}}

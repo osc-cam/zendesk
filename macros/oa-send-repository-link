@@ -28,7 +28,7 @@ END: IF NOT MARKED AS PUBLISHED, ELSE
 
 {{ticket.ticket_field_24114846}}
 
-Please let us know if there is anything that needs to be updated or changed.
+Please let us know if there is anything that needs to be updated or changed (please be aware that some changes may take up to two hours to appear in Apollo).
 
 {% if ticket.ticket_field_24117196 == '1' %}{% comment %}
 BEGIN: IF COAF POLICY TICKED
@@ -41,6 +41,5 @@ BEGIN: IF COAF POLICY TICKED
     {% endcomment %}{% endif %}{% comment %}
 END: IF COAF POLICY TICKED
 {% endcomment %}Yours sincerely,
+
 {{current_user.first_name}}
-
-
