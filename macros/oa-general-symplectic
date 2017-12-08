@@ -46,18 +46,18 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
         {% endcomment %}Please reply to this message with your accepted manuscript attached. There is no need to upload the manuscript through Symplectic Elements again.
         
-{% else %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
-        BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
+{% else %}{% if ticket.ticket_field_25612958 == '0' and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
+        BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
             {% endcomment %}{% if ticket.ticket_field_24071873 != '1' or ticket.ticket_field_77355348 == '1' %}{% comment %}
             BEGIN: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% else %}W{% endif %}{% comment %}
             END: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}{% else %}W{% endif %}{% comment %}
-        END: IF NOT MARKED AS HEFCE OUT OF SCOPE
+        END: IF NOT MARKED AS HEFCE OUT OF SCOPE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
 
-        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}it to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
+        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}it to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
 # BREAK THIS CONDITIONAL
-        BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK; ELSE
+        BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK, NOT A CONFERENCE ABSTRACT; ELSE
             {% endcomment %}. It is currently under an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
             BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
             {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
@@ -69,7 +69,7 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
             {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% elsif ticket.ticket_field_24072173 == '0_months' or ticket.ticket_field_24072163 == 'oa_journal_conference' %}, with an embargo until publication{% endif %}{% comment %}
             END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
             {% endcomment %}{% endif %}{% comment %}
-        END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
+        END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK, NOT A CONFERENCE ABSTRACT
 
         {% endcomment %}. {% if ticket.ticket_field_24114846 == blank %}We'll let you know when we've done this.
     
@@ -276,7 +276,7 @@ These sanctions apply to:
 * all original Wellcome-funded research papers published since 1 October 2009
 * to monographs and book chapters for which a contract was signed after 1 October 2014.
 
-{% endif %}{% if ticket.ticket_field_25612958 != '1' %}{% comment %}
+{% endif %}{% if ticket.ticket_field_25612958 == '0' and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
 BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
     {% endcomment %}{% if ticket.ticket_field_24071873 == '1' %}{% comment %}
     BEGIN: IF MARKED AS HEFCE FAILURE
