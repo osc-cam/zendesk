@@ -55,9 +55,9 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
             {% endcomment %}{% else %}W{% endif %}{% comment %}
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
 
-        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}it to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
-# BREAK THIS CONDITIONAL
-        BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK, NOT A CONFERENCE ABSTRACT; ELSE
+        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
+
+        BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
             {% endcomment %}. It is currently under an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
             BEGIN: IF EMBARGO DURATION NOT BLANK OR ZERO MONTHS <<1>>
             {% endcomment %} to the {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% endif %}{% comment %}
@@ -65,15 +65,19 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
             {% endcomment %} once publication takes place{% else %}{% comment %}
         ELSE FOR: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
             {% endcomment %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
-            BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS; ELSIF EMBARGO ZERO MONTHS OR OPEN ACCESS JOURNAL 
-            {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% elsif ticket.ticket_field_24072173 == '0_months' or ticket.ticket_field_24072163 == 'oa_journal_conference' %}, with an embargo until publication{% endif %}{% comment %}
-            END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS 
+            BEGIN: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS; ELSIF NOT MARKED AS PUBLISHED
+            {% endcomment %}, with a {{ ticket.ticket_field_24072173 | remove:'_months' }}-month [embargo period imposed by the publisher](https://en.wikipedia.org/wiki/Embargo_%28academic_publishing%29){% elsif ticket.ticket_field_77352028 == '0' %}{% if ticket.ticket_field_24072173 == '0_months' or ticket.ticket_field_24072163 == 'oa_journal_conference' %}{% comment %}
+                BEGIN: IF EMBARGO ZERO MONTHS OR OA JOURNAL 
+                {% endcomment %}, with an embargo until publication{% endif %}{% comment %}
+                END: IF EMBARGO ZERO MONTHS OR OA JOURNAL 
+                {% endcomment %}{% endif %}{% comment %}
+            END: IF NOT MARKED AS APC ALREADY PAID (CC BY VERSION DEPOSITED WITHOUT EMBARGO) AND EMBARGO DURATION NOT BLANK OR ZERO MONTHS; ELSIF NOT MARKED AS PUBLISHED 
             {% endcomment %}{% endif %}{% comment %}
-        END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK, NOT A CONFERENCE ABSTRACT
+        END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
 
         {% endcomment %}. {% if ticket.ticket_field_24114846 == blank %}We'll let you know when we've done this.
     
-{% else %}Your paper can be found in Apollo at the following link:
+{% else %}Your manuscript can be found in Apollo at the following link:
 
 {{ticket.ticket_field_24114846}}
 
