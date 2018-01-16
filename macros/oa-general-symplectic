@@ -58,7 +58,7 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
             {% endcomment %}{% else %}W{% endif %}{% comment %}
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
 
-        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
+        {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% comment %}COMMENTING EMBARGO INFORMATION OUT UNTIL ORPHEUS IS FULLY FUNCTIONAL AND INTEGRATED WITH APOLLO{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
 
         BEGIN: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
             {% endcomment %}. It is currently under an indefinite embargo until it is published. This will be updated{% if ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}
@@ -78,7 +78,7 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
             {% endcomment %}{% endif %}{% comment %}
         END: IF NOT MARKED AS PUBLISHED, NOT MARKED AS HEFCE OUT OF SCOPE, REPOSITORY LINK NOT BLANK
 
-        {% endcomment %}. {% if ticket.ticket_field_24114846 == blank %}We'll let you know when we've done this.
+        {% endcomment %}NEXT ENDCOMMENT CORRESPONDS TO "COMMENTING EMBARGO INFORMATION OUT UNTIL ORPHEUS IS FULLY FUNCTIONAL AND INTEGRATED WITH APOLLO"{% endcomment %}. {% if ticket.ticket_field_24114846 == blank %}We'll let you know when we've done this.
     
 {% else %}Your manuscript can be found in Apollo at the following link:
 
