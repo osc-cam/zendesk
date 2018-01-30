@@ -39,7 +39,9 @@ BLOCK END: DATA VALIDATION WARNINGS
 BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
     {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_24069523 == '1' %}{% comment %}
     BEGIN: IF MARKED AS WRONG VERSION; ELSE
-    {% endcomment %}**Please can you send us the [accepted manuscript](http://osc.cam.ac.uk/sites/osc.cam.ac.uk/files/art_publicationprocessdiagram_updated_20160127.png)** (the final author-created version, incorporating peer-review changes but before any publisher work such as copy-editing or typesetting). I am afraid we cannot make the version you have sent us openly available because of publisher copyright restrictions.
+    {% endcomment %}**Please can you send us the [accepted manuscript](http://osc.cam.ac.uk/sites/osc.cam.ac.uk/files/art_publicationprocessdiagram_updated_20160127.png)** (the final author-created version, incorporating peer-review changes but before any publisher work such as copy-editing or typesetting). {% if ticket.ticket_field_360000612693 == 'proofs' or ticket.ticket_field_360000612693 == 'published_version' %}{% comment %}
+        BEGIN: IF WRONG VERSION IS PUBLISHED VERSION OR PROOFS; ELSIF PREPRINT
+        {% endcomment %}I am afraid we cannot make the version you have sent us openly available because of publisher copyright restrictions.{% elsif ticket.ticket_field_360000612693 == 'submitted_version' %}I am afraid that depositing the submitted version (pre-print) alone is not sufficient for complying with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/).{% endif %}
     
 {% if ticket.ticket_field_25612958 != '1' and ticket.ticket_field_24071873 != '1' and ticket.ticket_field_24114776 >= '2016-04-01' %}{% comment %}
         BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
@@ -49,14 +51,14 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
         {% endcomment %}Please reply to this message with your accepted manuscript attached. There is no need to upload the manuscript through Symplectic Elements again.
         
-{% else %}{% if ticket.ticket_field_25612958 == '0' and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
-        BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
+{% else %}{% if ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24117286 == '0' and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
+        BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT MARKED AS RETROSPECTIVE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
             {% endcomment %}{% if ticket.ticket_field_24071873 != '1' or ticket.ticket_field_77355348 == '1' %}{% comment %}
             BEGIN: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}To comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% else %}W{% endif %}{% comment %}
             END: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}{% else %}W{% endif %}{% comment %}
-        END: IF NOT MARKED AS HEFCE OUT OF SCOPE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
+        END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT MARKED AS RETROSPECTIVE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
 
         {% endcomment %}e {% if ticket.ticket_field_24114846 == blank %}can add {% else %}have added {% endif %}your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% comment %}COMMENTING EMBARGO INFORMATION OUT UNTIL ORPHEUS IS FULLY FUNCTIONAL AND INTEGRATED WITH APOLLO{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_25612958 == '0' and ticket.ticket_field_24114846 != blank %}{% comment %}
 

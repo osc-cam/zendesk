@@ -118,7 +118,10 @@ Hero Thesis,30126368,checkbox,True,hero_thesis,https://camacuk.zendesk.com/api/v
 DSpace Tickets,28166688,checkbox,True,dspace_tickets,https://camacuk.zendesk.com/api/v2/ticket_fields/28166688.json
 OA Number,33053987,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/33053987.json
 CRSid,46829348,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46829348.json
+Thesis deposit status,81254948,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/81254948.json
+Wrong version type,360000612393,multiselect,False,,https://camacuk.zendesk.com/api/v2/ticket_fields/360000612393.json
 New Thesis,30145837,checkbox,True,new_thesis,https://camacuk.zendesk.com/api/v2/ticket_fields/30145837.json
+Thesis third party comments,114103761454,textarea,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/114103761454.json
 Outstanding Commitment (Wellcome Supplement),34288687,decimal,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/34288687.json
 Access exception type,76512047,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/76512047.json
 Page/colour invoice paid,58141748,checkbox,False,page_colour_invoice_paid,https://camacuk.zendesk.com/api/v2/ticket_fields/58141748.json
@@ -137,12 +140,16 @@ Amount invoiced - COAF,24072263,decimal,False,,https://camacuk.zendesk.com/api/v
 Bloodwise (Leukaemia & Lymphoma Research),26329928,checkbox,True,leukaemia_and_lymphoma_research,https://camacuk.zendesk.com/api/v2/ticket_fields/26329928.json
 Membership invoice paid,57759307,checkbox,False,membership_invoice_paid,https://camacuk.zendesk.com/api/v2/ticket_fields/57759307.json
 Technical exception type,76949068,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/76949068.json
+RCUK/COAF failure action,81107788,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/81107788.json
 Edit existing repository record,30460238,checkbox,True,edit_existing_repository_record,https://camacuk.zendesk.com/api/v2/ticket_fields/30460238.json
 Page/colour invoice processed,48023887,checkbox,True,page_colour_invoice_processed,https://camacuk.zendesk.com/api/v2/ticket_fields/48023887.json
 EPSRC Data Requirement,24536658,checkbox,True,epsrc_data_requirement,https://camacuk.zendesk.com/api/v2/ticket_fields/24536658.json
 Membership invoice processed,48024147,checkbox,True,membership_invoice_processed,https://camacuk.zendesk.com/api/v2/ticket_fields/48024147.json
+Unmediated deposit type,80793427,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80793427.json
+Thesis embargo reason other,81205588,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/81205588.json
 HEFCE transitional deadline met,77355348,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/77355348.json
 DSpace done - needs email,24522837,checkbox,True,needs_dspace_email,https://camacuk.zendesk.com/api/v2/ticket_fields/24522837.json
+Wrong version type,360000612693,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/360000612693.json
 published,77352028,checkbox,True,already_published,https://camacuk.zendesk.com/api/v2/ticket_fields/77352028.json
 Corresponding author(s)' affiliation(s),80911708,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80911708.json
 Promote on Twitter?,40547167,checkbox,True,promote_twitter,https://camacuk.zendesk.com/api/v2/ticket_fields/40547167.json
@@ -163,6 +170,8 @@ Membership invoice date,48024187,date,True,,https://camacuk.zendesk.com/api/v2/t
 Degree,46901887,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46901887.json
 NIHR,71509888,checkbox,True,nihr,https://camacuk.zendesk.com/api/v2/ticket_fields/71509888.json
 APC invoice paid,58141568,checkbox,True,apc_invoice_paid,https://camacuk.zendesk.com/api/v2/ticket_fields/58141568.json
+Tweeted,81113728,checkbox,True,data_tweeted,https://camacuk.zendesk.com/api/v2/ticket_fields/81113728.json
+Thesis submitted date,114103819653,date,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/114103819653.json
 Technical Issue,30146437,checkbox,True,repository_technical_issue,https://camacuk.zendesk.com/api/v2/ticket_fields/30146437.json
 Other exception type,76949128,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/76949128.json
 Commitment note,29294987,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29294987.json
@@ -179,7 +188,9 @@ Repository feature request,30746518,checkbox,True,repository_feature_request,htt
 Type of request?,33185687,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/33185687.json
 H2020,73663128,checkbox,True,horizon_2020,https://camacuk.zendesk.com/api/v2/ticket_fields/73663128.json
 Gold team,80644248,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80644248.json
+Thesis IP comments,114103819673,textarea,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/114103819673.json
 HEFCE Out of Scope,25612958,checkbox,True,book_chapter,https://camacuk.zendesk.com/api/v2/ticket_fields/25612958.json
+Thesis embargo reason,80820127,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/80820127.json
 Twitter handles,40547487,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40547487.json
 In Dark Collection,29097378,checkbox,True,dark_collection,https://camacuk.zendesk.com/api/v2/ticket_fields/29097378.json
 Data supporting a publication?,40426148,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40426148.json
@@ -187,6 +198,7 @@ RCUK failure,80935588,checkbox,True,rcuk_failure,https://camacuk.zendesk.com/api
 Thesis title,46902187,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46902187.json
 AHRC,28673708,checkbox,True,ahrc,https://camacuk.zendesk.com/api/v2/ticket_fields/28673708.json
 Licence applied by publisher,29275308,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/29275308.json
+Comments for theses team,114103819693,textarea,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/114103819693.json
 Publication in Apollo,36260527,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/36260527.json
 SWORD Deposit Thesis,40666287,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/40666287.json
 COAF cost centre,46241967,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/46241967.json
@@ -207,7 +219,8 @@ Publisher met funder requirements,29275338,date,False,,https://camacuk.zendesk.c
 APC invoice processed,29294538,checkbox,True,invoice_processed,https://camacuk.zendesk.com/api/v2/ticket_fields/29294538.json
 Is this an ethics query?,45233868,checkbox,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/45233868.json
 Dark collection status,31217868,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/31217868.json
-Supporting article URL,36336588,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/36336588.json
+Supporting article DOI,36336588,text,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/36336588.json
+Thesis source,81329868,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/81329868.json
 Deposit exception type,76512207,tagger,True,,https://camacuk.zendesk.com/api/v2/ticket_fields/76512207.json
 Gates Foundation,61116627,checkbox,True,gates_foundation,https://camacuk.zendesk.com/api/v2/ticket_fields/61116627.json
 STFC,28673748,checkbox,True,stfc,https://camacuk.zendesk.com/api/v2/ticket_fields/28673748.json
