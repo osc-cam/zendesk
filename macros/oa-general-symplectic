@@ -254,7 +254,11 @@ Our VAT no., should it be required, is GB 823 8476 09.
     END: IF MARKED AS APC PAYMENT
     {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_no' %}{% if ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences of the United States of America' or ticket.ticket_field_24069493 == 'Proceedings of the National Academy of Sciences (PNAS)' or ticket.ticket_field_24069493 == 'PNAS' %}{% comment %}
     BEGIN: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
-    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' Open Access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117206 == '1' %}{% if ticket.ticket_field_24117196 != '1' and ticket.ticket_field_28673738 != '1' and ticket.ticket_field_28673718 != '1' and ticket.ticket_field_71509888 != '1' and ticket.ticket_field_26352407 != '1' %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}**T{% endif %}{% else %}**T{% endif %}{% comment %}
+    {% endcomment %}*Proceedings of the National Academy of Sciences* automatically deposits the Publisher's version/PDF of your article in Europe PMC/Pubmed Central for public release no later than 6 months after publication. Furthermore, PNAS Open Access Option is not compliant with most funders' Open Access policies so **t{% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117206 == '1' %}{% if ticket.ticket_field_24117196 != '1' and ticket.ticket_field_28673738 != '1' and ticket.ticket_field_28673718 != '1' and ticket.ticket_field_71509888 != '1' and ticket.ticket_field_26352407 != '1' %}{% comment %}
+        BEGIN: IF NOT MARKED AS COVERED BY COAF, MRC, BBSRC, NIHR, OR BREAT CANCER NOW POLICIES; ELSE
+        {% endcomment %}The version of your paper deposited in Apollo is sufficient to comply with this/these policies, so **t{% else %}This journal's self-archiving policy is compliant with this/these policies, so **t{% endif %}{% comment %}
+        END: IF NOT MARKED AS COVERED BY COAF, MRC, BBSRC, NIHR, OR BREAT CANCER NOW POLICIES; ELSE
+    {% endcomment %}{% else %}**T{% endif %}{% comment %}
     END: IF JOURNAL IS PNAS; ELSIF MARKED AS COVERED BY COAF, RCUK OR 'OTHER FUNDER' POLICIES
     
     {% endcomment %}here is no need to select a paid-for Open Access option from the publisher in this case**.
@@ -344,8 +348,6 @@ For further advice on data sharing, you can also e-mail info@data.cam.ac.uk
 
 {% endif %}{% comment %}
 END: IF FUNDED BY RCUK, WELLCOME OR CRUK
-{% endcomment %}We would really appreciate it if you could fill out this [short survey](https://goo.gl/forms/H76H4ABDdHGPy05x1) about your experiences using Symplectic to deposit your paper.
-
-Best wishes,
+{% endcomment %}Best wishes,
 
 {{ticket.assignee.first_name}}
