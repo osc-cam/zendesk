@@ -86,7 +86,44 @@ BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
 
 {{ticket.ticket_field_24114846}}
 
-{% endif %}{% endif %}{% comment %}
+{% endif %}{% if ticket.ticket_field_25612958 == '0' and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
+BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
+    {% endcomment %}{% if ticket.ticket_field_24071873 == '1' %}{% comment %}
+    BEGIN: IF MARKED AS HEFCE FAILURE
+        #### HEFCE compliance{% endcomment %}{% if ticket.ticket_field_77355348 == '0' and ticket.ticket_field_30491447 == blank %}{% comment %}
+        BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET AND EXCEPTION TYPE IS BLANK (I.E. NOT MARKED AS HEFCE EXCEPTION); ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSIF MARKED AS EXCEPTION 38F (GOLD OA); ELSIF MARKED AS EXCEPTION (BUT NOT MARKED AS EXCEPTIONS THAT ONLY EXIST IN ELEMENTS)
+        {% endcomment %}Because this paper was accepted and published by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that papers are submitted to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
+{% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to 3 months from the date of publication, instead of 3 months from the date of acceptance. However, this flexibility will be subject to a review in winter 2017, so please upload your papers to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
+{% elsif ticket.ticket_field_76512207 == 'deposit6___gold_oa__38f_' %}Technically you have submitted your paper too late for us to be able to make it comply with the HEFCE Open Access policy. However, we can mark it as an exception because it was published with immediate (Gold) Open Access status, and it will be REF-eligible.
+{% elsif ticket.ticket_field_30491447 != blank and ticket.ticket_field_30491447 != 'tech1___conference_without_an_issn' and ticket.ticket_field_30491447 != 'unavailable___full_text_not_available' and ticket.ticket_field_30491447 != 'waiver___waiver_has_been_requested' %}I'm afraid we can't make this paper comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). However, it may still be eligible for submission to the next REF because the following exception to the policy may apply: 
+
+* {% if ticket.ticket_field_76512207 == 'deposit1___no_repository_available__38a_' %}{% comment %}
+            BEGIN: IF MARKED AS EXCEPTION 38A; ELSIF MARKED AS EACH OF THE OTHER POSSIBLE EXCEPTIONS
+            {% endcomment %}**Deposit exception 38a**: The individual whose output is being submitted to the REF was unable to secure the use of a repository at the point of acceptance.
+            {% elsif ticket.ticket_field_76512207 == 'deposit2___delay_in_securing_full_text__38b_' %}**Deposit exception 38b**: The individual whose output is being submitted to the REF experienced a delay in securing the final peer-reviewed text (for instance, where a paper has multiple authors).
+            {% elsif ticket.ticket_field_76512207 == 'deposit3___not_employed_by_uk_hei__38c_' %}**Deposit exception 38c**: The individual whose output is being submitted to the REF was not employed by a UK HEI at the time of submission for publication. 
+            {% elsif ticket.ticket_field_76512207 == 'deposit4___unlawful_to_deposit__38d_' %}**Deposit exception 38d**: It would be unlawful to deposit, or request the deposit of, the output.
+            {% elsif ticket.ticket_field_76512207 == 'deposit5___security_risk__38e_' %}**Deposit exception 38e**: Depositing the output would present a security risk.
+            {% elsif ticket.ticket_field_76512207 == 'deposit6___gold_oa__38f_' %}{% comment %}
+            THIS ELSIF WILL NEVER RUN BECAUSE THIS CONDITION IS BEING HANDLED OUTSIDE THIS LOOP; SEE ABOVE; LEAVING IT HERE FOR NOW IN CASE WE WANT TO REVERT TO TREATING THIS EXCEPTION LIKE ALL THE OTHERS.
+            {% endcomment %}**Deposit exception 38f**: The output was published as ‘gold’ Open Access (for example, RCUK-funded projects where an Open Access article processing charge has been paid). We would strongly encourage these outputs to be deposited in a repository to facilitate preservation, aggregation and text-mining.
+            {% elsif ticket.ticket_field_76512047 == 'access1___3rd_party_content_is_not_open_access__39a_' %}**Access exception 39a**: The output depends on the reproduction of third party content for which Open Access rights could not be granted (either within the specified timescales, or at all).
+            {% elsif ticket.ticket_field_76512047 == 'access2___excessive_embargo__39b_' %}**Access exception 39b**: The publication concerned requires an embargo period that exceeds the stated maxima, and was the most appropriate publication for the output.
+            {% elsif ticket.ticket_field_76512047 == 'access3___publisher_disallows_deposit__39c_' %}**Access exception 39c**: The publication concerned actively disallows open-access deposit in a repository, and was the most appropriate publication for the output.
+            {% elsif ticket.ticket_field_76949068 == 'tech2___other_uk_hei_failed_to_comply__40a_' %}**Technical exception 40a**: At the point of acceptance, the individual whose output is being submitted to the REF was at a different UK HEI which failed to comply with the criteria.
+            {% elsif ticket.ticket_field_76949068 == 'tech3___repository_technical_failure__40b_' %}**Technical exception 40b**: The repository experienced a short-term or transient technical failure that prevented compliance with the criteria.
+            {% elsif ticket.ticket_field_76949068 == 'tech4___external_provider_failure__40c_' %}**Technical exception 40c**: An external service provider failure prevented compliance (for instance, a subject repository did not enable Open Access at the end of the embargo period, or a subject repository ceased to operate).
+            {% elsif ticket.ticket_field_76949128 == 'other___other_exception__41_' %}**Other exception 41**: In very exceptional cases, it may not be possible for an output to meet the Open Access requirements set out by this policy for a reason not covered by the exceptions listed above. We will require a short written explanation for why the output could not meet the Open Access requirements at the point of submission to the REF. We expect that such cases should be extremely rare. We will establish the process for considering them as part of our more detailed work to develop the REF 2021.
+            {% endif %}{% comment %}
+            END: IF MARKED AS EXCEPTION 38A; ELSIF MARKED AS EACH OF THE OTHER POSSIBLE EXCEPTIONS
+        {% endcomment %}{% endif %}{% comment %}
+        END: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET AND EXCEPTION TYPE IS BLANK (I.E. NOT MARKED AS HEFCE EXCEPTION); ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSIF MARKED AS EXCEPTION (BUT NOT MARKED AS EXCEPTIONS THAT ONLY EXIST IN ELEMENTS)
+    {% endcomment %}    
+{% endif %}{% comment %}
+    END: IF MARKED AS HEFCE FAILURE
+{% endcomment %}{% endif %}{% comment %}
+END: IF NOT MARKED AS HEFCE OUT OF SCOPE
+{% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS WRONG VERSION; ELSE
     {% endcomment %}{% endif %}{% comment %}
 END: IF GOLD TEAM NOT MARKED AS PROCESSED
@@ -293,45 +330,7 @@ These sanctions apply to:
 * all original Wellcome-funded research papers published since 1 October 2009
 * to monographs and book chapters for which a contract was signed after 1 October 2014.
 
-{% endif %}{% if ticket.ticket_field_25612958 == '0' and ticket.ticket_field_80501387 != 'conference_abstract' %}{% comment %}
-BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE
-    {% endcomment %}{% if ticket.ticket_field_24071873 == '1' %}{% comment %}
-    BEGIN: IF MARKED AS HEFCE FAILURE
-        {% endcomment %}#### HEFCE compliance
-{% if ticket.ticket_field_77355348 == '0' and ticket.ticket_field_30491447 == blank %}{% comment %}
-        BEGIN: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET AND EXCEPTION TYPE IS BLANK (I.E. NOT MARKED AS HEFCE EXCEPTION); ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSIF MARKED AS EXCEPTION 38F (GOLD OA); ELSIF MARKED AS EXCEPTION (BUT NOT MARKED AS EXCEPTIONS THAT ONLY EXIST IN ELEMENTS)
-        {% endcomment %}Because this paper was accepted and published by the journal/conference more than 3 months ago, I'm afraid we can't make it comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). This requires that papers are submitted to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
-{% elsif ticket.ticket_field_77355348 == '1' %}Please note that compliance with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) was only achieved in this case because during the first two years of the policy (1 April 2016 – 1 April 2018), outputs can be deposited up to 3 months from the date of publication, instead of 3 months from the date of acceptance. However, this flexibility will be subject to a review in winter 2017, so please upload your papers to us within a maximum of 3 months from the [**acceptance date**](http://www.hefce.ac.uk/rsrch/oa/FAQ/#deposit4). 
-{% elsif ticket.ticket_field_76512207 == 'deposit6___gold_oa__38f_' %}Technically you have submitted your paper too late for us to be able to make it comply with the HEFCE Open Access policy. However, we can mark it as an exception because it was published with immediate (Gold) Open Access status, and it will be REF-eligible.
-{% elsif ticket.ticket_field_30491447 != blank and ticket.ticket_field_30491447 != 'tech1___conference_without_an_issn' and ticket.ticket_field_30491447 != 'unavailable___full_text_not_available' and ticket.ticket_field_30491447 != 'waiver___waiver_has_been_requested' %}I'm afraid we can't make this paper comply with the [HEFCE Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/). However, it may still be eligible for submission to the next REF because the following exception to the policy may apply: 
-
-* {% if ticket.ticket_field_76512207 == 'deposit1___no_repository_available__38a_' %}{% comment %}
-            BEGIN: IF MARKED AS EXCEPTION 38A; ELSIF MARKED AS EACH OF THE OTHER POSSIBLE EXCEPTIONS
-            {% endcomment %}**Deposit exception 38a**: The individual whose output is being submitted to the REF was unable to secure the use of a repository at the point of acceptance.
-            {% elsif ticket.ticket_field_76512207 == 'deposit2___delay_in_securing_full_text__38b_' %}**Deposit exception 38b**: The individual whose output is being submitted to the REF experienced a delay in securing the final peer-reviewed text (for instance, where a paper has multiple authors).
-            {% elsif ticket.ticket_field_76512207 == 'deposit3___not_employed_by_uk_hei__38c_' %}**Deposit exception 38c**: The individual whose output is being submitted to the REF was not employed by a UK HEI at the time of submission for publication. 
-            {% elsif ticket.ticket_field_76512207 == 'deposit4___unlawful_to_deposit__38d_' %}**Deposit exception 38d**: It would be unlawful to deposit, or request the deposit of, the output.
-            {% elsif ticket.ticket_field_76512207 == 'deposit5___security_risk__38e_' %}**Deposit exception 38e**: Depositing the output would present a security risk.
-            {% elsif ticket.ticket_field_76512207 == 'deposit6___gold_oa__38f_' %}{% comment %}
-            THIS ELSIF WILL NEVER RUN BECAUSE THIS CONDITION IS BEING HANDLED OUTSIDE THIS LOOP; SEE ABOVE; LEAVING IT HERE FOR NOW IN CASE WE WANT TO REVERT TO TREATING THIS EXCEPTION LIKE ALL THE OTHERS.
-            {% endcomment %}**Deposit exception 38f**: The output was published as ‘gold’ Open Access (for example, RCUK-funded projects where an Open Access article processing charge has been paid). We would strongly encourage these outputs to be deposited in a repository to facilitate preservation, aggregation and text-mining.
-            {% elsif ticket.ticket_field_76512047 == 'access1___3rd_party_content_is_not_open_access__39a_' %}**Access exception 39a**: The output depends on the reproduction of third party content for which Open Access rights could not be granted (either within the specified timescales, or at all).
-            {% elsif ticket.ticket_field_76512047 == 'access2___excessive_embargo__39b_' %}**Access exception 39b**: The publication concerned requires an embargo period that exceeds the stated maxima, and was the most appropriate publication for the output.
-            {% elsif ticket.ticket_field_76512047 == 'access3___publisher_disallows_deposit__39c_' %}**Access exception 39c**: The publication concerned actively disallows open-access deposit in a repository, and was the most appropriate publication for the output.
-            {% elsif ticket.ticket_field_76949068 == 'tech2___other_uk_hei_failed_to_comply__40a_' %}**Technical exception 40a**: At the point of acceptance, the individual whose output is being submitted to the REF was at a different UK HEI which failed to comply with the criteria.
-            {% elsif ticket.ticket_field_76949068 == 'tech3___repository_technical_failure__40b_' %}**Technical exception 40b**: The repository experienced a short-term or transient technical failure that prevented compliance with the criteria.
-            {% elsif ticket.ticket_field_76949068 == 'tech4___external_provider_failure__40c_' %}**Technical exception 40c**: An external service provider failure prevented compliance (for instance, a subject repository did not enable Open Access at the end of the embargo period, or a subject repository ceased to operate).
-            {% elsif ticket.ticket_field_76949128 == 'other___other_exception__41_' %}**Other exception 41**: In very exceptional cases, it may not be possible for an output to meet the Open Access requirements set out by this policy for a reason not covered by the exceptions listed above. We will require a short written explanation for why the output could not meet the Open Access requirements at the point of submission to the REF. We expect that such cases should be extremely rare. We will establish the process for considering them as part of our more detailed work to develop the REF 2021.
-            {% endif %}{% comment %}
-            END: IF MARKED AS EXCEPTION 38A; ELSIF MARKED AS EACH OF THE OTHER POSSIBLE EXCEPTIONS
-        {% endcomment %}{% endif %}{% comment %}
-        END: IF NOT MARKED AS HEFCE TRANSITIONAL DEADLINE MET AND EXCEPTION TYPE IS BLANK (I.E. NOT MARKED AS HEFCE EXCEPTION); ELSEIF MARKED AS HEFCE TRANSITIONAL DEADLINE MET; ELSIF MARKED AS EXCEPTION (BUT NOT MARKED AS EXCEPTIONS THAT ONLY EXIST IN ELEMENTS)
-    {% endcomment %}    
-{% endif %}{% comment %}
-    END: IF MARKED AS HEFCE FAILURE
-{% endcomment %}{% endif %}{% comment %}
-END: IF NOT MARKED AS HEFCE OUT OF SCOPE
-{% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_26329848 == '1' or ticket.ticket_field_26352357 == '1' %}{% comment %}
+{% endif %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_26329848 == '1' or ticket.ticket_field_26352357 == '1' %}{% comment %}
 BEGIN: IF FUNDED BY RCUK, WELLCOME OR CRUK
 {% endcomment %}#### Research data
 The funder(s) of this research require data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload.
