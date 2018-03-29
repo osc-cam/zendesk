@@ -1,6 +1,6 @@
 Dear {{ticket.requester.name}},
 
-We've added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
+We've added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_24069553 != 'deposit_completed' and ticket.ticket_field_24069553 != 'symplectic_completed' and ticket.ticket_field_77352028 != '1' %}{% comment %}
 BEGIN: IF NOT MARKED AS PUBLISHED; ELSE
     {% endcomment %}. It is currently under an indefinite embargo until it is published. {% if ticket.ticket_field_24071633 == blank or ticket.ticket_field_24071633 == 'payment_no' %}{% comment %}
     BEGIN: IF 'IS THERE AN APC PAYMENT' BLANK OR NO; ELSE
