@@ -249,7 +249,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
 
 {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
-        {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for Open Access funding, we have already processed the invoice and forwarded it to our finance division. The publisher may expect payment shortly.
+        {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for Open Access funding, we have already processed the invoice and forwarded it to Central Finance. The publisher may expect payment shortly.
         
 {% else %}You would be eligible for funds from the University's RCUK and/or COAF block grants to pay for this. Please ask the publisher to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
         
