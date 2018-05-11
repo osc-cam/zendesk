@@ -1,4 +1,6 @@
-Dear {{ticket.requester.name}},
+{% if ticket.ticket_field_24069553 == 'needs_depositing' %}WARNING: Field Repository status is set to '{{ ticket.ticket_field_24069553 }}'. Have you forgotten to change its value?
+
+{% endif %}Dear {{ticket.requester.name}},
 
 We've added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_24069553 == 'deposit_completed' or ticket.ticket_field_24069553 == 'symplectic_completed' or ticket.ticket_field_77352028 == '1' %}{% comment %}
 BEGIN: IF MARKED AS PUBLISHED; ELSE
