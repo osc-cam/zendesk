@@ -2,6 +2,10 @@
 
 {% endif %}Dear {{ticket.requester.name}},
 
+**Manuscript title**: {{ ticket.ticket_field_24069473 }}{% if ticket.ticket_field_24069493 != blank %}
+**Journal title**: {{ ticket.ticket_field_24069493 }}{% endif %}{% if ticket.ticket_field_24069563 != blank %}
+**DOI**: {{ ticket.ticket_field_24069563 }}{% endif %}
+
 We've added your manuscript to [Apollo](https://www.repository.cam.ac.uk/), the University's institutional repository{% if ticket.ticket_field_24069553 == 'deposit_completed' or ticket.ticket_field_24069553 == 'symplectic_completed' or ticket.ticket_field_77352028 == '1' %}{% comment %}
 BEGIN: IF MARKED AS PUBLISHED; ELSE
     {% endcomment %}{% if ticket.ticket_field_80650548 == '0' and ticket.ticket_field_24072173 != '0_months' and ticket.ticket_field_24072173 != blank %}{% comment %}

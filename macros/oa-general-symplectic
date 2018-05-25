@@ -34,6 +34,10 @@ END: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
 BLOCK END: DATA VALIDATION WARNINGS
 {% endcomment %}Dear {{ticket.requester.name}},
 
+**Manuscript title**: {{ ticket.ticket_field_24069473 }}{% if ticket.ticket_field_24069493 != blank %}
+**Journal title**: {{ ticket.ticket_field_24069493 }}{% endif %}{% if ticket.ticket_field_24069563 != blank %}
+**DOI**: {{ ticket.ticket_field_24069563 }}{% endif %}
+
 {% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
 
 BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
