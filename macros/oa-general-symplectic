@@ -184,17 +184,17 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 {% endif %}{% comment %}
     END: IF MARKED AS COAF OR RCUK POLICIES (I.E. IF WE MIGHT BE ABLE TO HELP WITH PAYMENT)
-{% endcomment %}{% elsif ticket.ticket_field_80935588 == '1' or ticket.ticket_field_80684087 == '1' %}To comply with this/these funder policies, you should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. {% if ticket.ticket_field_81107788 == 'request_retrospective_oa' %}**We will contact the publisher shortly to enquire if this licence can be applied retrospectively**. {% else %}{% endif %}To receive our advice before having to sign an agreement with the publisher, **please upload your future publications to us as soon as possible after acceptance**.
+{% endcomment %}{% elsif ticket.ticket_field_80935588 == '1' or ticket.ticket_field_80684087 == '1' %}To comply with this/these funder policies, the corresponding author should have selected the journal's option for immediate Open Access and chosen a [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/) licence. {% if ticket.ticket_field_81107788 == 'request_retrospective_oa' %}**We will contact the publisher shortly to enquire if this licence can be applied retrospectively**. {% else %}{% endif %}To receive our advice before having to sign an agreement with the publisher, **please upload your future publications to us as soon as possible after acceptance**.
 
 {% elsif ticket.ticket_field_24117436 == '1' %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}We have already approved immediate Open Access for this article via the University's [Springer Compact agreement](http://www.springer.com/gp/open-access/springer-open-choice/springer-compact/for-uk-authors-intro/731990), which allows us to make all articles accepted for publication in [eligible journals](http://resource-cms.springer.com/springer-cms/rest/v1/content/7476756/data/v3/Open+Choice+journals+title+list) with a Cambridge corresponding author fully Open Access at no extra cost to the University. {% elsif ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}To comply with this/these funder policies, we have already approved immediate Open Access for this article via the University's prepayment deal with the publisher. {% else %}We have already approved immediate Open Access for this article via the University's prepayment deal with the publisher. {% endif %}
 
-**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+**Please ensure that the licence type you (or corresponding author) select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 
 {% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' or ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}{% if ticket.ticket_field_24072163 == 'oa_journal_conference' %}{% comment %}
     BEGIN: IF MARKED AS OPEN ACCESS JOURNAL
     {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully Open Access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_24117206 == '1' %}{% comment %}
         BEGIN: IF MARKED AS RCUK, COAF, or OTHER FUNDER POLICIES
-        {% endcomment %}To comply with this/these you'll need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
+        {% endcomment %}To comply with this/these the corresponding author will need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
         END: IF MARKED AS RCUK, COAF, or OTHER FUNDER POLICIES
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS OPEN ACCESS JOURNAL
@@ -248,15 +248,15 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
         END: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; 
     {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for Open Access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
     
-{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details.
+{% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to the corresponding author as they complete the publication and Open Access details.
     
-{% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to you as you complete the publication and Open Access details. 
+{% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to the corresponding author as they complete the publication and Open Access details. 
 
 {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
         {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for Open Access funding, we have already processed the invoice and forwarded it to Central Finance. The publisher may expect payment shortly.
         
-{% else %}You would be eligible for funds from the University's RCUK and/or COAF block grants to pay for this. Please ask the publisher to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so we can connect it back to your article.
+{% else %}You would be eligible for funds from the University's RCUK and/or COAF block grants to pay for this. Please could the corresponding author ask the publisher to include our reference number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so that we can connect it back to your article?
         
 {% endif %}{% comment %}
         END: IF MARKED AS APC INVOICE PROCESSED
@@ -264,7 +264,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
     END: IF MARKED AS GATES POLICY; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
     {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71064067 == '1' or ticket.ticket_field_73176687 == '1' or ticket.ticket_field_73663128 == '1' or ticket.ticket_field_71509888 == '1' or ticket.ticket_field_26352407 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS RCUK, COAF, GATES, ERC, FP7, H2020, NIHR or BREAST CANCER NOW POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
-    {% endcomment %}**Please ensure that the licence type you select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+    {% endcomment %}**Please ensure that the licence type you (or corresponding author) select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 
 {% endif %}{% comment %}
     END: IF MARKED AS RCUK, COAF OR GATES POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
@@ -276,7 +276,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
         {% endcomment %}{% if ticket.ticket_field_29294538 == '0' %}{% comment %}
             
             BEGIN: IF NOT MARKED AS APC INVOICE PROCESSED
-            {% endcomment %}When filling in our invoicing details you should give the billing address as:
+            {% endcomment %}When filling in our invoicing details the corresponding author should give the billing address as:
 
 University of Cambridge
 Open Access
@@ -290,7 +290,7 @@ and our email address info@openaccess.cam.ac.uk
 
 Our VAT no., should it be required, is GB 823 8476 09.
 
-*If you receive an invoice which needs to be paid please forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
+*If the corresponding author receives an invoice which needs to be paid please ask them to forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
 
 {% endif %}{% comment %}
             END: IF NOT MARKED AS APC INVOICE PROCESSED
