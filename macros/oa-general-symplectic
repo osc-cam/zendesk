@@ -8,7 +8,7 @@ BLOCK: DATA VALIDATION WARNINGS
 {% endif %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
 BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
 {% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" or ticket.ticket_field_24069543 == "springer" or ticket.ticket_field_24069543 == "SPRINGER" %}{% comment %}
-    BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
+    BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES AND EITHER RCUK PAYMENT OR COAF PAYMENT
     {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
         BEGIN: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
         {% endcomment %}WARNING: Publisher is Springer and it appears that this paper has not been published yet. Please consider whether this requires the attention of the Gold Team. If it has not been published yet, please consider selecting "Springer Compact" in "Is there an APC payment?" and setting "Gold team" to "-" (blank). A list of journals included in the Springer Compact deal is available here: http://resource-cms.springer.com/springer-cms/rest/v1/content/7476756/data/v3/Open+Choice+journals+title+list
@@ -17,7 +17,7 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
         
 {% endif %}{% comment %}
         END: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
-    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_yes' %}{% if ticket.ticket_field_24069543 == "Oxford University Press" or ticket.ticket_field_24069543 == "OUP" or ticket.ticket_field_24069543 == "Oxford" %}{% comment %}
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_yes' and (ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1') %}{% if ticket.ticket_field_24069543 == "Oxford University Press" or ticket.ticket_field_24069543 == "OUP" or ticket.ticket_field_24069543 == "Oxford" %}{% comment %}
         BEGIN: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
         {% endcomment %}WARNING: Publisher is OUP. Please consider selecting "OUP Prepayment Account" instead of "Yes" in field "Is there an APC payment?"
     
