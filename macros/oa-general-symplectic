@@ -1,6 +1,10 @@
 {% assign tags = ticket.tags | split: ' ' %}{% comment %}
 BLOCK: DATA VALIDATION WARNINGS 
-{% endcomment %}{% if ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}WARNING: Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal, so the output produced by this macro is unusual and might require editing. Please review the ticket and reply carefully.
+{% endcomment %}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_26352397 == '0' and ticket.ticket_field_26329928 == '0' and ticket.ticket_field_26352407 == '0' and ticket.ticket_field_26352377 == '0' and ticket.ticket_field_26352357 == '0' and ticket.ticket_field_28241947 == '0' and ticket.ticket_field_26329848 == '0' %}WARNING: COAF policy ticked, but no COAF funders selected. Please review the funder checkboxes.
+
+{% endif %}{% if ticket.ticket_field_24071783 == '1' and ticket.ticket_field_28673708 == '0' and ticket.ticket_field_28673718 == '0' and ticket.ticket_field_28673728 == '0' and ticket.ticket_field_28676917 == '0' and ticket.ticket_field_28676927 == '0' and ticket.ticket_field_28241947 == '0' and ticket.ticket_field_28673738 == '0' and ticket.ticket_field_28673748 == '0' %}WARNING: RCUK policy ticked, but no RCUK funders selected. Please review the funder checkboxes.
+
+{% endif %}{% if ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}WARNING: Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal, so the output produced by this macro is unusual and might require editing. Please review the ticket and reply carefully.
 
 {% endif %}{% if ticket.ticket_field_24069553 != blank and ticket.ticket_field_24069553 != 'needs_depositing' %}WARNING: I have just changed the value of field Repository status from '{{ ticket.ticket_field_24069553 }}' to 'Needs depositing'{% if ticket.ticket_field_29313297 != blank
 %} and deleted {{ ticket.ticket_field_29313297 }} from field 'Date deposit completed (YYYY-MM-DD){% endif %}. Please ensure these fields are correctly set now.
