@@ -38,22 +38,26 @@ BLOCK END: DATA VALIDATION WARNINGS
 **Journal title**: {{ ticket.ticket_field_24069493 }}{% endif %}{% if ticket.ticket_field_24069563 != blank %}
 **DOI**: {{ ticket.ticket_field_24069563 }}{% endif %}
 
-{% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
+{% if ticket.ticket_field_80501387 == 'conference_abstract' %}{% comment %}
+BEGIN: IF MARKED AS CONFERENCE ABSTRACT
+    {% endcomment %}Thank you for your submission. Please note that conference abstracts are no longer accepted in Apollo, so I will be removing this file from Symplectic Elements shortly. Conference abstracts, posters and presentations are not covered by the REF's Open Access policy, so they do not need to be uploaded for REF-eligibility. However, should you wish to deposit the poster, presentation or other output that this abstract relates to, you are welcome to do so.
+    
+{% else %}{% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
 
-BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
-    {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_24069523 == '1' %}{% comment %}
-    BEGIN: IF MARKED AS WRONG VERSION; ELSE
-    {% endcomment %}**Please can you send us the [accepted manuscript](http://osc.cam.ac.uk/sites/osc.cam.ac.uk/files/art_publicationprocessdiagram_updated_20160127.png)** (the final author-created version, incorporating peer-review changes but before any publisher work such as copy-editing or typesetting). {% if ticket.ticket_field_360000612693 == 'proofs' or ticket.ticket_field_360000612693 == 'published_version' %}{% comment %}
-        BEGIN: IF WRONG VERSION IS PUBLISHED VERSION OR PROOFS; ELSIF PREPRINT
-        {% endcomment %}I am afraid we cannot make the version you have sent us openly available because of publisher copyright restrictions.{% elsif ticket.ticket_field_360000612693 == 'submitted_version' %}I am afraid that depositing the submitted version (pre-print) alone is not sufficient for complying with the [REF Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/).{% endif %}
+    BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
+        {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_24069523 == '1' %}{% comment %}
+        BEGIN: IF MARKED AS WRONG VERSION; ELSE
+        {% endcomment %}**Please can you send us the [accepted manuscript](http://osc.cam.ac.uk/sites/osc.cam.ac.uk/files/art_publicationprocessdiagram_updated_20160127.png)** (the final author-created version, incorporating peer-review changes but before any publisher work such as copy-editing or typesetting). {% if ticket.ticket_field_360000612693 == 'proofs' or ticket.ticket_field_360000612693 == 'published_version' %}{% comment %}
+            BEGIN: IF WRONG VERSION IS PUBLISHED VERSION OR PROOFS; ELSIF PREPRINT
+            {% endcomment %}I am afraid we cannot make the version you have sent us openly available because of publisher copyright restrictions.{% elsif ticket.ticket_field_360000612693 == 'submitted_version' %}I am afraid that depositing the submitted version (pre-print) alone is not sufficient for complying with the [REF Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/).{% endif %}
     
 {% if ticket.ticket_field_25612958 != '1' and ticket.ticket_field_24071873 != '1' and ticket.ticket_field_24114776 >= '2016-04-01' %}{% comment %}
-        BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
-        {% endcomment %}**Until we receive your accepted manuscript this paper will remain ineligible for the REF.**
+            BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
+            {% endcomment %}**Until we receive your accepted manuscript this paper will remain ineligible for the REF.**
 
 {% endif %}{% comment %}
-        END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
-        {% endcomment %}{% if tags contains 'unmediated_other_action' or tags contains 'unmediated_email_sent' or tags contains 'unmediated_under_review' %}{% comment %}
+            END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
+            {% endcomment %}{% if tags contains 'unmediated_other_action' or tags contains 'unmediated_email_sent' or tags contains 'unmediated_under_review' %}{% comment %}
             BEGIN: IF ANY UNMEDIATED TAG IS PRESENT; ELSE
             {% endcomment %}Please reply to this message with your accepted manuscript attached. There is no need to upload the manuscript through Symplectic Elements again.{% else %}Please edit your submission in Symplectic Elements using the link below and upload your accepted manuscript or Open Access published paper.
 
@@ -358,6 +362,8 @@ For further advice on data sharing, you can also e-mail info@data.cam.ac.uk
 
 {% endif %}{% comment %}
 END: IF FUNDED BY RCUK, WELLCOME OR CRUK
+{% endcomment %}{% endif %}{% comment %}
+END: IF MARKED AS A CONFERENCE ABSTRACT
 {% endcomment %}Best wishes,
 
 {{ticket.assignee.first_name}}
