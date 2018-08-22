@@ -5,8 +5,8 @@ BLOCK: DATA VALIDATION WARNINGS
 {% endif %}{% if ticket.ticket_field_24069553 != blank and ticket.ticket_field_24069553 != 'needs_depositing' %}WARNING: I have just changed the value of field Repository status from '{{ ticket.ticket_field_24069553 }}' to 'Needs depositing'{% if ticket.ticket_field_29313297 != blank
 %} and deleted {{ ticket.ticket_field_29313297 }} from field 'Date deposit completed (YYYY-MM-DD){% endif %}. Please ensure these fields are correctly set now.
 
-{% endif %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
-BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
+{% endif %}{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_24069583 == blank and ticket.ticket_field_47509168 == blank %}{% comment %}
+BEGIN: IF NOT MARKED AS PUBLISHED AND BOTH PUBLICATION DATE FIELDS LINKED TO ELEMENTS BLANK; ELSIF MARKED AS SPRINGER COMPACT
 {% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" or ticket.ticket_field_24069543 == "springer" or ticket.ticket_field_24069543 == "SPRINGER" %}{% comment %}
     BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES
     {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
@@ -30,7 +30,7 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
     {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'springer_compact' %}WARNING: This has already been published, so it is unlikely that Springer Compact is still an option. Please consider modifying "Is there an APC payment?"
     
 {% endif %}{% comment %}
-END: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
+END: IF NOT MARKED AS PUBLISHED AND BOTH PUBLICATION DATE FIELDS LINKED TO ELEMENTS BLANK; ELSIF MARKED AS SPRINGER COMPACT
 BLOCK END: DATA VALIDATION WARNINGS
 {% endcomment %}Dear {{ticket.requester.name}},
 
