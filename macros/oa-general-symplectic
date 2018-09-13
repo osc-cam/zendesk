@@ -1,14 +1,18 @@
 {% assign tags = ticket.tags | split: ' ' %}{% comment %}
 BLOCK: DATA VALIDATION WARNINGS 
-{% endcomment %}{% if ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}WARNING: Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal, so the output produced by this macro is unusual and might require editing. Please review the ticket and reply carefully.
+{% endcomment %}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_26352397 == '0' and ticket.ticket_field_26329928 == '0' and ticket.ticket_field_26352407 == '0' and ticket.ticket_field_26352377 == '0' and ticket.ticket_field_26352357 == '0' and ticket.ticket_field_28241947 == '0' and ticket.ticket_field_26329848 == '0' %}WARNING: COAF policy ticked, but no COAF funders selected. Please review the funder checkboxes.
+
+{% endif %}{% if ticket.ticket_field_24071783 == '1' and ticket.ticket_field_28673708 == '0' and ticket.ticket_field_28673718 == '0' and ticket.ticket_field_28673728 == '0' and ticket.ticket_field_28676917 == '0' and ticket.ticket_field_28676927 == '0' and ticket.ticket_field_28241947 == '0' and ticket.ticket_field_28673738 == '0' and ticket.ticket_field_28673748 == '0' %}WARNING: RCUK policy ticked, but no RCUK funders selected. Please review the funder checkboxes.
+
+{% endif %}{% if ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}WARNING: Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal, so the output produced by this macro is unusual and might require editing. Please review the ticket and reply carefully.
 
 {% endif %}{% if ticket.ticket_field_24069553 != blank and ticket.ticket_field_24069553 != 'needs_depositing' %}WARNING: I have just changed the value of field Repository status from '{{ ticket.ticket_field_24069553 }}' to 'Needs depositing'{% if ticket.ticket_field_29313297 != blank
 %} and deleted {{ ticket.ticket_field_29313297 }} from field 'Date deposit completed (YYYY-MM-DD){% endif %}. Please ensure these fields are correctly set now.
 
 {% endif %}{% if ticket.ticket_field_24071633 == 'oup_prepayment_account' %}WARNING: The OUP prepayment account is no longer available. Please change field "Is there an APC payment" to "Yes"
 
-{% endif %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
-BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
+{% endif %}{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_24069583 == blank and ticket.ticket_field_47509168 == blank %}{% comment %}
+BEGIN: IF NOT MARKED AS PUBLISHED AND BOTH PUBLICATION DATE FIELDS LINKED TO ELEMENTS BLANK; ELSIF MARKED AS SPRINGER COMPACT
 {% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" or ticket.ticket_field_24069543 == "springer" or ticket.ticket_field_24069543 == "SPRINGER" %}{% comment %}
     BEGIN: IF PUBLISHER IS SPRINGER; ELSIF MARKED AS PAYMENT_YES AND EITHER RCUK PAYMENT OR COAF PAYMENT
     {% endcomment %}{% if ticket.ticket_field_80644248 == 'gold_team_needs_processsing' %}{% comment %}
@@ -30,7 +34,7 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
     {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'springer_compact' %}WARNING: This has already been published, so it is unlikely that Springer Compact is still an option. Please consider modifying "Is there an APC payment?"
     
 {% endif %}{% comment %}
-END: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
+END: IF NOT MARKED AS PUBLISHED AND BOTH PUBLICATION DATE FIELDS LINKED TO ELEMENTS BLANK; ELSIF MARKED AS SPRINGER COMPACT
 BLOCK END: DATA VALIDATION WARNINGS
 {% endcomment %}Dear {{ticket.requester.name}},
 
@@ -38,22 +42,26 @@ BLOCK END: DATA VALIDATION WARNINGS
 **Journal title**: {{ ticket.ticket_field_24069493 }}{% endif %}{% if ticket.ticket_field_24069563 != blank %}
 **DOI**: {{ ticket.ticket_field_24069563 }}{% endif %}
 
-{% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
+{% if ticket.ticket_field_80501387 == 'conference_abstract' %}{% comment %}
+BEGIN: IF MARKED AS CONFERENCE ABSTRACT
+    {% endcomment %}Thank you for your submission. Please note that conference abstracts are no longer accepted in Apollo, so I will be removing this file from Symplectic Elements shortly. Conference abstracts, posters and presentations are not covered by the REF's Open Access policy, so they do not need to be uploaded for REF-eligibility. However, should you wish to deposit the poster, presentation or other output that this abstract relates to, you are welcome to do so.
+    
+{% else %}{% if ticket.ticket_field_80644248 != 'gold_team_processed' %}{% comment %}
 
-BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
-    {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_24069523 == '1' %}{% comment %}
-    BEGIN: IF MARKED AS WRONG VERSION; ELSE
-    {% endcomment %}**Please can you send us the [accepted manuscript](http://osc.cam.ac.uk/sites/osc.cam.ac.uk/files/art_publicationprocessdiagram_updated_20160127.png)** (the final author-created version, incorporating peer-review changes but before any publisher work such as copy-editing or typesetting). {% if ticket.ticket_field_360000612693 == 'proofs' or ticket.ticket_field_360000612693 == 'published_version' %}{% comment %}
-        BEGIN: IF WRONG VERSION IS PUBLISHED VERSION OR PROOFS; ELSIF PREPRINT
-        {% endcomment %}I am afraid we cannot make the version you have sent us openly available because of publisher copyright restrictions.{% elsif ticket.ticket_field_360000612693 == 'submitted_version' %}I am afraid that depositing the submitted version (pre-print) alone is not sufficient for complying with the [REF Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/).{% endif %}
+    BEGIN: IF GOLD TEAM NOT MARKED AS PROCESSED
+        {% endcomment %}Thank you for uploading your paper. {% if ticket.ticket_field_24069523 == '1' %}{% comment %}
+        BEGIN: IF MARKED AS WRONG VERSION; ELSE
+        {% endcomment %}**Please can you send us the [accepted manuscript](http://osc.cam.ac.uk/sites/osc.cam.ac.uk/files/art_publicationprocessdiagram_updated_20160127.png)** (the final author-created version, incorporating peer-review changes but before any publisher work such as copy-editing or typesetting). {% if ticket.ticket_field_360000612693 == 'proofs' or ticket.ticket_field_360000612693 == 'published_version' %}{% comment %}
+            BEGIN: IF WRONG VERSION IS PUBLISHED VERSION OR PROOFS; ELSIF PREPRINT
+            {% endcomment %}I am afraid we cannot make the version you have sent us openly available because of publisher copyright restrictions.{% elsif ticket.ticket_field_360000612693 == 'submitted_version' %}I am afraid that depositing the submitted version (pre-print) alone is not sufficient for complying with the [REF Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/).{% endif %}
     
 {% if ticket.ticket_field_25612958 != '1' and ticket.ticket_field_24071873 != '1' and ticket.ticket_field_24114776 >= '2016-04-01' %}{% comment %}
-        BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
-        {% endcomment %}**Until we receive your accepted manuscript this paper will remain ineligible for the REF.**
+            BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
+            {% endcomment %}**Until we receive your accepted manuscript this paper will remain ineligible for the REF.**
 
 {% endif %}{% comment %}
-        END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
-        {% endcomment %}{% if tags contains 'unmediated_other_action' or tags contains 'unmediated_email_sent' or tags contains 'unmediated_under_review' %}{% comment %}
+            END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT HEFCE FAILURE AND ACCEPTANCE DATE IS AFTER MARCH 2016
+            {% endcomment %}{% if tags contains 'unmediated_other_action' or tags contains 'unmediated_email_sent' or tags contains 'unmediated_under_review' %}{% comment %}
             BEGIN: IF ANY UNMEDIATED TAG IS PRESENT; ELSE
             {% endcomment %}Please reply to this message with your accepted manuscript attached. There is no need to upload the manuscript through Symplectic Elements again.{% else %}Please edit your submission in Symplectic Elements using the link below and upload your accepted manuscript or Open Access published paper.
 
@@ -226,7 +234,7 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     BEGIN: IF MARKED AS GATES POLICY; ELSEIF MARKED AS GRANT PAYMENT (TEST OTHER FUNDER POLICIES); ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
     {% endcomment %}The Bill & Melinda Gates Foundation should pay the fees for immediate Open Access (if applicable) to effect publication on the terms of their policy. To apply for payment, please use their [Chronos](http://chronos.gatesfoundation.org) platform. 
     
-{% elsif ticket.ticket_field_24071783 == '0' and ticket.ticket_field_24117196 == '0' and ticket.ticket_field_24117266 == '1' %}{% if ticket.ticket_field_71509888 == '1' %}{% comment %}
+{% elsif ticket.ticket_field_24117246 == '0' and ticket.ticket_field_24071843 == '0' and ticket.ticket_field_24117266 == '1' %}{% comment %}ELSIF; MARKED AS GRANT PAYMENT AND NOT AS RCUK OR COAF PAYMENT{% endcomment %}{% if ticket.ticket_field_71509888 == '1' %}{% comment %}
         BEGIN: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; ELSIF MARKED AS BREAST CANCER NOW
         {% endcomment %}Funds to pay for immediate (Gold) Open Access to comply with this policy should have been included in your original NIHR grant, or they may be available from the NIHR. **You should contact your NIHR programme manager if you have any questions regarding this requirement.**
     
@@ -358,6 +366,8 @@ For further advice on data sharing, you can also e-mail info@data.cam.ac.uk
 
 {% endif %}{% comment %}
 END: IF FUNDED BY RCUK, WELLCOME OR CRUK
+{% endcomment %}{% endif %}{% comment %}
+END: IF MARKED AS A CONFERENCE ABSTRACT
 {% endcomment %}Best wishes,
 
 {{ticket.assignee.first_name}}
