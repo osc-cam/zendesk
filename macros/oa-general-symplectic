@@ -5,6 +5,8 @@ BLOCK: DATA VALIDATION WARNINGS
 {% endif %}{% if ticket.ticket_field_24069553 != blank and ticket.ticket_field_24069553 != 'needs_depositing' %}WARNING: I have just changed the value of field Repository status from '{{ ticket.ticket_field_24069553 }}' to 'Needs depositing'{% if ticket.ticket_field_29313297 != blank
 %} and deleted {{ ticket.ticket_field_29313297 }} from field 'Date deposit completed (YYYY-MM-DD){% endif %}. Please ensure these fields are correctly set now.
 
+{% endif %}{% if ticket.ticket_field_24071633 == 'oup_prepayment_account' %}WARNING: The OUP prepayment account is no longer available. Please change field "Is there an APC payment" to "Yes"
+
 {% endif %}{% if ticket.ticket_field_77352028 == '0' %}{% comment %}
 BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
 {% endcomment %}{% if ticket.ticket_field_24069543 == "Springer" or ticket.ticket_field_24069543 == "springer" or ticket.ticket_field_24069543 == "SPRINGER" %}{% comment %}
@@ -17,11 +19,9 @@ BEGIN: IF NOT MARKED AS PUBLISHED; ELSIF MARKED AS SPRINGER COMPACT
         
 {% endif %}{% comment %}
         END: MARKED AS gold_team_needs_processsing; ELSIF NOT MARKED AS SPRINGER COMPACT
-    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_yes' and (ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1') %}{% if ticket.ticket_field_24069543 == "Oxford University Press" or ticket.ticket_field_24069543 == "OUP" or ticket.ticket_field_24069543 == "Oxford" %}{% comment %}
-        BEGIN: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
-        {% endcomment %}WARNING: Publisher is OUP. Please consider selecting "OUP Prepayment Account" instead of "Yes" in field "Is there an APC payment?"
-    
-{% elsif ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "John Wiley & Sons Ltd." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" or ticket.ticket_field_24069543 == "Wiley-Blackwell" or ticket.ticket_field_24069543 == "EMBO Press" or ticket.ticket_field_24069543 == "EMBO" %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
+    {% endcomment %}{% elsif ticket.ticket_field_24071633 == 'payment_yes' and (ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1') %}{% if ticket.ticket_field_24069543 == "John Wiley & Sons Inc." or ticket.ticket_field_24069543 == "John Wiley & Sons Ltd." or ticket.ticket_field_24069543 == "Wiley" or ticket.ticket_field_24069543 == "wiley" or ticket.ticket_field_24069543 == "WILEY" or ticket.ticket_field_24069543 == "Wiley-Blackwell" or ticket.ticket_field_24069543 == "EMBO Press" or ticket.ticket_field_24069543 == "EMBO" %}{% comment %}
+        BEGIN: IF PUBLISHER IS WILEY
+        {% endcomment %}WARNING: Publisher is Wiley. Please consider selecting "Wiley Dashboard" instead of "Yes" in field "Is there an APC payment?"
 
 {% endif %}{% comment %}
         END: IF PUBLISHER IS OUP; ELSIF PUBLISHER IS WILEY
