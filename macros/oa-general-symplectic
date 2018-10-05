@@ -174,7 +174,7 @@ BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSE, CHECK IF INCLUDED IN OA P
 {% endif %}{% if ticket.ticket_field_26352357 == '1' %}* [Cancer Research UK](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/policy-on-open-access)
 {% endif %}{% if ticket.ticket_field_71064067 == '1' %}* [ERC](https://erc.europa.eu/sites/default/files/document/file/ERC_Open_Access_Guidelines-revised_feb_2016.pdf)
 {% endif %}{% if ticket.ticket_field_73176687 == '1' %}* [FP7](https://www.openaire.eu/open-access-in-fp7-seventh-research-framework-programme)
-{% endif %}{% if ticket.ticket_field_73663128 == '1' %}* [H2020](https://www.openaire.eu/open-access-in-horizon-2020)
+{% endif %}{% if ticket.ticket_field_73663128 == '1' %}* [H2020](http://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/open-access_en.htm)
 {% endif %}{% if ticket.ticket_field_71509888 == '1' %}* [NIHR](https://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm)
 {% endif %}{% if ticket.ticket_field_28241947 == '1' %}* [Parkinson's UK](https://www.parkinsons.org.uk/sites/default/files/openaccesspublishing_infoforauthors.pdf)
 {% endif %}{% if ticket.ticket_field_26329848 == '1' %}* [Wellcome Trust](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
