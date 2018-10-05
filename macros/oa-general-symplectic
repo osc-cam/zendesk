@@ -349,7 +349,10 @@ These sanctions apply to:
 * all original Wellcome-funded research papers published since 1 October 2009
 * to monographs and book chapters for which a contract was signed after 1 October 2014.
 
-{% endif %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_26329848 == '1' or ticket.ticket_field_26352357 == '1' %}{% comment %}
+{% endif %}#### Acknowledging your funders
+Please remember to include grant numbers in your funding statement/acknowledgements. General guidance on how to acknowledge funding information is available from the [Research Information Network](http://www.rin.ac.uk/system/files/attachments/Acknowledgement-funders-guidance.pdf).
+
+{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_26329848 == '1' or ticket.ticket_field_26352357 == '1' %}{% comment %}
 BEGIN: IF FUNDED BY RCUK, WELLCOME OR CRUK
 {% endcomment %}#### Research data
 The funder(s) of this research require data generated as a result of their support to be shared. If you would like to upload research data supporting this publication into Apollo, you can do it here: http://www.data.cam.ac.uk/upload.
