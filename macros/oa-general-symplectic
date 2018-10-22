@@ -222,8 +222,6 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 {% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}ACS members and the University of Cambridge are entitled to a substantial discount, so **please include your membership number and affiliation when filling in the online form**. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
 
-{% else %} 
-
 {% endif %}{% comment %}
         END: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS
 {% endcomment %}{% endif %}{% comment %}
