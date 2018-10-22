@@ -214,21 +214,19 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     
 {% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for Open Access. Please contact your unit administrator regarding this.
     
-{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' or ticket.ticket_field_24117256 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW (Grant payment or author/department payment or other institution payment) {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
-        BEGIN: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIFs FOR SPECIFIC JOURNALS; ELSE XXXX
-        {% endcomment %}ranges from £1000 to £2500 + VAT, depending on the article type.  Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
+{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' or ticket.ticket_field_24117256 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW (Grant payment or author/department payment or other institution payment) {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal is {% if ticket.ticket_field_360008258194 != blank %}{{ticket.ticket_field_360008258194}}{% else %}XXXX{% endif %} + VAT. {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
+        BEGIN: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS    
+        {% endcomment %}Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
-{% elsif ticket.ticket_field_24069543 == "American Society for Microbiology" or ticket.ticket_field_24069543 == "ASM" %}is $3000. Members of the American Society for Microbiology are entitled to a $750 discount so, if you are a member, please let the publisher know.
+{% elsif ticket.ticket_field_24069543 == "American Society for Microbiology" or ticket.ticket_field_24069543 == "ASM" %}Members of the American Society for Microbiology are entitled to a $750 discount so, if you are a member, please let the publisher know.
 
-{% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}is $2000 + VAT, already including the discount for ACS members and our institutional discount. **Please include your membership number when filling in the online form**. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
+{% elsif ticket.ticket_field_24069543 == "American Chemical Society" or ticket.ticket_field_24069543 == "ACS" %}ACS members and the University of Cambridge are entitled to a substantial discount, so **please include your membership number and affiliation when filling in the online form**. If none of the authors are ACS members please let me know as we'll be able to pay for membership for one author in order to take advantage of the reduced APC price.
 
-{% elsif ticket.ticket_field_24069493 == "Nature Communications" %}is £3,150 + VAT. {% elsif ticket.ticket_field_24069493 == "Science Advances" %}is $4,922 + VAT. {% elsif ticket.ticket_field_24069493 == "Scientific Reports" %}is £1,110 + VAT. {% else %}is XXXX + VAT. {% if ticket.ticket_field_24069543 == "BioMed Central" %}{% comment %}
-            BEGIN: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS
-            {% endcomment %}All Cambridge authors are eligible to a 15% discount as part of the university's BioMed Central Supporter Membership. **Please ask the publisher to apply this discount**. {% endif %}{% comment %}
-            END: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS
-            {% endcomment %}{% endif %}{% comment %}
-        END: IF PUBLISHER IS  ROYAL SOCIETY OF CHEMISTRY; ELSIF PUBLISHER IS AMERICAN CHEMICAL SOCIETY; ELSEIFs FOR SPECIFIC JOURNALS; ELSE XXXX
-        {% endcomment %}{% endif %}{% comment %}
+{% else %} 
+
+{% endif %}{% comment %}
+        END: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS
+{% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS SPRINGER COMPACT; ELSEIF JOURNAL IS "Journal of Experimental Botany"; ELSIF MARKED AS MRC PAYMENT; ELSIF MARKED AS GRANT PAYMENT OR AUTHOR/DEPARTMENT PAYMENT OR OTHER INSTITUTION PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSE PRINT VALUE OF APC
     {% endcomment %}{% if ticket.ticket_field_61116627 == '1' %}{% comment %}
     BEGIN: IF MARKED AS GATES POLICY; ELSEIF MARKED AS GRANT PAYMENT (TEST OTHER FUNDER POLICIES); ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
