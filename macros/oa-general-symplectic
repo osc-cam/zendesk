@@ -214,7 +214,7 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
     
 {% elsif ticket.ticket_field_79225067 =='1' %} You would be eligible for funds from your MRC Unit's core award to pay for Open Access. Please contact your unit administrator regarding this.
     
-{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' or ticket.ticket_field_24117256 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW (Grant payment or author/department payment or other institution payment) {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal is {% if ticket.ticket_field_360008258194 != blank %}{{ticket.ticket_field_360008258194}}{% else %}XXXX{% endif %} + VAT. {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
+{% elsif ticket.ticket_field_24117266 == '1' or ticket.ticket_field_24071853 == '1' or ticket.ticket_field_24117256 == '1' %}{% comment %} PRINT NOTHING HERE FOR NOW (Grant payment or author/department payment or other institution payment) {% endcomment %}{% elsif ticket.ticket_field_80911708 != blank %}{% comment %} PRINT NOTHING HERE FOR NOW {% endcomment %}{% else %}The article processing charge for articles published in this journal is {% if ticket.ticket_field_360008258194 != blank %}{{ticket.ticket_field_360008258194}}{% else %}XXXX{% endif %} + VAT. {% if ticket.ticket_field_24069543 == "Royal Society of Chemistry" or ticket.ticket_field_24069543 == "RSC" %}{% comment %}
         BEGIN: BLOCK DETAILING DISCOUNT INFO FOR PARTICULAR PUBLISHERS / JOURNALS    
         {% endcomment %}Members of the Royal Society of Chemistry are entitled to a 15% discount so, if you are a member, please include your membership number in the online application form when requested to do so.
 
@@ -250,7 +250,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
 
 {% endif %}{% comment %}
         END: IF MARKED AS NIHR; ELSIF MARKED AS H2020; ELSIF MARKED AS ERC; 
-    {% endcomment %}{% elsif ticket.ticket_field_80911708 == 'none_at_cambridge_at_least_one_uk_affiliation' %}Funds to pay for Open Access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
+    {% endcomment %}{% elsif ticket.ticket_field_80911708 != blank %}Funds to pay for Open Access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
     
 {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to the corresponding author as they complete the publication and Open Access details.
     
