@@ -200,10 +200,10 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 {% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' or ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}{% if ticket.ticket_field_24072163 == 'oa_journal_conference' %}{% comment %}
     BEGIN: IF MARKED AS OPEN ACCESS JOURNAL
-    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully Open Access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% comment %}
-        BEGIN: IF MARKED AS RCUK OR COAF PAYMENT; ELSIF OTHER FUNDER POLICIES
-        {% endcomment %}To comply with this/these the corresponding author will need to select the journal's option for immediate Open Access. {% elsif ticket.ticket_field_24117206 == '1' %}Please check the terms of your grant(s) as, to comply with this/these it may be that the corresponding author will need to select the journal's option for immediate Open Access.{% endif %}{% comment %}
-        END: IF MARKED AS RCUK OR COAF PAYMENT; ELSIF OTHER FUNDER POLICIES
+    {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully Open Access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' or ticket.ticket_field_79225067 == '1' %}{% comment %}
+        BEGIN: IF MARKED AS RCUK, COAF OR MRC CORE PAYMENT; ELSIF OTHER FUNDER POLICIES
+        {% endcomment %}To comply with this/these the corresponding author will need to select the journal's option for immediate Open Access. {% elsif ticket.ticket_field_24117206 == '1' %}Please check the terms of your {% if ticket.ticket_field_71064067 == '1' %}ERC {% endif %}{% if ticket.ticket_field_73176687 == '1' %}FP7 {% endif %}{% if ticket.ticket_field_73663128 == '1' %}H2020 {% endif %}{% if ticket.ticket_field_71509888 == '1' %}NIHR {% endif %}grant(s) as, to comply with this/these, the corresponding author may need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
+        END: IF MARKED AS RCUK, COAF OR MRC CORE PAYMENT; ELSIF OTHER FUNDER POLICIES
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS OPEN ACCESS JOURNAL
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
@@ -268,10 +268,10 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
     END: IF MARKED AS GATES POLICY; ELSEIF MARKED AS NIHR POLICY ONLY AND GRANT PAYMENT; ELSIF MARKED AS HAVING ALL CORRESPONDING AUTHORS IN OTHER UK INSTITUTIONS; ELSIF WILEY DASHBOARD; ELSEIF OUP PREPAYMENT; ELSIF RCUK OR COAF PAYMENT (INVOICE)
     {% endcomment %}{% if ticket.ticket_field_24071783 == '1' or ticket.ticket_field_24117196 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_71064067 == '1' or ticket.ticket_field_73176687 == '1' or ticket.ticket_field_73663128 == '1' or ticket.ticket_field_71509888 == '1' or ticket.ticket_field_26352407 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
     BEGIN: IF MARKED AS RCUK, COAF, GATES, ERC, FP7, H2020, NIHR or BREAST CANCER NOW POLICIES (CC BY REQUIRED); OR IF MARKED AS SPRINGER COMPACT
-    {% endcomment %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' or ticket.ticket_field_61116627 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
-	    BEGIN: IF MARKED AS RCUK PAYMENT, COAF PAYMENT, GATES POLICY OR IF MARKED AS SPRINGER COMPACT; ELSE 
-    {% endcomment %}**P{% else %}If you confirm that a grant payment is required, **p{% endif %}{% comment %}
-	    END: IF MARKED AS RCUK PAYMENT, COAF PAYMENT, GATES POLICY OR IF MARKED AS SPRINGER COMPACT; ELSE 
+    {% endcomment %}{% if ticket.ticket_field_24117266 == '1' %}{% comment %}
+	    BEGIN: IF MARKED AS GRANT PAYMENT; ELSE 
+    {% endcomment %}If you confirm that a grant payment is required, **p{% else %}**P{% endif %}{% comment %}
+	    END: IF MARKED AS GRANT PAYMENT; ELSE 
     {% endcomment %}lease ensure that the licence type you (or corresponding author) select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. If final version is published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 
 {% if ticket.ticket_field_24117266 == '1' and ticket.ticket_field_24071783 == '1' %}{% comment %}
