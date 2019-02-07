@@ -166,7 +166,7 @@ BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSE, CHECK IF INCLUDED IN OA P
     {% endcomment %}Your paper is also covered by the following Open Access policy/policies:
 
 {% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
-{% endif %}{% if ticket.ticket_field_26352397 == '1' %}* [Arthritis Research UK](http://www.arthritisresearchuk.org/research/information-for-award-holders/open-access-and-travel-support/open-access.aspx)
+{% endif %}{% if ticket.ticket_field_26352397 == '1' %}* [Versus Arthritis (Arthritis Research UK)](https://www.versusarthritis.org/research/information-for-award-holders/open-access-and-travel-support/)
 {% endif %}{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy)
 {% endif %}{% if ticket.ticket_field_26329928 == '1' %}* [Bloodwise](https://bloodwise.org.uk/research/policies/open-access)
 {% endif %}{% if ticket.ticket_field_26352407 == '1' %}* [Breast Cancer Now](http://breastcancernow.org/sites/default/files/public/revised_bcn_open_access_policy_sept_16_0.pdf)
