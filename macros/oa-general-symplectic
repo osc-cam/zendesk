@@ -260,7 +260,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
         BEGIN: IF MARKED AS APC INVOICE PROCESSED
         {% endcomment %}We have received an invoice for Open Access charges relating to this article. As this publication is eligible for Open Access funding, we have already processed the invoice and forwarded it to Central Finance. The publisher may expect payment shortly.
         
-{% else %}You would be eligible for funds from the University's RCUK and/or COAF block grants to pay for this. Please could the corresponding author ask the publisher to include our reference/purchase order number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so that we can connect it back to your article?
+{% else %}You would be eligible for funds from the University's RCUK and/or COAF block grants to pay for this. Please could the corresponding author ask the publisher to include our reference/purchase order number **{{ ticket.ticket_field_24117426 | remove:'SE-' | remove:'OA-' }}{{ticket.id}}** on the invoice so that we can connect it back to your article? If you have already requested an invoice, there is no need to ask the publisher to amend it to include this number or our billing address. We will be able to process the invoice as long as it is addressed to the University of Cambridge. *Please just ensure that if the corresponding author receives an invoice that needs to be paid they forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
         
 {% endif %}{% comment %}
         END: IF MARKED AS APC INVOICE PROCESSED
@@ -303,8 +303,6 @@ UK
 and our email address info@openaccess.cam.ac.uk
 
 Our VAT no., should it be required, is GB 823 8476 09.
-
-*If the corresponding author receives an invoice which needs to be paid please ask them to forward it to us for processing. If the invoice doesn't have the University Library's address we probably aren't aware of it.*
 
 {% endif %}{% comment %}
             END: IF NOT MARKED AS APC INVOICE PROCESSED
