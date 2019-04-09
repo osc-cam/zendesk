@@ -73,7 +73,7 @@ https://elements.admin.cam.ac.uk/repository.html?pub={{ ticket.ticket_field_2411
         BEGIN: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT MARKED AS RETROSPECTIVE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
             {% endcomment %}{% if ticket.ticket_field_24071873 != '1' or ticket.ticket_field_77355348 == '1' %}{% comment %}
             BEGIN: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
-            {% endcomment %}To comply with the [REF Open Access policy](http://www.hefce.ac.uk/rsrch/oa/Policy/) w{% else %}W{% endif %}{% comment %}
+            {% endcomment %}To comply with the [REF Open Access policy](https://www.ref.ac.uk/media/1092/ref-2019_01-guidance-on-submissions.pdf) w{% else %}W{% endif %}{% comment %}
             END: IF NOT MARKED AS HEFCE FAILURE OR IF MARKED AS HEFCE TRANSITIONAL DEADLINE MET
             {% endcomment %}{% else %}W{% endif %}{% comment %}
         END: IF NOT MARKED AS HEFCE OUT OF SCOPE, NOT MARKED AS RETROSPECTIVE AND PUBLICATION TYPE NOT CONFERENCE ABSTRACT
@@ -165,7 +165,7 @@ BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSE, CHECK IF INCLUDED IN OA P
     BEGIN: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
     {% endcomment %}Your paper is also covered by the following Open Access policy/policies:
 
-{% if ticket.ticket_field_24071783 == '1' %}* [RCUK](http://www.rcuk.ac.uk/research/openaccess/policy/)
+{% if ticket.ticket_field_24071783 == '1' %}* [RCUK](https://www.ukri.org/funding/information-for-award-holders/open-access/open-access-policy/)
 {% endif %}{% if ticket.ticket_field_26352397 == '1' %}* [Versus Arthritis (Arthritis Research UK)](https://www.versusarthritis.org/research/information-for-award-holders/open-access-and-travel-support/)
 {% endif %}{% if ticket.ticket_field_61116627 == '1' %}* [Bill & Melinda Gates Foundation](http://www.gatesfoundation.org/How-We-Work/General-Information/Open-Access-Policy)
 {% endif %}{% if ticket.ticket_field_26329928 == '1' %}* [Bloodwise](https://bloodwise.org.uk/research/policies/open-access)
@@ -173,11 +173,11 @@ BEGIN: IF MARKED AS GOLD_TEAM_NEEDS_PROCESSSING; ELSE, CHECK IF INCLUDED IN OA P
 {% endif %}{% if ticket.ticket_field_26352377 == '1' %}* [British Heart Foundation](https://www.bhf.org.uk/research/information-for-researchers/managing-your-grant/open-access-policy)
 {% endif %}{% if ticket.ticket_field_26352357 == '1' %}* [Cancer Research UK](http://www.cancerresearchuk.org/funding-for-researchers/applying-for-funding/policies-that-affect-your-grant/policy-on-open-access)
 {% endif %}{% if ticket.ticket_field_71064067 == '1' %}* [ERC](https://erc.europa.eu/sites/default/files/document/file/ERC_Open_Access_Guidelines-revised_feb_2016.pdf)
-{% endif %}{% if ticket.ticket_field_73176687 == '1' %}* [FP7](https://www.openaire.eu/open-access-in-fp7-seventh-research-framework-programme)
+{% endif %}{% if ticket.ticket_field_73176687 == '1' %}* [FP7](https://ec.europa.eu/research/science-society/document_library/pdf_06/open-access-pilot_en.pdf)
 {% endif %}{% if ticket.ticket_field_73663128 == '1' %}* [H2020](http://ec.europa.eu/research/participants/docs/h2020-funding-guide/cross-cutting-issues/open-access-data-management/open-access_en.htm)
 {% endif %}{% if ticket.ticket_field_71509888 == '1' %}* [NIHR](https://www.nihr.ac.uk/funding-and-support/funding-for-research-studies/how-to-apply/support-for-study-teams/publishing-your-research/nihr-open-access-policy.htm)
-{% endif %}{% if ticket.ticket_field_28241947 == '1' %}* [Parkinson's UK](https://www.parkinsons.org.uk/sites/default/files/openaccesspublishing_infoforauthors.pdf)
-{% endif %}{% if ticket.ticket_field_26329848 == '1' %}* [Wellcome Trust](https://wellcome.ac.uk/funding/managing-grant/charity-open-access-fund)
+{% endif %}{% if ticket.ticket_field_28241947 == '1' %}* [Parkinson's UK](https://www.parkinsons.org.uk/research/open-access-publishing-researchers)
+{% endif %}{% if ticket.ticket_field_26329848 == '1' %}* [Wellcome Trust](https://wellcome.ac.uk/funding/guidance/open-access-policy)
 {% endif %}
 {% endif %}{% comment %}
 END: IF MARKED AS RCUK, COAF OR 'OTHER FUNDER' POLICIES
