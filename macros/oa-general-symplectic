@@ -1,6 +1,6 @@
 {% assign tags = ticket.tags | split: ' ' %}{% comment %}
 BLOCK: DATA VALIDATION WARNINGS 
-{% endcomment %}{% if tags contains 'unmediated_other_action' or tags contains 'unmediated_email_sent' or tags contains 'unmediated_under_review' or tags contains 'unmediated_accepted_not_published' %}{% else %}WARNING: Did you forget to deposit this using Fast Track?
+{% endcomment %}{% if tags contains 'unmediated_under_review' or tags contains 'unmediated_submitted' or tags contains 'unmediated_proof' or tags contains 'unmediated_published_oa' or tags contains 'unmediated_published_not_oa' or tags contains 'unmediated_accepted_published' or tags contains 'unmediated_accepted_not_published' or tags contains 'unmediated_other' %}{% else %}WARNING: Did you forget to deposit this using Fast Track?
 
 {% endif %}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_26352397 == '0' and ticket.ticket_field_26329928 == '0' and ticket.ticket_field_26352407 == '0' and ticket.ticket_field_26352377 == '0' and ticket.ticket_field_26352357 == '0' and ticket.ticket_field_28241947 == '0' and ticket.ticket_field_26329848 == '0' %}WARNING: COAF policy ticked, but no COAF funders selected. Please review the funder checkboxes.
 
