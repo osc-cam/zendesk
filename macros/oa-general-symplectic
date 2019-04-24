@@ -8,9 +8,6 @@ BLOCK: DATA VALIDATION WARNINGS
 
 {% endif %}{% if ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}WARNING: Journal of Experimental Botany offers free Open Access publication for research papers of authors whose institutions subscribe to the journal, so the output produced by this macro is unusual and might require editing. Please review the ticket and reply carefully.
 
-{% endif %}{% if ticket.ticket_field_24069553 != blank and ticket.ticket_field_24069553 != 'needs_depositing' %}WARNING: I have just changed the value of field Repository status from '{{ ticket.ticket_field_24069553 }}' to 'Needs depositing'{% if ticket.ticket_field_29313297 != blank
-%} and deleted {{ ticket.ticket_field_29313297 }} from field 'Date deposit completed (YYYY-MM-DD){% endif %}. Please ensure these fields are correctly set now.
-
 {% endif %}{% if ticket.ticket_field_24071633 == 'oup_prepayment_account' %}WARNING: The OUP prepayment account is no longer available. Please change field "Is there an APC payment" to "Yes"
 
 {% endif %}{% if ticket.ticket_field_77352028 == '0' and ticket.ticket_field_24069583 == blank and ticket.ticket_field_47509168 == blank %}{% comment %}
