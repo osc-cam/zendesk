@@ -1,6 +1,8 @@
 {% assign tags = ticket.tags | split: ' ' %}{% comment %}
 BLOCK: DATA VALIDATION WARNINGS 
-{% endcomment %}{% if tags contains 'unmediated_under_review' or tags contains 'unmediated_submitted' or tags contains 'unmediated_proof' or tags contains 'unmediated_published_oa' or tags contains 'unmediated_published_not_oa' or tags contains 'unmediated_accepted_published' or tags contains 'unmediated_accepted_not_published' or tags contains 'unmediated_other' %}{% else %}WARNING: Did you forget to deposit this using Fast Track?
+{% endcomment %}{% if ticket.ticket_field_24069493 == "ACS Omega" or ticket.ticket_field_24069493 == "ACS omega" or ticket.ticket_field_24069493 == "acs omega" %}{% if ticket.ticket_field_24071633 == 'acs_token' %}WARNING: ACS Omega is not part of the ACS deal. Please change value of field "Is there an APC payment" to "Yes". 
+
+{% endif %}{% endif %}{% if tags contains 'unmediated_under_review' or tags contains 'unmediated_submitted' or tags contains 'unmediated_proof' or tags contains 'unmediated_published_oa' or tags contains 'unmediated_published_not_oa' or tags contains 'unmediated_accepted_published' or tags contains 'unmediated_accepted_not_published' or tags contains 'unmediated_other' %}{% else %}WARNING: Did you forget to deposit this using Fast Track?
 
 {% endif %}{% if ticket.ticket_field_24117196 == '1' and ticket.ticket_field_26352397 == '0' and ticket.ticket_field_26329928 == '0' and ticket.ticket_field_26352407 == '0' and ticket.ticket_field_26352377 == '0' and ticket.ticket_field_26352357 == '0' and ticket.ticket_field_28241947 == '0' and ticket.ticket_field_26329848 == '0' %}WARNING: COAF policy ticked, but no COAF funders selected. Please review the funder checkboxes.
 
@@ -197,12 +199,12 @@ BEGIN: IF MARKED AS HAVING BEEN PUBLISHED OPEN ACCESS FOR A WHILE (APC ALREADY P
 
 **Please ensure that the licence type you (or corresponding author) select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. Once the final version has been published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
 
-{% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'oup_prepayment_account' or ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}{% if ticket.ticket_field_24072163 == 'oa_journal_conference' %}{% comment %}
+{% elsif ticket.ticket_field_24071633 == 'payment_yes' or ticket.ticket_field_24071633 == 'springer_compact' or ticket.ticket_field_24071633 == 'wiley_dashboard' or ticket.ticket_field_24071633 == 'acs_token' or ticket.ticket_field_24071633 == 'oup_prepayment_account' or ticket.ticket_field_24069493 == "Journal of Experimental Botany" %}{% if ticket.ticket_field_24072163 == 'oa_journal_conference' %}{% comment %}
     BEGIN: IF MARKED AS OPEN ACCESS JOURNAL
     {% endcomment %}{% comment %} PRINT NOTHING HERE BECAUSE "You would be eligible for funds to pay for the cost of publishing in this fully Open Access journal." DOES NOT WORK FOR THINGS MARKED AS AUTHOR/DEPARTMENT PAYMENT FOR EXAMPLE {% endcomment %}{% else %}{% if ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' or ticket.ticket_field_79225067 == '1' or ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
-        BEGIN: IF MARKED AS RCUK, COAF, MRC CORE PAYMENT OR SPRINGER COMPACT; ELSIF OTHER FUNDER POLICIES
-        {% endcomment %}To comply with this/these the corresponding author will need to select the journal's option for immediate Open Access. {% elsif ticket.ticket_field_24117206 == '1' %}Please check the terms of your {% if ticket.ticket_field_71064067 == '1' %}ERC {% endif %}{% if ticket.ticket_field_73176687 == '1' %}FP7 {% endif %}{% if ticket.ticket_field_73663128 == '1' %}H2020 {% endif %}{% if ticket.ticket_field_71509888 == '1' %}NIHR {% endif %}grant(s) as, to comply with this/these, the corresponding author may need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
-        END: IF MARKED AS RCUK, COAF, MRC CORE PAYMENT OR SPRINGER COMPACT; ELSIF OTHER FUNDER POLICIES
+        BEGIN: IF MARKED AS RCUK, COAF, MRC CORE PAYMENT OR SPRINGER COMPACT; ELSIF OTHER FUNDER POLICIES AND CORRESPONDING AUTHOR FIELD BLANK
+        {% endcomment %}To comply with this/these the corresponding author will need to select the journal's option for immediate Open Access. {% elsif ticket.ticket_field_24117206 == '1' and ticket.ticket_field_80911708 == blank %}Please check the terms of your {% if ticket.ticket_field_71064067 == '1' %}ERC {% endif %}{% if ticket.ticket_field_73176687 == '1' %}FP7 {% endif %}{% if ticket.ticket_field_73663128 == '1' %}H2020 {% endif %}{% if ticket.ticket_field_71509888 == '1' %}NIHR {% endif %}grant(s) as, to comply with this/these, the corresponding author may need to select the journal's option for immediate Open Access. {% endif %}{% comment %}
+        END: IF MARKED AS RCUK, COAF, MRC CORE PAYMENT OR SPRINGER COMPACT; ELSIF OTHER FUNDER POLICIES AND CORRESPONDING AUTHOR FIELD BLANK
         {% endcomment %}{% endif %}{% comment %}
     END: IF MARKED AS OPEN ACCESS JOURNAL
     {% endcomment %}{% if ticket.ticket_field_24071633 == 'springer_compact' %}{% comment %}
@@ -252,7 +254,9 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
     {% endcomment %}{% elsif ticket.ticket_field_80911708 != blank %}Funds to pay for Open Access for this paper should be sought from the corresponding author(s) institution(s). Please let us know if you encounter a problem when applying for this. 
     
 {% elsif ticket.ticket_field_24071633 == 'wiley_dashboard' %} Please use the University's Wiley Open Access (WOA) Account for this charge; an option to select this should be presented to the corresponding author as they complete the publication and Open Access details.
-    
+
+{% elsif ticket.ticket_field_24071633 == 'acs_token' %} Please refer this charge to the University's Institutional Account with ACS; an option to select this should be presented to the corresponding author as they complete the publication and Open Access details.
+
 {% elsif ticket.ticket_field_24071633 == 'oup_prepayment_account' %} Please use the University's OUP Prepayment Account for this charge; an option to select this should be presented to the corresponding author as they complete the publication and Open Access details. 
 
 {% elsif ticket.ticket_field_24117246 == '1' or ticket.ticket_field_24071843 == '1' %}{% if ticket.ticket_field_29294538 == '1' %}{% comment %}
@@ -271,7 +275,7 @@ If a H2020 beneficiary breaches any of its obligations, the grant may be reduced
 	    BEGIN: IF MARKED AS GRANT PAYMENT; ELSE 
     {% endcomment %}If you confirm that a grant payment is required, **p{% else %}**P{% endif %}{% comment %}
 	    END: IF MARKED AS GRANT PAYMENT; ELSE 
-    {% endcomment %}lease ensure that the licence type you (or corresponding author) select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. If final version is published with a CC BY licence, we'll also be able to replace the version in the repository with that and remove the embargo.
+    {% endcomment %}lease ensure that the licence type you (or corresponding author) select is [CC BY (Creative Commons Attribution)](https://creativecommons.org/licenses/by/4.0/), as this is required by your funders**. Please note that other Creative Commons licences such as CC BY-NC, CC BY NC-SA and CC BY NC-ND are **NOT** compliant with your funder requirements. If the final version is published with a CC BY licence, we'll also add it to the repository.
 
 {% if ticket.ticket_field_24117266 == '1' and ticket.ticket_field_24071783 == '1' %}{% comment %}
 	    BEGIN: IF MARKED AS GRANT PAYMENT AND RCUK POLICY
@@ -334,7 +338,7 @@ BEGIN: IF MARKED AS COVERED BY COAF, MRC, BBSRC, NIHR OR BREAST CANCER NOW POLIC
         BEGIN: IF MARKED AS COVERED BY BREAST CANCER NOW POLICY AND NOT COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
         {% endcomment %}12 {% else %}6 {% endif %}{% comment %}
         END: IF MARKED AS COVERED BY BREAST CANCER NOW POLICY AND NOT COVERED BY COAF, MRC, BBSRC OR NIHR POLICIES
-    {% endcomment %}months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/emss/login/uls.cgi?rss=WT&url=https://plus.europepmc.org/emss/sub.cgi?login=WT) to self-archive your papers. Please let us know if you need help with this requirement.
+    {% endcomment %}months after the date of publication.** The publisher will often do this for you, however, you can also use the author manuscript submission system [Europe PMC plus](https://plus.europepmc.org/login?next=/dashboard) to self-archive your papers. Please let us know if you need help with this requirement.
 
 {% endif %}{% comment %}
     END: IF JOURNAL IS NOT PNAS
